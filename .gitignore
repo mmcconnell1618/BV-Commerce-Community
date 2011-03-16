@@ -1,0 +1,14 @@
+nbproject
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.suo
+*.user
+*.vspcc
+*.vsp
+bin/
+obj/
+/App/TestResults
+/builds
+/Builds
+
