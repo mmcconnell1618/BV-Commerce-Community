@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MigrationToolService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd6" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Contacts" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Shipping" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Orders" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Content" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Membership" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Taxes" />
+      <xsd:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Marketing" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMigrationToolService_ClearProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClearProducts" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_ClearProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClearProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_ClearAllCategoriesFirst_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClearAllCategoriesFirst" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_ClearAllCategoriesFirst_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClearAllCategoriesFirstResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigratePriceGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigratePriceGroup" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigratePriceGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigratePriceGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateCustomerAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateCustomerAccount" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateCustomerAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateCustomerAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateAffiliate_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateAffiliate" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateAffiliate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateAffiliateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateAffiliateReferral_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateAffiliateReferral" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateAffiliateReferral_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateAffiliateReferralResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateTaxSchedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateTaxSchedule" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateTaxSchedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateTaxScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateTax_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateTax" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateTax_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateTaxResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateVendorManufacturer_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateVendorManufacturer" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateVendorManufacturer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateVendorManufacturerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductProperty_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductProperty" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductProperty_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductPropertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductType_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductType" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_AssignProductPropertyToType_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssignProductPropertyToType" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_AssignProductPropertyToType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssignProductPropertyToTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_ImagesUploadCategoryImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:ImagesUploadCategoryImage" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_ImagesUploadCategoryImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ImagesUploadCategoryImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_ImagesUploadCategoryBanner_InputMessage">
+    <wsdl:part name="parameters" element="tns:ImagesUploadCategoryBanner" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_ImagesUploadCategoryBanner_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ImagesUploadCategoryBannerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateOption_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateOption" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateOption_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateOptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_AssignOptionToProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssignOptionToProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_AssignOptionToProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssignOptionToProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_SetInventoryLevelsForProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetInventoryLevelsForProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_SetInventoryLevelsForProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetInventoryLevelsForProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_SetProductPropertyValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetProductPropertyValue" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_SetProductPropertyValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetProductPropertyValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_ImagesUploadProductImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:ImagesUploadProductImage" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_ImagesUploadProductImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ImagesUploadProductImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateAdditionalImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateAdditionalImage" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateAdditionalImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateAdditionalImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductFileFirstPart_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductFileFirstPart" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductFileFirstPart_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductFileFirstPartResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductFileAdditionalPart_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductFileAdditionalPart" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductFileAdditionalPart_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductFileAdditionalPartResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_AssociateProductFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssociateProductFile" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_AssociateProductFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssociateProductFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrationProductVolumeDiscount_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrationProductVolumeDiscount" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrationProductVolumeDiscount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrationProductVolumeDiscountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductReview_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductReview" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateProductReview_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateProductReviewResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrationProductXCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrationProductXCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrationProductXCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrationProductXCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_AssociateProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssociateProducts" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_AssociateProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssociateProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateOrderTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateOrderTransaction" />
+  </wsdl:message>
+  <wsdl:message name="IMigrationToolService_MigrateOrderTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateOrderTransactionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMigrationToolService">
+    <wsdl:operation name="ClearProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/ClearProducts" message="tns:IMigrationToolService_ClearProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/ClearProductsResponse" message="tns:IMigrationToolService_ClearProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearAllCategoriesFirst">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/ClearAllCategoriesFirst" message="tns:IMigrationToolService_ClearAllCategoriesFirst_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/ClearAllCategoriesFirstResponse" message="tns:IMigrationToolService_ClearAllCategoriesFirst_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigratePriceGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigratePriceGroup" message="tns:IMigrationToolService_MigratePriceGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigratePriceGroupResponse" message="tns:IMigrationToolService_MigratePriceGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateCustomerAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateCustomerAccount" message="tns:IMigrationToolService_MigrateCustomerAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateCustomerAccountResponse" message="tns:IMigrationToolService_MigrateCustomerAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateAffiliate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateAffiliate" message="tns:IMigrationToolService_MigrateAffiliate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateAffiliateResponse" message="tns:IMigrationToolService_MigrateAffiliate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateAffiliateReferral">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateAffiliateReferral" message="tns:IMigrationToolService_MigrateAffiliateReferral_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateAffiliateReferralResponse" message="tns:IMigrationToolService_MigrateAffiliateReferral_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateTaxSchedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateTaxSchedule" message="tns:IMigrationToolService_MigrateTaxSchedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateTaxScheduleResponse" message="tns:IMigrationToolService_MigrateTaxSchedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateTax">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateTax" message="tns:IMigrationToolService_MigrateTax_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateTaxResponse" message="tns:IMigrationToolService_MigrateTax_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateVendorManufacturer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateVendorManufacturer" message="tns:IMigrationToolService_MigrateVendorManufacturer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateVendorManufacturerResponse" message="tns:IMigrationToolService_MigrateVendorManufacturer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductProperty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductProperty" message="tns:IMigrationToolService_MigrateProductProperty_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductPropertyResponse" message="tns:IMigrationToolService_MigrateProductProperty_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductType" message="tns:IMigrationToolService_MigrateProductType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductTypeResponse" message="tns:IMigrationToolService_MigrateProductType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignProductPropertyToType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/AssignProductPropertyToType" message="tns:IMigrationToolService_AssignProductPropertyToType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/AssignProductPropertyToTypeResponse" message="tns:IMigrationToolService_AssignProductPropertyToType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateCategory" message="tns:IMigrationToolService_MigrateCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateCategoryResponse" message="tns:IMigrationToolService_MigrateCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ImagesUploadCategoryImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/ImagesUploadCategoryImage" message="tns:IMigrationToolService_ImagesUploadCategoryImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/ImagesUploadCategoryImageResponse" message="tns:IMigrationToolService_ImagesUploadCategoryImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ImagesUploadCategoryBanner">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/ImagesUploadCategoryBanner" message="tns:IMigrationToolService_ImagesUploadCategoryBanner_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/ImagesUploadCategoryBannerResponse" message="tns:IMigrationToolService_ImagesUploadCategoryBanner_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateOption">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateOption" message="tns:IMigrationToolService_MigrateOption_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateOptionResponse" message="tns:IMigrationToolService_MigrateOption_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProduct" message="tns:IMigrationToolService_MigrateProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductResponse" message="tns:IMigrationToolService_MigrateProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignOptionToProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/AssignOptionToProduct" message="tns:IMigrationToolService_AssignOptionToProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/AssignOptionToProductResponse" message="tns:IMigrationToolService_AssignOptionToProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetInventoryLevelsForProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/SetInventoryLevelsForProduct" message="tns:IMigrationToolService_SetInventoryLevelsForProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/SetInventoryLevelsForProductResponse" message="tns:IMigrationToolService_SetInventoryLevelsForProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetProductPropertyValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/SetProductPropertyValue" message="tns:IMigrationToolService_SetProductPropertyValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/SetProductPropertyValueResponse" message="tns:IMigrationToolService_SetProductPropertyValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ImagesUploadProductImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/ImagesUploadProductImage" message="tns:IMigrationToolService_ImagesUploadProductImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/ImagesUploadProductImageResponse" message="tns:IMigrationToolService_ImagesUploadProductImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateAdditionalImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateAdditionalImage" message="tns:IMigrationToolService_MigrateAdditionalImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateAdditionalImageResponse" message="tns:IMigrationToolService_MigrateAdditionalImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductFileFirstPart">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductFileFirstPart" message="tns:IMigrationToolService_MigrateProductFileFirstPart_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductFileFirstPartResponse" message="tns:IMigrationToolService_MigrateProductFileFirstPart_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductFileAdditionalPart">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductFileAdditionalPart" message="tns:IMigrationToolService_MigrateProductFileAdditionalPart_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductFileAdditionalPartResponse" message="tns:IMigrationToolService_MigrateProductFileAdditionalPart_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AssociateProductFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/AssociateProductFile" message="tns:IMigrationToolService_AssociateProductFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/AssociateProductFileResponse" message="tns:IMigrationToolService_AssociateProductFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrationProductVolumeDiscount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrationProductVolumeDiscount" message="tns:IMigrationToolService_MigrationProductVolumeDiscount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrationProductVolumeDiscountResponse" message="tns:IMigrationToolService_MigrationProductVolumeDiscount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductReview">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductReview" message="tns:IMigrationToolService_MigrateProductReview_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateProductReviewResponse" message="tns:IMigrationToolService_MigrateProductReview_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrationProductXCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrationProductXCategory" message="tns:IMigrationToolService_MigrationProductXCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrationProductXCategoryResponse" message="tns:IMigrationToolService_MigrationProductXCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AssociateProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/AssociateProducts" message="tns:IMigrationToolService_AssociateProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/AssociateProductsResponse" message="tns:IMigrationToolService_AssociateProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateOrder" message="tns:IMigrationToolService_MigrateOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateOrderResponse" message="tns:IMigrationToolService_MigrateOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateOrderTransaction">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateOrderTransaction" message="tns:IMigrationToolService_MigrateOrderTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMigrationToolService/MigrateOrderTransactionResponse" message="tns:IMigrationToolService_MigrateOrderTransaction_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMigrationToolService" type="tns:IMigrationToolService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ClearProducts">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/ClearProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearAllCategoriesFirst">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/ClearAllCategoriesFirst" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigratePriceGroup">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigratePriceGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateCustomerAccount">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateCustomerAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateAffiliate">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateAffiliate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateAffiliateReferral">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateAffiliateReferral" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateTaxSchedule">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateTaxSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateTax">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateTax" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateVendorManufacturer">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateVendorManufacturer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductProperty">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateProductProperty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductType">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateProductType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignProductPropertyToType">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/AssignProductPropertyToType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateCategory">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImagesUploadCategoryImage">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/ImagesUploadCategoryImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImagesUploadCategoryBanner">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/ImagesUploadCategoryBanner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateOption">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateOption" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProduct">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignOptionToProduct">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/AssignOptionToProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInventoryLevelsForProduct">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/SetInventoryLevelsForProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProductPropertyValue">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/SetProductPropertyValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImagesUploadProductImage">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/ImagesUploadProductImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateAdditionalImage">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateAdditionalImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductFileFirstPart">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateProductFileFirstPart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductFileAdditionalPart">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateProductFileAdditionalPart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssociateProductFile">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/AssociateProductFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrationProductVolumeDiscount">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrationProductVolumeDiscount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateProductReview">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateProductReview" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrationProductXCategory">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrationProductXCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssociateProducts">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/AssociateProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateOrder">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateOrderTransaction">
+      <soap:operation soapAction="http://tempuri.org/IMigrationToolService/MigrateOrderTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MigrationToolService">
+    <wsdl:port name="BasicHttpBinding_IMigrationToolService" binding="tns:BasicHttpBinding_IMigrationToolService">
+      <soap:address location="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

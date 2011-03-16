@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Marketing" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Marketing" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfDiscountDetailDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DiscountDetailDTO" nillable="true" type="tns:DiscountDetailDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDiscountDetailDTO" nillable="true" type="tns:ArrayOfDiscountDetailDTO" />
+  <xs:complexType name="DiscountDetailDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DiscountDetailDTO" nillable="true" type="tns:DiscountDetailDTO" />
+</xs:schema>

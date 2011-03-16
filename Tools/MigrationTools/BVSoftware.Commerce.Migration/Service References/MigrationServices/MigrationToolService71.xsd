@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" />
+  <xs:complexType name="ApiResponseOfClearProductsDataviB0FTl6">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ApiResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ClearProductsData" Namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" minOccurs="0" name="Content" nillable="true" type="q1:ClearProductsData" />
+      <xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfApiError" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ApiResponseOfClearProductsDataviB0FTl6" nillable="true" type="tns:ApiResponseOfClearProductsDataviB0FTl6" />
+  <xs:complexType name="ArrayOfApiError">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ApiError" nillable="true" type="tns:ApiError" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfApiError" nillable="true" type="tns:ArrayOfApiError" />
+  <xs:complexType name="ApiError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ApiError" nillable="true" type="tns:ApiError" />
+  <xs:complexType name="ApiResponseOfboolean">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ApiResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="boolean" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Content" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfApiError" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ApiResponseOfboolean" nillable="true" type="tns:ApiResponseOfboolean" />
+  <xs:complexType name="ApiResponseOfstring">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ApiResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfApiError" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ApiResponseOfstring" nillable="true" type="tns:ApiResponseOfstring" />
+  <xs:complexType name="ApiResponseOflong">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ApiResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="long" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Content" type="xs:long" />
+      <xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfApiError" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ApiResponseOflong" nillable="true" type="tns:ApiResponseOflong" />
+  <xs:complexType name="ArrayOfApiOperation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ApiOperation" nillable="true" type="tns:ApiOperation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfApiOperation" nillable="true" type="tns:ArrayOfApiOperation" />
+  <xs:complexType name="ApiOperation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Rel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Uri" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ApiOperation" nillable="true" type="tns:ApiOperation" />
+  <xs:complexType name="ApiResponseOfCategoryDTOviB0FTl6">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ApiResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="CategoryDTO" Namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" minOccurs="0" name="Content" nillable="true" type="q2:CategoryDTO" />
+      <xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfApiError" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ApiResponseOfCategoryDTOviB0FTl6" nillable="true" type="tns:ApiResponseOfCategoryDTOviB0FTl6" />
+  <xs:complexType name="ArrayOfCustomPropertyDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomPropertyDTO" nillable="true" type="tns:CustomPropertyDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomPropertyDTO" nillable="true" type="tns:ArrayOfCustomPropertyDTO" />
+  <xs:complexType name="CustomPropertyDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeveloperId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomPropertyDTO" nillable="true" type="tns:CustomPropertyDTO" />
+</xs:schema>

@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA7BBCEF-0A49-45E3-8AE8-A9345D4F998C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BVSoftware.Commerce.Migration</RootNamespace>
+    <AssemblyName>BVSoftware.Commerce.Migration</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IMigrator.cs" />
+    <Compile Include="MigrationService.cs" />
+    <Compile Include="MigrationSettings.cs" />
+    <Compile Include="MigrationSourceType.cs" />
+    <Compile Include="Migrators\BV2004\Migrator.cs" />
+    <Compile Include="Migrators\BV5\BV5Address.cs" />
+    <Compile Include="Migrators\BV5\BV5OptionHtmlSettings.cs" />
+    <Compile Include="Migrators\BV5\BV5OptionTextSettings.cs" />
+    <Compile Include="Migrators\BV5\CustomProperty.cs" />
+    <Compile Include="Migrators\BV5\CustomPropertyCollection.cs" />
+    <Compile Include="Migrators\BV5\GeographyHelper.cs" />
+    <Compile Include="Migrators\BV5\data\OldDatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OldDatabase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrators\BV5\Migrator.cs" />
+    <Compile Include="Migrators\BV5\PackageItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\MigrationServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="TaxSplitter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <EntityDeploy Include="Migrators\BV5\data\OldDatabase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OldDatabase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Service References\MigrationServices\BVSoftware.Commerce.Migration.MigrationServices.ApiResponseOfboolean.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MigrationServices\BVSoftware.Commerce.Migration.MigrationServices.ApiResponseOfCategoryDTOviB0FTl6.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MigrationServices\BVSoftware.Commerce.Migration.MigrationServices.ApiResponseOfClearProductsDataviB0FTl6.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MigrationServices\BVSoftware.Commerce.Migration.MigrationServices.ApiResponseOflong.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MigrationServices\BVSoftware.Commerce.Migration.MigrationServices.ApiResponseOfstring.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService.wsdl" />
+    <None Include="Service References\MigrationServices\MigrationToolService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MigrationServices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MigrationServices\MigrationToolService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MigrationServices\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MigrationServices\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MigrationServices\MigrationToolService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService71.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\MigrationToolService81.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MigrationServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\App\source\BVSoftware.Web\BVSoftware.Web.csproj">
+      <Project>{7FFBB145-6487-4FFC-93D4-77EC3CD27C98}</Project>
+      <Name>BVSoftware.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

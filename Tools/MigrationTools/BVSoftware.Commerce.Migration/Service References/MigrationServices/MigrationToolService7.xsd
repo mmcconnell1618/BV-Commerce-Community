@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Membership" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Membership" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Contacts" />
+  <xs:complexType name="CustomerAccountDTO">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Contacts" minOccurs="0" name="Addresses" nillable="true" type="q1:ArrayOfAddressDTO" />
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreationDateUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FailedLoginCount" type="xs:int" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastLoginDateUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastUpdatedUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PricingGroupId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaxExempt" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomerAccountDTO" nillable="true" type="tns:CustomerAccountDTO" />
+</xs:schema>

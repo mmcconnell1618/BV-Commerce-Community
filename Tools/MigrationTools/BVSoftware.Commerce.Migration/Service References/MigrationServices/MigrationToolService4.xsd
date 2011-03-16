@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Orders" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Orders" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Contacts" />
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" />
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Marketing" />
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" />
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Shipping" />
+  <xs:simpleType name="OrderPaymentStatusDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Unpaid" />
+      <xs:enumeration value="PartiallyPaid" />
+      <xs:enumeration value="Paid" />
+      <xs:enumeration value="Overpaid" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderPaymentStatusDTO" nillable="true" type="tns:OrderPaymentStatusDTO" />
+  <xs:simpleType name="OrderShippingStatusDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Unshipped" />
+      <xs:enumeration value="PartiallyShipped" />
+      <xs:enumeration value="FullyShipped" />
+      <xs:enumeration value="NonShipping" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderShippingStatusDTO" nillable="true" type="tns:OrderShippingStatusDTO" />
+  <xs:simpleType name="OrderTransactionActionDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Uknown" />
+      <xs:enumeration value="CreditCardInfo" />
+      <xs:enumeration value="CreditCardHold">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">100</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CreditCardCapture">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">101</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CreditCardCharge">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">102</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CreditCardRefund">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">103</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CreditCardVoid">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">104</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CheckReceived">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">201</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CheckReturned">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">202</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CashReceived">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">301</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CashReturned">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">302</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PurchaseOrderInfo">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">401</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PurchaseOrderAccepted">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">402</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CompanyAccountInfo">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">450</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CompanyAccountAccepted">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">451</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GiftCardInfo">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">501</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GiftCardHold">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">502</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GiftCardCapture">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">503</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GiftCardDecrease">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">504</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GiftCardIncrease">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">505</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GiftCardActivate">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">506</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GiftCardBalanceInquiry">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">507</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RewardPointsInfo">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">551</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RewardPointsHold">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">552</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RewardPointsCapture">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">553</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RewardPointsDecrease">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">554</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RewardPointsIncrease">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">555</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RewardPointsBalanceInquiry">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">557</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RewardPointsUnHold">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">558</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PayPalHold">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">601</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PayPalCapture">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">602</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PayPalCharge">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">603</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PayPalRefund">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">604</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PayPalVoid">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">605</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PayPalExpressCheckoutInfo">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">606</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OfflinePaymentRequest">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9999</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderTransactionActionDTO" nillable="true" type="tns:OrderTransactionActionDTO" />
+  <xs:complexType name="OrderDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AffiliateID" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Contacts" minOccurs="0" name="BillingAddress" nillable="true" type="q1:AddressDTO" />
+      <xs:element minOccurs="0" name="Coupons" nillable="true" type="tns:ArrayOfOrderCouponDTO" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" minOccurs="0" name="CustomProperties" nillable="true" type="q2:ArrayOfCustomPropertyDTO" />
+      <xs:element minOccurs="0" name="FraudScore" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Instructions" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPlaced" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfLineItemDTO" />
+      <xs:element minOccurs="0" name="LastUpdatedUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Notes" nillable="true" type="tns:ArrayOfOrderNoteDTO" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Marketing" minOccurs="0" name="OrderDiscountDetails" nillable="true" type="q3:ArrayOfDiscountDetailDTO" />
+      <xs:element minOccurs="0" name="OrderNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Packages" nillable="true" type="tns:ArrayOfOrderPackageDTO" />
+      <xs:element minOccurs="0" name="PaymentStatus" type="tns:OrderPaymentStatusDTO" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Contacts" minOccurs="0" name="ShippingAddress" nillable="true" type="q4:AddressDTO" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Marketing" minOccurs="0" name="ShippingDiscountDetails" nillable="true" type="q5:ArrayOfDiscountDetailDTO" />
+      <xs:element minOccurs="0" name="ShippingMethodDisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShippingMethodId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShippingProviderId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShippingProviderServiceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShippingStatus" type="tns:OrderShippingStatusDTO" />
+      <xs:element minOccurs="0" name="StatusCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+      <xs:element minOccurs="0" name="ThirdPartyOrderId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimeOfOrderUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TotalHandling" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalShippingBeforeDiscounts" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalTax" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalTax2" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UserEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="bvin" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderDTO" nillable="true" type="tns:OrderDTO" />
+  <xs:complexType name="ArrayOfOrderCouponDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderCouponDTO" nillable="true" type="tns:OrderCouponDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderCouponDTO" nillable="true" type="tns:ArrayOfOrderCouponDTO" />
+  <xs:complexType name="OrderCouponDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CouponCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="IsUsed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastUpdatedUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderBvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderCouponDTO" nillable="true" type="tns:OrderCouponDTO" />
+  <xs:complexType name="ArrayOfLineItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LineItemDTO" nillable="true" type="tns:LineItemDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLineItemDTO" nillable="true" type="tns:ArrayOfLineItemDTO" />
+  <xs:complexType name="LineItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BasePricePerItem" type="xs:decimal" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" minOccurs="0" name="CustomProperties" nillable="true" type="q6:ArrayOfCustomPropertyDTO" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Marketing" minOccurs="0" name="DiscountDetails" nillable="true" type="q7:ArrayOfDiscountDetailDTO" />
+      <xs:element minOccurs="0" name="ExtraShipCharge" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="LastUpdatedUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderBvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductShippingHeight" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProductShippingLength" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProductShippingWeight" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProductShippingWidth" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProductShortDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductSku" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="QuantityReturned" type="xs:int" />
+      <xs:element minOccurs="0" name="QuantityShipped" type="xs:int" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" minOccurs="0" name="SelectionData" nillable="true" type="q8:ArrayOfOptionSelectionDTO" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Contacts" minOccurs="0" name="ShipFromAddress" nillable="true" type="q9:AddressDTO" />
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Shipping" minOccurs="0" name="ShipFromMode" type="q10:ShippingModeDTO" />
+      <xs:element minOccurs="0" name="ShipFromNotificationId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShipSeparately" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ShippingPortion" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ShippingSchedule" type="xs:long" />
+      <xs:element minOccurs="0" name="StatusCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+      <xs:element minOccurs="0" name="TaxPortion" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxSchedule" type="xs:long" />
+      <xs:element minOccurs="0" name="VariantId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LineItemDTO" nillable="true" type="tns:LineItemDTO" />
+  <xs:complexType name="ArrayOfOrderNoteDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderNoteDTO" nillable="true" type="tns:OrderNoteDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderNoteDTO" nillable="true" type="tns:ArrayOfOrderNoteDTO" />
+  <xs:complexType name="OrderNoteDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuditDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="IsPublic" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastUpdatedUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Note" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderNoteDTO" nillable="true" type="tns:OrderNoteDTO" />
+  <xs:complexType name="ArrayOfOrderPackageDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderPackageDTO" nillable="true" type="tns:OrderPackageDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderPackageDTO" nillable="true" type="tns:ArrayOfOrderPackageDTO" />
+  <xs:complexType name="OrderPackageDTO">
+    <xs:sequence>
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" minOccurs="0" name="CustomProperties" nillable="true" type="q11:ArrayOfCustomPropertyDTO" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EstimatedShippingCost" type="xs:decimal" />
+      <xs:element minOccurs="0" name="HasShipped" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Height" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfOrderPackageItemDTO" />
+      <xs:element minOccurs="0" name="LastUpdatedUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Length" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShipDateUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ShippingMethodId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShippingProviderId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShippingProviderServiceCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Shipping" minOccurs="0" name="SizeUnits" type="q12:LengthTypeDTO" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+      <xs:element minOccurs="0" name="TrackingNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Weight" type="xs:decimal" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Shipping" minOccurs="0" name="WeightUnits" type="q13:WeightTypeDTO" />
+      <xs:element minOccurs="0" name="Width" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderPackageDTO" nillable="true" type="tns:OrderPackageDTO" />
+  <xs:complexType name="ArrayOfOrderPackageItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderPackageItemDTO" nillable="true" type="tns:OrderPackageItemDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderPackageItemDTO" nillable="true" type="tns:ArrayOfOrderPackageItemDTO" />
+  <xs:complexType name="OrderPackageItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LineItemId" type="xs:long" />
+      <xs:element minOccurs="0" name="ProductBvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderPackageItemDTO" nillable="true" type="tns:OrderPackageItemDTO" />
+  <xs:complexType name="OrderTransactionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Action" type="tns:OrderTransactionActionDTO" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CheckNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyAccountNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreditCard" nillable="true" type="tns:OrderTransactionCardDataDTO" />
+      <xs:element minOccurs="0" name="GiftCardNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="LinkedToTransaction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Messages" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PurchaseOrderNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RefNum1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RefNum2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TimeStampUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Voided" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderTransactionDTO" nillable="true" type="tns:OrderTransactionDTO" />
+  <xs:complexType name="OrderTransactionCardDataDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardHolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardIsEncrypted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpirationMonth" type="xs:int" />
+      <xs:element minOccurs="0" name="ExpirationYear" type="xs:int" />
+      <xs:element minOccurs="0" name="SecurityCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderTransactionCardDataDTO" nillable="true" type="tns:OrderTransactionCardDataDTO" />
+</xs:schema>

@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Catalog" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" />
+  <xs:import schemaLocation="http://www.samplelocalhost6.com/api/v1/MigrationToolService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Shipping" />
+  <xs:simpleType name="OptionTypesDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Uknown" />
+      <xs:enumeration value="DropDownList">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">100</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RadioButtonList">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">200</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CheckBoxes">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">300</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Html">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">400</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TextInput">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">500</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FileUpload">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">600</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OptionTypesDTO" nillable="true" type="tns:OptionTypesDTO" />
+  <xs:simpleType name="CategorySourceTypeDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Manual" />
+      <xs:enumeration value="ByRules" />
+      <xs:enumeration value="CustomLink" />
+      <xs:enumeration value="CustomPage" />
+      <xs:enumeration value="DrillDown" />
+      <xs:enumeration value="FlexPage" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CategorySourceTypeDTO" nillable="true" type="tns:CategorySourceTypeDTO" />
+  <xs:simpleType name="CategorySortOrderDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="ManualOrder" />
+      <xs:enumeration value="ProductName" />
+      <xs:enumeration value="ProductPriceAscending" />
+      <xs:enumeration value="ProductPriceDescending" />
+      <xs:enumeration value="ManufacturerName" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CategorySortOrderDTO" nillable="true" type="tns:CategorySortOrderDTO" />
+  <xs:simpleType name="ProductVolumeDiscountTypeDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Percentage" />
+      <xs:enumeration value="Amount" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProductVolumeDiscountTypeDTO" nillable="true" type="tns:ProductVolumeDiscountTypeDTO" />
+  <xs:simpleType name="CustomPageLayoutTypeDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Empty" />
+      <xs:enumeration value="WithSideBar">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CustomPageLayoutTypeDTO" nillable="true" type="tns:CustomPageLayoutTypeDTO" />
+  <xs:simpleType name="ProductPropertyTypeDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="TextField" />
+      <xs:enumeration value="MultipleChoiceField" />
+      <xs:enumeration value="CurrencyField" />
+      <xs:enumeration value="DateField" />
+      <xs:enumeration value="HyperLink">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProductPropertyTypeDTO" nillable="true" type="tns:ProductPropertyTypeDTO" />
+  <xs:simpleType name="ProductStatusDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Disabled">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProductStatusDTO" nillable="true" type="tns:ProductStatusDTO" />
+  <xs:simpleType name="ProductReviewRatingDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ZeroStars" />
+      <xs:enumeration value="OneStar" />
+      <xs:enumeration value="TwoStars" />
+      <xs:enumeration value="ThreeStars" />
+      <xs:enumeration value="FourStars" />
+      <xs:enumeration value="FiveStars" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProductReviewRatingDTO" nillable="true" type="tns:ProductReviewRatingDTO" />
+  <xs:simpleType name="ProductInventoryModeDTO">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Unknown">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AlwayInStock">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">100</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WhenOutOfStockHide">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">101</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WhenOutOfStockShow">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">102</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WhenOutOfStockAllowBackorders">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">103</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProductInventoryModeDTO" nillable="true" type="tns:ProductInventoryModeDTO" />
+  <xs:complexType name="ClearProductsData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProductsCleared" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductsRemaining" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClearProductsData" nillable="true" type="tns:ClearProductsData" />
+  <xs:complexType name="ProductPropertyDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Choices" nillable="true" type="tns:ArrayOfProductPropertyChoiceDTO" />
+      <xs:element minOccurs="0" name="CultureCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DefaultValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DisplayOnSite" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DisplayToDropShipper" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="PropertyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SortOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="TypeCode" type="tns:ProductPropertyTypeDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductPropertyDTO" nillable="true" type="tns:ProductPropertyDTO" />
+  <xs:complexType name="ArrayOfProductPropertyChoiceDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductPropertyChoiceDTO" nillable="true" type="tns:ProductPropertyChoiceDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductPropertyChoiceDTO" nillable="true" type="tns:ArrayOfProductPropertyChoiceDTO" />
+  <xs:complexType name="ProductPropertyChoiceDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChoiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="LastUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PropertyId" type="xs:long" />
+      <xs:element minOccurs="0" name="SortOrder" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductPropertyChoiceDTO" nillable="true" type="tns:ProductPropertyChoiceDTO" />
+  <xs:complexType name="ProductTypeDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPermanent" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ProductTypeName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductTypeDTO" nillable="true" type="tns:ProductTypeDTO" />
+  <xs:complexType name="CategoryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BannerImageUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Criteria" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomPageId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomPageLayout" type="tns:CustomPageLayoutTypeDTO" />
+      <xs:element minOccurs="0" name="CustomPageOpenInNewWindow" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CustomPageUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerChangeableSortOrder" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DisplaySortOrder" type="tns:CategorySortOrderDTO" />
+      <xs:element minOccurs="0" name="Hidden" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ImageUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Keywords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastUpdatedUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LatestProductCount" type="xs:int" />
+      <xs:element minOccurs="0" name="MetaDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MetaKeywords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MetaTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" minOccurs="0" name="Operations" nillable="true" type="q1:ArrayOfApiOperation" />
+      <xs:element minOccurs="0" name="ParentId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PostContentColumnId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PreContentColumnId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PreTransformDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RewriteUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShowInTopMenu" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ShowTitle" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SortOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="SourceType" type="tns:CategorySourceTypeDTO" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+      <xs:element minOccurs="0" name="TemplateName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CategoryDTO" nillable="true" type="tns:CategoryDTO" />
+  <xs:complexType name="OptionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsShared" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsVariant" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfOptionItemDTO" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NameIsHidden" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OptionType" type="tns:OptionTypesDTO" />
+      <xs:element minOccurs="0" name="Settings" nillable="true" type="tns:ArrayOfOptionSettingDTO" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OptionDTO" nillable="true" type="tns:OptionDTO" />
+  <xs:complexType name="ArrayOfOptionItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OptionItemDTO" nillable="true" type="tns:OptionItemDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOptionItemDTO" nillable="true" type="tns:ArrayOfOptionItemDTO" />
+  <xs:complexType name="OptionItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsLabel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OptionBvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PriceAdjustment" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SortOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+      <xs:element minOccurs="0" name="WeightAdjustment" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OptionItemDTO" nillable="true" type="tns:OptionItemDTO" />
+  <xs:complexType name="ArrayOfOptionSettingDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OptionSettingDTO" nillable="true" type="tns:OptionSettingDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOptionSettingDTO" nillable="true" type="tns:ArrayOfOptionSettingDTO" />
+  <xs:complexType name="OptionSettingDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OptionSettingDTO" nillable="true" type="tns:OptionSettingDTO" />
+  <xs:complexType name="ProductDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowReviews" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreationDateUtc" type="xs:dateTime" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1" minOccurs="0" name="CustomProperties" nillable="true" type="q2:ArrayOfCustomPropertyDTO" />
+      <xs:element minOccurs="0" name="Featured" type="xs:boolean" />
+      <xs:element minOccurs="0" name="GiftWrapAllowed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="GiftWrapPrice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ImageFileMedium" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageFileMediumAlternateText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageFileSmall" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageFileSmallAlternateText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InventoryMode" type="tns:ProductInventoryModeDTO" />
+      <xs:element minOccurs="0" name="IsAvailableForSale" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Keywords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListPrice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LongDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ManufacturerId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MetaDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MetaKeywords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MetaTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MinimumQty" type="xs:int" />
+      <xs:element minOccurs="0" name="PostContentColumnId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PreContentColumnId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PreTransformLongDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductTypeId" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Shipping" minOccurs="0" name="ShippingDetails" nillable="true" type="q3:ShippableItemDTO" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BVSoftware.CommerceDTO.v1.Shipping" minOccurs="0" name="ShippingMode" type="q4:ShippingModeDTO" />
+      <xs:element minOccurs="0" name="ShortDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteCost" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SitePrice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SitePriceOverrideText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sku" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:ProductStatusDTO" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+      <xs:element minOccurs="0" name="Tabs" nillable="true" type="tns:ArrayOfProductDescriptionTabDTO" />
+      <xs:element minOccurs="0" name="TaxExempt" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TaxSchedule" type="xs:long" />
+      <xs:element minOccurs="0" name="UrlSlug" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VendorId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductDTO" nillable="true" type="tns:ProductDTO" />
+  <xs:complexType name="ArrayOfProductDescriptionTabDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductDescriptionTabDTO" nillable="true" type="tns:ProductDescriptionTabDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductDescriptionTabDTO" nillable="true" type="tns:ArrayOfProductDescriptionTabDTO" />
+  <xs:complexType name="ProductDescriptionTabDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HtmlData" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SortOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="TabTitle" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductDescriptionTabDTO" nillable="true" type="tns:ProductDescriptionTabDTO" />
+  <xs:complexType name="ProductInventoryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LowStockPoint" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductBvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QuantityOnHand" type="xs:int" />
+      <xs:element minOccurs="0" name="QuantityReserved" type="xs:int" />
+      <xs:element minOccurs="0" name="VariantId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductInventoryDTO" nillable="true" type="tns:ProductInventoryDTO" />
+  <xs:complexType name="ProductImageDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlternateText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastUpdatedUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ProductId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SortOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="StoreId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductImageDTO" nillable="true" type="tns:ProductImageDTO" />
+  <xs:complexType name="ProductVolumeDiscountDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DiscountType" type="tns:ProductVolumeDiscountTypeDTO" />
+      <xs:element minOccurs="0" name="LastUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ProductId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Qty" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductVolumeDiscountDTO" nillable="true" type="tns:ProductVolumeDiscountDTO" />
+  <xs:complexType name="ProductReviewDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Approved" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Bvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Karma" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductBvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Rating" type="tns:ProductReviewRatingDTO" />
+      <xs:element minOccurs="0" name="ReviewDateUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductReviewDTO" nillable="true" type="tns:ProductReviewDTO" />
+  <xs:complexType name="ArrayOfOptionSelectionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OptionSelectionDTO" nillable="true" type="tns:OptionSelectionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOptionSelectionDTO" nillable="true" type="tns:ArrayOfOptionSelectionDTO" />
+  <xs:complexType name="OptionSelectionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OptionBvin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SelectionData" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OptionSelectionDTO" nillable="true" type="tns:OptionSelectionDTO" />
+</xs:schema>
