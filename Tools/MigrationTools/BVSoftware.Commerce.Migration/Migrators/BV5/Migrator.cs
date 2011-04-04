@@ -2165,8 +2165,12 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
             int totalPages = (int)(Math.Ceiling((decimal)totalRecords / (decimal)pageSize));
 
             //System.Threading.Tasks.Parallel.For(0, totalPages, ProcessPage);
-
-            for (int i = 0; i < totalPages; i++)
+            int startIndex = 0;
+            if (settings.UserStartPage > 1)
+            {
+                startIndex = settings.UserStartPage - 1;
+            }
+            for (int i = startIndex; i < totalPages; i++)
             {
                 wl("Getting Users page " + (i + 1) + " of " + totalPages.ToString());
                 int startRecord = i * pageSize;

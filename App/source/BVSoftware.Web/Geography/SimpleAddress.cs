@@ -19,5 +19,31 @@ namespace BVSoftware.Web.Geography
             RegionData = new RegionSnapShot();
             CountryData = new CountrySnapShot();
         }
+
+        public string ToHtmlString()
+        {
+            StringBuilder sb = new StringBuilder();
+            if ((Street ?? string.Empty).Length > 0)
+            {
+                sb.Append(Street + "<br />");
+            }            
+            if (RegionData != null)
+            {
+                sb.Append((City ?? string.Empty) + ", " + RegionData.Abbreviation + " " + (PostalCode ?? string.Empty) + "<br />");
+            }
+            else
+            {
+                sb.Append(" ");                
+            }
+            if (CountryData != null)
+            {
+                if (CountryData.Name.Trim().Length > 0)
+                {
+                    sb.Append(CountryData.Name + "<br />");
+                }
+            }
+            return sb.ToString();
+        }
+		
     }
 }

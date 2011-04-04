@@ -33,6 +33,8 @@ namespace BVSoftware.Commerce.Migration
         public string SingleSkuImport {get;set;}
         public int ImportProductLimit { get; set; }
 
+        public int UserStartPage { get; set; }
+
         public string SQLServer { get; set; }
         public string SQLDatabase { get; set; }
         public string SQLUsername { get; set; }
@@ -72,6 +74,7 @@ namespace BVSoftware.Commerce.Migration
             SingleOrderImport = string.Empty;
             SingleSkuImport = string.Empty;
             ImportProductLimit = -1;
+            UserStartPage = 1;
         }
 
         public void PrepArgs()

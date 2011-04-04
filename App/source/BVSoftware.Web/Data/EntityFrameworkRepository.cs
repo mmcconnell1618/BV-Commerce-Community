@@ -87,7 +87,10 @@ namespace BVSoftware.Web.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.LogMessage("Find by Primary Key Failure: " +
+                                "KEY=" + id.KeyAsObject().ToString() 
+                                + ", EntitySetName=" + _objectSet.EntitySet.Name 
+                                + ", EXCEPTION=" + ex.ToString() + " " + ex.StackTrace);
             }
             return null;
         }

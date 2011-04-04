@@ -31,6 +31,31 @@
             this.Button1 = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rb2004 = new System.Windows.Forms.RadioButton();
+            this.rb5 = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnBrowseForImagesRoot = new System.Windows.Forms.Button();
+            this.ImagesRootFolderField = new System.Windows.Forms.TextBox();
+            this.ApiKeyField = new System.Windows.Forms.TextBox();
+            this.SQLPasswordField = new System.Windows.Forms.TextBox();
+            this.SQLUsernameField = new System.Windows.Forms.TextBox();
+            this.SQLDatabaseField = new System.Windows.Forms.TextBox();
+            this.SQLServerField = new System.Windows.Forms.TextBox();
+            this.SingleOrderField = new System.Windows.Forms.TextBox();
+            this.chkSingleOrder = new System.Windows.Forms.CheckBox();
+            this.SingleSkuField = new System.Windows.Forms.TextBox();
+            this.chkSingleSku = new System.Windows.Forms.CheckBox();
+            this.chkMetric = new System.Windows.Forms.CheckBox();
+            this.UserStartPageField = new System.Windows.Forms.TextBox();
             this.chkClearOrders = new System.Windows.Forms.CheckBox();
             this.chkClearAffiliates = new System.Windows.Forms.CheckBox();
             this.chkClearProducts = new System.Windows.Forms.CheckBox();
@@ -41,29 +66,6 @@
             this.chkImportUsers = new System.Windows.Forms.CheckBox();
             this.chkImportProducts = new System.Windows.Forms.CheckBox();
             this.chkImportCategories = new System.Windows.Forms.CheckBox();
-            this.Label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.SQLPasswordField = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.SQLUsernameField = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.SQLDatabaseField = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.SQLServerField = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.rb2004 = new System.Windows.Forms.RadioButton();
-            this.rb5 = new System.Windows.Forms.RadioButton();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.ImagesRootFolderField = new System.Windows.Forms.TextBox();
-            this.btnBrowseForImagesRoot = new System.Windows.Forms.Button();
-            this.ApiKeyField = new System.Windows.Forms.TextBox();
-            this.SingleOrderField = new System.Windows.Forms.TextBox();
-            this.chkSingleOrder = new System.Windows.Forms.CheckBox();
-            this.SingleSkuField = new System.Windows.Forms.TextBox();
-            this.chkSingleSku = new System.Windows.Forms.CheckBox();
-            this.chkMetric = new System.Windows.Forms.CheckBox();
             this.DestinationRootUrlField = new System.Windows.Forms.TextBox();
             this.GroupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -95,6 +97,8 @@
             // 
             // GroupBox1
             // 
+            this.GroupBox1.Controls.Add(this.label8);
+            this.GroupBox1.Controls.Add(this.UserStartPageField);
             this.GroupBox1.Controls.Add(this.chkClearOrders);
             this.GroupBox1.Controls.Add(this.chkClearAffiliates);
             this.GroupBox1.Controls.Add(this.chkClearProducts);
@@ -110,6 +114,271 @@
             this.GroupBox1.Size = new System.Drawing.Size(354, 167);
             this.GroupBox1.TabIndex = 4;
             this.GroupBox1.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(177, 68);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(73, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Start At Page:";
+            // 
+            // Label1
+            // 
+            this.Label1.AutoSize = true;
+            this.Label1.Location = new System.Drawing.Point(12, 9);
+            this.Label1.Name = "Label1";
+            this.Label1.Size = new System.Drawing.Size(212, 13);
+            this.Label1.TabIndex = 12;
+            this.Label1.Text = "Web Site Address (URL) of your BV 6 Store";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.SQLPasswordField);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.SQLUsernameField);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.SQLDatabaseField);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.SQLServerField);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(15, 214);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(322, 134);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 98);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "SQL Password";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 70);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "SQL Username";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 44);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "SQL Database";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "SQL Server";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rb2004);
+            this.groupBox3.Controls.Add(this.rb5);
+            this.groupBox3.Location = new System.Drawing.Point(15, 134);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(322, 74);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            // 
+            // rb2004
+            // 
+            this.rb2004.AutoSize = true;
+            this.rb2004.Location = new System.Drawing.Point(9, 42);
+            this.rb2004.Name = "rb2004";
+            this.rb2004.Size = new System.Drawing.Size(183, 17);
+            this.rb2004.TabIndex = 1;
+            this.rb2004.Text = "Migrate From BV Commerce 2004";
+            this.rb2004.UseVisualStyleBackColor = true;
+            // 
+            // rb5
+            // 
+            this.rb5.AutoSize = true;
+            this.rb5.Location = new System.Drawing.Point(9, 19);
+            this.rb5.Name = "rb5";
+            this.rb5.Size = new System.Drawing.Size(165, 17);
+            this.rb5.TabIndex = 0;
+            this.rb5.Text = "Migrate From BV Commerce 5";
+            this.rb5.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 48);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(114, 13);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "API Key for BV 6 Store";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 87);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(466, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Full Path to the Root Folder of your Old Store for Image Import ( i.e. c:\\inetpub" +
+    "\\wwwroot\\mystore )";
+            // 
+            // btnBrowseForImagesRoot
+            // 
+            this.btnBrowseForImagesRoot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowseForImagesRoot.Location = new System.Drawing.Point(697, 100);
+            this.btnBrowseForImagesRoot.Name = "btnBrowseForImagesRoot";
+            this.btnBrowseForImagesRoot.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseForImagesRoot.TabIndex = 16;
+            this.btnBrowseForImagesRoot.Text = "Browse";
+            this.btnBrowseForImagesRoot.UseVisualStyleBackColor = true;
+            this.btnBrowseForImagesRoot.Click += new System.EventHandler(this.btnBrowseForImagesRoot_Click);
+            // 
+            // ImagesRootFolderField
+            // 
+            this.ImagesRootFolderField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagesRootFolderField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ImagesRootFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ImagesRootFolderField.Location = new System.Drawing.Point(12, 103);
+            this.ImagesRootFolderField.Name = "ImagesRootFolderField";
+            this.ImagesRootFolderField.Size = new System.Drawing.Size(679, 20);
+            this.ImagesRootFolderField.TabIndex = 15;
+            this.ImagesRootFolderField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ImagesRootFolder;
+            // 
+            // ApiKeyField
+            // 
+            this.ApiKeyField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ApiKeyField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ApiKey", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ApiKeyField.Location = new System.Drawing.Point(12, 64);
+            this.ApiKeyField.Name = "ApiKeyField";
+            this.ApiKeyField.Size = new System.Drawing.Size(760, 20);
+            this.ApiKeyField.TabIndex = 1;
+            this.ApiKeyField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ApiKey;
+            // 
+            // SQLPasswordField
+            // 
+            this.SQLPasswordField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SQLPasswordField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SQLPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SQLPasswordField.Location = new System.Drawing.Point(103, 98);
+            this.SQLPasswordField.Name = "SQLPasswordField";
+            this.SQLPasswordField.Size = new System.Drawing.Size(213, 20);
+            this.SQLPasswordField.TabIndex = 3;
+            this.SQLPasswordField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SQLPassword;
+            this.SQLPasswordField.UseSystemPasswordChar = true;
+            // 
+            // SQLUsernameField
+            // 
+            this.SQLUsernameField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SQLUsernameField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SQLUsername", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SQLUsernameField.Location = new System.Drawing.Point(103, 70);
+            this.SQLUsernameField.Name = "SQLUsernameField";
+            this.SQLUsernameField.Size = new System.Drawing.Size(213, 20);
+            this.SQLUsernameField.TabIndex = 2;
+            this.SQLUsernameField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SQLUsername;
+            // 
+            // SQLDatabaseField
+            // 
+            this.SQLDatabaseField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SQLDatabaseField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SQLDatabase", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SQLDatabaseField.Location = new System.Drawing.Point(103, 44);
+            this.SQLDatabaseField.Name = "SQLDatabaseField";
+            this.SQLDatabaseField.Size = new System.Drawing.Size(213, 20);
+            this.SQLDatabaseField.TabIndex = 1;
+            this.SQLDatabaseField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SQLDatabase;
+            // 
+            // SQLServerField
+            // 
+            this.SQLServerField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SQLServerField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SQLServer", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SQLServerField.Location = new System.Drawing.Point(103, 18);
+            this.SQLServerField.Name = "SQLServerField";
+            this.SQLServerField.Size = new System.Drawing.Size(213, 20);
+            this.SQLServerField.TabIndex = 0;
+            this.SQLServerField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SQLServer;
+            // 
+            // SingleOrderField
+            // 
+            this.SingleOrderField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleOrderImport", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SingleOrderField.Location = new System.Drawing.Point(601, 352);
+            this.SingleOrderField.Name = "SingleOrderField";
+            this.SingleOrderField.Size = new System.Drawing.Size(157, 20);
+            this.SingleOrderField.TabIndex = 7;
+            this.SingleOrderField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleOrderImport;
+            this.SingleOrderField.Visible = false;
+            // 
+            // chkSingleOrder
+            // 
+            this.chkSingleOrder.AutoSize = true;
+            this.chkSingleOrder.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleOrderOn;
+            this.chkSingleOrder.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleOrderOn", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkSingleOrder.Location = new System.Drawing.Point(427, 354);
+            this.chkSingleOrder.Name = "chkSingleOrder";
+            this.chkSingleOrder.Size = new System.Drawing.Size(172, 17);
+            this.chkSingleOrder.TabIndex = 6;
+            this.chkSingleOrder.Text = "Test Import with a single Order:";
+            this.chkSingleOrder.UseVisualStyleBackColor = true;
+            this.chkSingleOrder.Visible = false;
+            // 
+            // SingleSkuField
+            // 
+            this.SingleSkuField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleSkuImport", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SingleSkuField.Location = new System.Drawing.Point(601, 375);
+            this.SingleSkuField.Name = "SingleSkuField";
+            this.SingleSkuField.Size = new System.Drawing.Size(157, 20);
+            this.SingleSkuField.TabIndex = 9;
+            this.SingleSkuField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleSkuImport;
+            this.SingleSkuField.Visible = false;
+            // 
+            // chkSingleSku
+            // 
+            this.chkSingleSku.AutoSize = true;
+            this.chkSingleSku.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleSkuOn;
+            this.chkSingleSku.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleSkuOn", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkSingleSku.Location = new System.Drawing.Point(427, 377);
+            this.chkSingleSku.Name = "chkSingleSku";
+            this.chkSingleSku.Size = new System.Drawing.Size(168, 17);
+            this.chkSingleSku.TabIndex = 8;
+            this.chkSingleSku.Text = "Test Import with a single SKU:";
+            this.chkSingleSku.UseVisualStyleBackColor = true;
+            this.chkSingleSku.Visible = false;
+            // 
+            // chkMetric
+            // 
+            this.chkMetric.AutoSize = true;
+            this.chkMetric.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.UseMetricUnits;
+            this.chkMetric.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "UseMetricUnits", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMetric.Location = new System.Drawing.Point(427, 331);
+            this.chkMetric.Name = "chkMetric";
+            this.chkMetric.Size = new System.Drawing.Size(279, 17);
+            this.chkMetric.TabIndex = 5;
+            this.chkMetric.Text = "Use Metric Units During Import ( cm instead of inches)";
+            this.chkMetric.UseVisualStyleBackColor = true;
+            this.chkMetric.Visible = false;
+            // 
+            // UserStartPageField
+            // 
+            this.UserStartPageField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "UserStartPage", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.UserStartPageField.Location = new System.Drawing.Point(249, 65);
+            this.UserStartPageField.Name = "UserStartPageField";
+            this.UserStartPageField.Size = new System.Drawing.Size(81, 20);
+            this.UserStartPageField.TabIndex = 10;
+            this.UserStartPageField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.UserStartPage;
             // 
             // chkClearOrders
             // 
@@ -239,258 +508,10 @@
             this.chkImportCategories.Text = "Import Categories";
             this.chkImportCategories.UseVisualStyleBackColor = true;
             // 
-            // Label1
-            // 
-            this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(12, 9);
-            this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(212, 13);
-            this.Label1.TabIndex = 12;
-            this.Label1.Text = "Web Site Address (URL) of your BV 6 Store";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.SQLPasswordField);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.SQLUsernameField);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.SQLDatabaseField);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.SQLServerField);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(15, 214);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(322, 134);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            // 
-            // SQLPasswordField
-            // 
-            this.SQLPasswordField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.SQLPasswordField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SQLPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SQLPasswordField.Location = new System.Drawing.Point(103, 98);
-            this.SQLPasswordField.Name = "SQLPasswordField";
-            this.SQLPasswordField.Size = new System.Drawing.Size(213, 20);
-            this.SQLPasswordField.TabIndex = 3;
-            this.SQLPasswordField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SQLPassword;
-            this.SQLPasswordField.UseSystemPasswordChar = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 98);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "SQL Password";
-            // 
-            // SQLUsernameField
-            // 
-            this.SQLUsernameField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.SQLUsernameField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SQLUsername", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SQLUsernameField.Location = new System.Drawing.Point(103, 70);
-            this.SQLUsernameField.Name = "SQLUsernameField";
-            this.SQLUsernameField.Size = new System.Drawing.Size(213, 20);
-            this.SQLUsernameField.TabIndex = 2;
-            this.SQLUsernameField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SQLUsername;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 70);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "SQL Username";
-            // 
-            // SQLDatabaseField
-            // 
-            this.SQLDatabaseField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.SQLDatabaseField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SQLDatabase", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SQLDatabaseField.Location = new System.Drawing.Point(103, 44);
-            this.SQLDatabaseField.Name = "SQLDatabaseField";
-            this.SQLDatabaseField.Size = new System.Drawing.Size(213, 20);
-            this.SQLDatabaseField.TabIndex = 1;
-            this.SQLDatabaseField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SQLDatabase;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 44);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "SQL Database";
-            // 
-            // SQLServerField
-            // 
-            this.SQLServerField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.SQLServerField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SQLServer", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SQLServerField.Location = new System.Drawing.Point(103, 18);
-            this.SQLServerField.Name = "SQLServerField";
-            this.SQLServerField.Size = new System.Drawing.Size(213, 20);
-            this.SQLServerField.TabIndex = 0;
-            this.SQLServerField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SQLServer;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "SQL Server";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.rb2004);
-            this.groupBox3.Controls.Add(this.rb5);
-            this.groupBox3.Location = new System.Drawing.Point(15, 134);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(322, 74);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            // 
-            // rb2004
-            // 
-            this.rb2004.AutoSize = true;
-            this.rb2004.Location = new System.Drawing.Point(9, 42);
-            this.rb2004.Name = "rb2004";
-            this.rb2004.Size = new System.Drawing.Size(183, 17);
-            this.rb2004.TabIndex = 1;
-            this.rb2004.Text = "Migrate From BV Commerce 2004";
-            this.rb2004.UseVisualStyleBackColor = true;
-            this.rb2004.Visible = false;
-            // 
-            // rb5
-            // 
-            this.rb5.AutoSize = true;
-            this.rb5.Location = new System.Drawing.Point(9, 19);
-            this.rb5.Name = "rb5";
-            this.rb5.Size = new System.Drawing.Size(165, 17);
-            this.rb5.TabIndex = 0;
-            this.rb5.Text = "Migrate From BV Commerce 5";
-            this.rb5.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 48);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(114, 13);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "API Key for BV 6 Store";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 87);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(466, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Full Path to the Root Folder of your Old Store for Image Import ( i.e. c:\\inetpub" +
-                "\\wwwroot\\mystore )";
-            // 
-            // ImagesRootFolderField
-            // 
-            this.ImagesRootFolderField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagesRootFolderField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ImagesRootFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ImagesRootFolderField.Location = new System.Drawing.Point(12, 103);
-            this.ImagesRootFolderField.Name = "ImagesRootFolderField";
-            this.ImagesRootFolderField.Size = new System.Drawing.Size(679, 20);
-            this.ImagesRootFolderField.TabIndex = 15;
-            this.ImagesRootFolderField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ImagesRootFolder;
-            // 
-            // btnBrowseForImagesRoot
-            // 
-            this.btnBrowseForImagesRoot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseForImagesRoot.Location = new System.Drawing.Point(697, 100);
-            this.btnBrowseForImagesRoot.Name = "btnBrowseForImagesRoot";
-            this.btnBrowseForImagesRoot.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowseForImagesRoot.TabIndex = 16;
-            this.btnBrowseForImagesRoot.Text = "Browse";
-            this.btnBrowseForImagesRoot.UseVisualStyleBackColor = true;
-            this.btnBrowseForImagesRoot.Click += new System.EventHandler(this.btnBrowseForImagesRoot_Click);
-            // 
-            // ApiKeyField
-            // 
-            this.ApiKeyField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ApiKeyField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ApiKey", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ApiKeyField.Location = new System.Drawing.Point(12, 64);
-            this.ApiKeyField.Name = "ApiKeyField";
-            this.ApiKeyField.Size = new System.Drawing.Size(760, 20);
-            this.ApiKeyField.TabIndex = 1;
-            this.ApiKeyField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ApiKey;
-            // 
-            // SingleOrderField
-            // 
-            this.SingleOrderField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleOrderImport", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SingleOrderField.Location = new System.Drawing.Point(601, 352);
-            this.SingleOrderField.Name = "SingleOrderField";
-            this.SingleOrderField.Size = new System.Drawing.Size(157, 20);
-            this.SingleOrderField.TabIndex = 7;
-            this.SingleOrderField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleOrderImport;
-            this.SingleOrderField.Visible = false;
-            // 
-            // chkSingleOrder
-            // 
-            this.chkSingleOrder.AutoSize = true;
-            this.chkSingleOrder.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleOrderOn;
-            this.chkSingleOrder.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleOrderOn", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkSingleOrder.Location = new System.Drawing.Point(427, 354);
-            this.chkSingleOrder.Name = "chkSingleOrder";
-            this.chkSingleOrder.Size = new System.Drawing.Size(172, 17);
-            this.chkSingleOrder.TabIndex = 6;
-            this.chkSingleOrder.Text = "Test Import with a single Order:";
-            this.chkSingleOrder.UseVisualStyleBackColor = true;
-            this.chkSingleOrder.Visible = false;
-            // 
-            // SingleSkuField
-            // 
-            this.SingleSkuField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleSkuImport", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SingleSkuField.Location = new System.Drawing.Point(601, 375);
-            this.SingleSkuField.Name = "SingleSkuField";
-            this.SingleSkuField.Size = new System.Drawing.Size(157, 20);
-            this.SingleSkuField.TabIndex = 9;
-            this.SingleSkuField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleSkuImport;
-            this.SingleSkuField.Visible = false;
-            // 
-            // chkSingleSku
-            // 
-            this.chkSingleSku.AutoSize = true;
-            this.chkSingleSku.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleSkuOn;
-            this.chkSingleSku.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleSkuOn", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkSingleSku.Location = new System.Drawing.Point(427, 377);
-            this.chkSingleSku.Name = "chkSingleSku";
-            this.chkSingleSku.Size = new System.Drawing.Size(168, 17);
-            this.chkSingleSku.TabIndex = 8;
-            this.chkSingleSku.Text = "Test Import with a single SKU:";
-            this.chkSingleSku.UseVisualStyleBackColor = true;
-            this.chkSingleSku.Visible = false;
-            // 
-            // chkMetric
-            // 
-            this.chkMetric.AutoSize = true;
-            this.chkMetric.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.UseMetricUnits;
-            this.chkMetric.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "UseMetricUnits", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkMetric.Location = new System.Drawing.Point(427, 331);
-            this.chkMetric.Name = "chkMetric";
-            this.chkMetric.Size = new System.Drawing.Size(279, 17);
-            this.chkMetric.TabIndex = 5;
-            this.chkMetric.Text = "Use Metric Units During Import ( cm instead of inches)";
-            this.chkMetric.UseVisualStyleBackColor = true;
-            this.chkMetric.Visible = false;
-            // 
             // DestinationRootUrlField
             // 
-            this.DestinationRootUrlField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DestinationRootUrlField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DestinationRootUrlField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "DestinationRootUrl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DestinationRootUrlField.Location = new System.Drawing.Point(12, 25);
             this.DestinationRootUrlField.Name = "DestinationRootUrlField";
@@ -575,5 +596,7 @@
         internal System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox ImagesRootFolderField;
         private System.Windows.Forms.Button btnBrowseForImagesRoot;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox UserStartPageField;
     }
 }

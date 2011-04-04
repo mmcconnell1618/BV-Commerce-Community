@@ -48,6 +48,16 @@
     <Compile Include="MigrationService.cs" />
     <Compile Include="MigrationSettings.cs" />
     <Compile Include="MigrationSourceType.cs" />
+    <Compile Include="Migrators\BV2004\BVC2004Address.cs" />
+    <Compile Include="Migrators\BV2004\BVC2004OptionHtmlSetting.cs" />
+    <Compile Include="Migrators\BV2004\BVC2004OptionTextSetting.cs" />
+    <Compile Include="Migrators\BV2004\CustomProperty.cs" />
+    <Compile Include="Migrators\BV2004\data\OldDatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OldDatabase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrators\BV2004\GeographyHelper.cs" />
     <Compile Include="Migrators\BV2004\Migrator.cs" />
     <Compile Include="Migrators\BV5\BV5Address.cs" />
     <Compile Include="Migrators\BV5\BV5OptionHtmlSettings.cs" />
@@ -76,6 +86,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <EntityDeploy Include="Migrators\BV5\data\OldDatabase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OldDatabase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Migrators\BV2004\data\OldDatabase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OldDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
@@ -153,6 +167,7 @@
       <Name>BVSoftware.Web</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

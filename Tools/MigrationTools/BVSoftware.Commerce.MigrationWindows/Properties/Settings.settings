@@ -71,5 +71,8 @@
     <Setting Name="ImagesRootFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">c:\inetpub\wwwroot</Value>
     </Setting>
+    <Setting Name="UserStartPage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

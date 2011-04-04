@@ -77,6 +77,12 @@ namespace BVSoftware.Commerce.MigrationWindows
 
             s.ImagesRootFolder = Properties.Settings.Default.ImagesRootFolder;
 
+            int userStartpage = 1;
+            if (int.TryParse(Properties.Settings.Default.UserStartPage, out userStartpage))
+            {
+                s.UserStartPage = userStartpage;
+            }
+
             s.PrepArgs();
         }       
     }

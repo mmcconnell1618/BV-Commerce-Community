@@ -33,6 +33,6 @@ using System;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("6.0.24.90")]
-[assembly: AssemblyFileVersion("6.0.24.90")]
+[assembly: AssemblyVersion("6.0.28.95")]
+[assembly: AssemblyFileVersion("6.0.28.95")]
 [assembly: CLSCompliant(true)]
