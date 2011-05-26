@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using BVSoftware.CommerceDTO.v1.Catalog;
+using BVSoftware.CommerceDTO.v1;
 
 namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 {
@@ -23,9 +25,9 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             Value = propertyValue;
         }
 
-        public MigrationServices.CustomPropertyDTO ToDto()
+        public CustomPropertyDTO ToDto()
         {
-            MigrationServices.CustomPropertyDTO dto = new MigrationServices.CustomPropertyDTO();
+            CustomPropertyDTO dto = new CustomPropertyDTO();
             dto.Value = this.Value;
             dto.Key = this.Key;
             dto.DeveloperId = "bvc2004";

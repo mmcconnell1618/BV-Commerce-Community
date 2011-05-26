@@ -15,6 +15,7 @@ namespace BVSoftware.Commerce.Migration
 
         public bool ImportCategories {get;set;}
         public bool ImportProducts {get;set;}
+        public bool ImportProductImagesOnly { get; set; }
         public bool ImportUsers {get;set;}
         public bool ImportAffiliates {get;set;}
         public bool ImportOrders {get;set;}
@@ -24,6 +25,7 @@ namespace BVSoftware.Commerce.Migration
         public bool ClearProducts {get;set;}
         public bool ClearOrders {get;set;}
         public bool ClearAffiliates {get;set;}
+        public bool ClearUsers { get; set; }
 
         public bool UseMetricUnits {get;set;}
 
@@ -34,11 +36,17 @@ namespace BVSoftware.Commerce.Migration
         public int ImportProductLimit { get; set; }
 
         public int UserStartPage { get; set; }
+        public int ProductStartPage { get; set; }
 
         public string SQLServer { get; set; }
         public string SQLDatabase { get; set; }
         public string SQLUsername { get; set; }
         public string SQLPassword { get; set; }
+
+        public bool DisableMultiThreading { get; set; }
+
+        public bool SkipProductPrerequisites { get; set; }
+
 
         public string SourceConnectionString()
         {
@@ -69,12 +77,17 @@ namespace BVSoftware.Commerce.Migration
             ClearProducts = false;
             ClearOrders = false;
             ClearAffiliates = false;
+            ClearUsers = false;
             UseMetricUnits = false;
             IgnoreOrdersOlderThan = new DateTime(1975, 1, 1);
             SingleOrderImport = string.Empty;
             SingleSkuImport = string.Empty;
             ImportProductLimit = -1;
             UserStartPage = 1;
+            DisableMultiThreading = false;
+            ProductStartPage = 1;
+            ImportProductImagesOnly = false;
+            SkipProductPrerequisites = false;
         }
 
         public void PrepArgs()

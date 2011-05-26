@@ -310,5 +310,65 @@ namespace BVSoftware.Commerce.MigrationWindows.Properties {
                 this["UserStartPage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string ProductStartPage {
+            get {
+                return ((string)(this["ProductStartPage"]));
+            }
+            set {
+                this["ProductStartPage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ProductImagesOnly {
+            get {
+                return ((bool)(this["ProductImagesOnly"]));
+            }
+            set {
+                this["ProductImagesOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DisableMultiThreading {
+            get {
+                return ((bool)(this["DisableMultiThreading"]));
+            }
+            set {
+                this["DisableMultiThreading"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SkipProductPrerequisites {
+            get {
+                return ((bool)(this["SkipProductPrerequisites"]));
+            }
+            set {
+                this["SkipProductPrerequisites"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClearUsers {
+            get {
+                return ((bool)(this["ClearUsers"]));
+            }
+            set {
+                this["ClearUsers"] = value;
+            }
+        }
     }
 }

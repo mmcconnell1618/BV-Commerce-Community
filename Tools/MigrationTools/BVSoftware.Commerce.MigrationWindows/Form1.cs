@@ -53,6 +53,7 @@ namespace BVSoftware.Commerce.MigrationWindows
             s.ClearCategories = Properties.Settings.Default.ClearCategories;
             s.ClearOrders = Properties.Settings.Default.ClearOrders;
             s.ClearProducts = Properties.Settings.Default.ClearProducts;
+            s.ClearUsers = Properties.Settings.Default.ClearUsers;
             s.DestinationServiceRootUrl = Properties.Settings.Default.DestinationRootUrl;
             s.ImportAffiliates = Properties.Settings.Default.ImportAffiliates;
             s.ImportCategories = Properties.Settings.Default.ImportCategories;
@@ -82,6 +83,16 @@ namespace BVSoftware.Commerce.MigrationWindows
             {
                 s.UserStartPage = userStartpage;
             }
+            int productStartPage = 1;
+            
+            if (int.TryParse(Properties.Settings.Default.ProductStartPage, out productStartPage))
+            {
+                s.ProductStartPage = productStartPage;
+            }
+            s.DisableMultiThreading = Properties.Settings.Default.DisableMultiThreading;
+            s.ImportProductImagesOnly = Properties.Settings.Default.ProductImagesOnly;
+
+            s.SkipProductPrerequisites = Properties.Settings.Default.SkipProductPrerequisites;
 
             s.PrepArgs();
         }       

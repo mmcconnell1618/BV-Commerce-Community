@@ -4,6 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using BVSoftware.CommerceDTO.v1;
+using BVSoftware.CommerceDTO.v1.Catalog;
+using BVSoftware.CommerceDTO.v1.Client;
+using BVSoftware.CommerceDTO.v1.Contacts;
+using BVSoftware.CommerceDTO.v1.Content;
+using BVSoftware.CommerceDTO.v1.Marketing;
+using BVSoftware.CommerceDTO.v1.Membership;
+using BVSoftware.CommerceDTO.v1.Orders;
+using BVSoftware.CommerceDTO.v1.Shipping;
+using BVSoftware.CommerceDTO.v1.Taxes;
 
 namespace BVSoftware.Commerce.Migration.Migrators.BV5
 {
@@ -43,9 +53,9 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
             _Value = propertyValue;
         }
      
-        public MigrationServices.CustomPropertyDTO ToDto()
+        public CustomPropertyDTO ToDto()
         {
-            MigrationServices.CustomPropertyDTO dto = new MigrationServices.CustomPropertyDTO();
+            CustomPropertyDTO dto = new CustomPropertyDTO();
             dto.Value = this.Value;
             dto.Key = this.Key;
             dto.DeveloperId = this.DeveloperId;

@@ -4,6 +4,16 @@ using System.Linq;
 using System.Data;
 using System.Text;
 using System.IO;
+using BVSoftware.CommerceDTO.v1;
+using BVSoftware.CommerceDTO.v1.Catalog;
+using BVSoftware.CommerceDTO.v1.Client;
+using BVSoftware.CommerceDTO.v1.Contacts;
+using BVSoftware.CommerceDTO.v1.Content;
+using BVSoftware.CommerceDTO.v1.Marketing;
+using BVSoftware.CommerceDTO.v1.Membership;
+using BVSoftware.CommerceDTO.v1.Orders;
+using BVSoftware.CommerceDTO.v1.Shipping;
+using BVSoftware.CommerceDTO.v1.Taxes;
 
 namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 {
@@ -11,9 +21,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
     {
 
         private const int CHUNKSIZE = 131072;
-        private MigrationSettings settings = null;
-        private MigrationServices.MigrationToolServiceClient bv6proxy = null;
-        private data.bvc2004Entities oldDatabase = null;
+        private MigrationSettings settings = null;                
         private Dictionary<int, long> AffiliateMapper = new Dictionary<int, long>();
         private Dictionary<int, long> TaxScheduleMapper = new Dictionary<int, long>();
         private Dictionary<int, long> ProductPropertyMapper = new Dictionary<int, long>();
@@ -46,22 +54,26 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             "\"";
             return result;
         }
-        private void DumpErrors(List<MigrationServices.ApiError> errors)
+        private void DumpErrors(List<ApiError> errors)
         {
-            foreach (MigrationServices.ApiError e in errors)
+            foreach (ApiError e in errors)
             {
                 wl("ERROR: " + e.Code + " | " + e.Description);
             }
         }
 
-        private MigrationServices.MigrationToolServiceClient GetBV6Proxy()
+        private data.bvc2004Entities GetOldDatabase()
         {
-            MigrationServices.MigrationToolServiceClient result = null;
+            return new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
+        }
+        private BVSoftware.CommerceDTO.v1.Client.Api GetBV6Proxy()
+        {
+            Api result = null;
             try
             {
-                string serviceUrl = settings.DestinationServiceRootUrl + "/api/v1/MigrationToolService.svc";
-                result = new MigrationServices.MigrationToolServiceClient("BasicHttpBinding_IMigrationToolService",
-                                                                            serviceUrl);
+                string serviceUrl = settings.DestinationServiceRootUrl;
+                string apiKey = settings.ApiKey;
+                result = new Api(serviceUrl, apiKey);
             }
             catch (Exception ex)
             {
@@ -82,23 +94,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
             try
             {
-                string serviceUrl = s.DestinationServiceRootUrl + "/api/v1/MigrationToolService.svc";
-                wl("Creating service connection to: " + serviceUrl);
-                bv6proxy = new MigrationServices.MigrationToolServiceClient("BasicHttpBinding_IMigrationToolService",
-                                                                            serviceUrl);
-                wl("Service Connection Created");
-            }
-            catch (Exception ex)
-            {
-                wl("EXCEPTION While attempting to create service proxy for BV 6!");
-                wl(ex.Message);
-                wl(ex.StackTrace);
-                return;
-            }
-
-            try
-            {
-                oldDatabase = new data.bvc2004Entities(EFConnString(s.SourceConnectionString()));
+                data.bvc2004Entities oldTest = GetOldDatabase();                
             }
             catch (Exception ex2)
             {
@@ -113,7 +109,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             {
 
                 // Clear Products
-                if (s.ClearProducts)
+                if (s.ClearProducts && s.ImportProductImagesOnly == false)
                 {
                     ClearProducts();
                 }
@@ -122,6 +118,12 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 if (s.ClearCategories)
                 {
                     ClearCategories();
+                }
+
+                // Clear Users
+                if (s.ClearUsers)
+                {
+                    ClearUsers();
                 }
 
                 // Users 
@@ -139,21 +141,21 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 }
 
                 // Tax Classes are prerequisite for product import
-                if (s.ImportOtherSettings || s.ImportProducts)
+                if (s.ImportOtherSettings || (s.ImportProducts && s.SkipProductPrerequisites == false))
                 {
                     ImportTaxSchedules();
                     ImportTaxes();
                 }
 
                 // Vendors and Manufacturers
-                if (s.ImportProducts || s.ImportCategories)
+                if ((s.ImportProducts && s.ImportProductImagesOnly == false && s.SkipProductPrerequisites == false) || s.ImportCategories)
                 {
                     ImportVendors();
                     ImportManufacturers();
                 }
 
                 // Product Types
-                if (s.ImportProducts)
+                if (s.ImportProducts && s.ImportProductImagesOnly == false && s.SkipProductPrerequisites == false)
                 {
                     ImportProductProperties();
                     ImportProductTypes();
@@ -166,13 +168,19 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 }
 
                 if (s.ImportProducts)
-                {                                        
-                    ImportProductChoices();
-                    MigrateProductFileDownloads();
+                {
+                    if (s.ImportProductImagesOnly == false && s.SkipProductPrerequisites == false)
+                    {
+                        ImportProductChoices();
+                    }
 
+                    MigrateProductFileDownloads();
                     ImportProducts();
 
-                    ImportRelatedItems();
+                    if (s.ImportProductImagesOnly == false)
+                    {
+                        ImportRelatedItems();
+                    }
                 }
 
                 if (s.ImportOrders)
@@ -220,6 +228,8 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 {
                     int.TryParse(settings.SingleOrderImport, out singleOrderID);
                 }
+
+                data.bvc2004Entities oldDatabase = GetOldDatabase();    
                 var o = (from old in oldDatabase.bvc_Order where old.ID == singleOrderID select old).FirstOrDefault();
                 if (o == null)
                 {
@@ -233,6 +243,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             {
                 // Multi-Order Mode
                 int pageSize = 100;
+                data.bvc2004Entities oldDatabase = GetOldDatabase();    
                 int totalRecords = oldDatabase.bvc_Order.Where(y => y.StatusCode == 3).Count();
                 int totalPages = (int)(Math.Ceiling((decimal)totalRecords / (decimal)pageSize));
                 for (int i = 0; i < totalPages; i++)
@@ -250,13 +261,12 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             if (old == null) return;
             wl("Processing Order: " + old.ID.ToString());
 
-            MigrationServices.OrderDTO o = new MigrationServices.OrderDTO();
-            PrepOrderDto(o);
+            OrderDTO o = new OrderDTO();            
             PopulateDto(old, o);
             if (o != null)
             {
-                MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
-                var res = proxy.MigrateOrder(settings.ApiKey, o);
+                Api proxy = GetBV6Proxy();
+                var res = proxy.OrdersCreate(o);
                 if (res != null)
                 {
                     if (res.Errors.Count > 0)
@@ -267,25 +277,14 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     else
                     {
                         wl("SUCCESS");
-                        ImportOrderTransactions(o.bvin, o.OrderNumber, old);
+                        ImportOrderTransactions(o.Bvin, o.OrderNumber, old);
                     }
                 }
 
             }
         }
-        private void PrepOrderDto(MigrationServices.OrderDTO o)
-        {
-            o.BillingAddress = new MigrationServices.AddressDTO();
-            o.Coupons = new List<MigrationServices.OrderCouponDTO>();
-            o.CustomProperties = new List<MigrationServices.CustomPropertyDTO>();
-            o.Items = new List<MigrationServices.LineItemDTO>();
-            o.Notes = new List<MigrationServices.OrderNoteDTO>();
-            o.OrderDiscountDetails = new List<MigrationServices.DiscountDetailDTO>();
-            o.Packages = new List<MigrationServices.OrderPackageDTO>();
-            o.ShippingAddress = new MigrationServices.AddressDTO();
-            o.ShippingDiscountDetails = new List<MigrationServices.DiscountDetailDTO>();
-        }
-        private void PopulateDto(data.bvc_Order old, MigrationServices.OrderDTO o)
+      
+        private void PopulateDto(data.bvc_Order old, OrderDTO o)
         {
             o.AffiliateID = old.AffiliateID == 0 ? string.Empty : old.AffiliateID.ToString();
             BVC2004Address oldBilling = new BVC2004Address();
@@ -294,8 +293,8 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             {
                 oldBilling.CopyTo(o.BillingAddress, EFConnString(settings.SourceConnectionString()));
             }
-            o.bvin = old.ID.ToString() ?? string.Empty;
-            o.CustomProperties = new List<MigrationServices.CustomPropertyDTO>();
+            o.Bvin = old.ID.ToString() ?? string.Empty;
+            o.CustomProperties = new List<CustomPropertyDTO>();
             o.FraudScore = 0;
             //o.Id = old.ID;
             o.Instructions = old.Instructions;
@@ -304,21 +303,21 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             o.OrderNumber = old.ID.ToString() ?? string.Empty;
             if (old.OrderDiscountsTotal != 0)
             {
-                o.OrderDiscountDetails.Add(new MigrationServices.DiscountDetailDTO() { Amount = -1 * ((decimal)old.OrderDiscountsTotal), Description = "BVC 2004 Order Discounts", Id = new Guid() });
+                o.OrderDiscountDetails.Add(new DiscountDetailDTO() { Amount = -1 * ((decimal)old.OrderDiscountsTotal), Description = "BVC 2004 Order Discounts", Id = new Guid() });
             }
-            o.PaymentStatus = MigrationServices.OrderPaymentStatusDTO.Unknown;    
+            o.PaymentStatus = OrderPaymentStatusDTO.Unknown;
             switch (old.PaymentStatus)
             {
                 case 0:
-                case 99:                
-                    o.PaymentStatus = MigrationServices.OrderPaymentStatusDTO.Unknown;
+                case 99:
+                    o.PaymentStatus = OrderPaymentStatusDTO.Unknown;
                     break;
                 case 10:
                 case 20:
-                    o.PaymentStatus = MigrationServices.OrderPaymentStatusDTO.Unpaid;
+                    o.PaymentStatus = OrderPaymentStatusDTO.Unpaid;
                     break;
                 case 30:
-                    o.PaymentStatus = MigrationServices.OrderPaymentStatusDTO.Paid;
+                    o.PaymentStatus = OrderPaymentStatusDTO.Paid;
                     break;
             }
 
@@ -326,67 +325,67 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             if (firstPackage != null)
             {
                 BVC2004Address oldShipping = new BVC2004Address();
-                oldShipping.FromXmlString(firstPackage.DestinationAddress);                
+                oldShipping.FromXmlString(firstPackage.DestinationAddress);
                 if (oldShipping != null) oldShipping.CopyTo(o.ShippingAddress, EFConnString(settings.SourceConnectionString()));
                 o.ShippingMethodDisplayName = firstPackage.ShippingMethodName;
                 o.ShippingMethodId = string.Empty;
                 o.ShippingProviderId = string.Empty;
-                o.ShippingProviderServiceCode = firstPackage.ShippingServiceCode;                
+                o.ShippingProviderServiceCode = firstPackage.ShippingServiceCode;
             }
 
-            o.ShippingStatus = MigrationServices.OrderShippingStatusDTO.Unknown;
+            o.ShippingStatus = OrderShippingStatusDTO.Unknown;
             switch (old.ShippingStatus)
             {
                 case 0:
-                    o.ShippingStatus = MigrationServices.OrderShippingStatusDTO.Unknown;
+                    o.ShippingStatus = OrderShippingStatusDTO.Unknown;
                     break;
                 case 1:
-                    o.ShippingStatus = MigrationServices.OrderShippingStatusDTO.Unshipped;
+                    o.ShippingStatus = OrderShippingStatusDTO.Unshipped;
                     break;
                 case 2:
-                    o.ShippingStatus = MigrationServices.OrderShippingStatusDTO.PartiallyShipped;
+                    o.ShippingStatus = OrderShippingStatusDTO.PartiallyShipped;
                     break;
                 case 3:
-                    o.ShippingStatus = MigrationServices.OrderShippingStatusDTO.FullyShipped;
+                    o.ShippingStatus = OrderShippingStatusDTO.FullyShipped;
                     break;
                 case 4:
-                    o.ShippingStatus = MigrationServices.OrderShippingStatusDTO.NonShipping;
+                    o.ShippingStatus = OrderShippingStatusDTO.NonShipping;
                     break;
             }
             o.StatusCode = string.Empty;
             o.StatusName = "Uknown";
-            switch(old.StatusCode)
-            {                                         
-                                     
+            switch (old.StatusCode)
+            {
+
                 case -1: //com.bvsoftware.bvc2004.OrderStatusCode.Canceled
-                        o.StatusCode = "A7FFDB90-C566-4cf2-93F4-D42367F359D5";
-                        o.StatusName = "On Hold";
-                        break;
+                    o.StatusCode = "A7FFDB90-C566-4cf2-93F4-D42367F359D5";
+                    o.StatusName = "On Hold";
+                    break;
                 case 3: //com.bvsoftware.bvc2004.OrderStatusCode.Completed
-                        o.StatusCode = "09D7305D-BD95-48d2-A025-16ADC827582A";
-                        o.StatusName = "Complete";
-                        break;
+                    o.StatusCode = "09D7305D-BD95-48d2-A025-16ADC827582A";
+                    o.StatusName = "Complete";
+                    break;
                 case 2: //com.bvsoftware.bvc2004.OrderStatusCode.InProcess
-                        o.StatusCode = "F37EC405-1EC6-4a91-9AC4-6836215FBBBC";
-                        o.StatusName = "In Process";
-                        break;
+                    o.StatusCode = "F37EC405-1EC6-4a91-9AC4-6836215FBBBC";
+                    o.StatusName = "In Process";
+                    break;
                 case 1:
                 case 100:
                 case 200: //com.bvsoftware.bvc2004.OrderStatusCode.OnHold
-                        o.StatusCode = "88B5B4BE-CA7B-41a9-9242-D96ED3CA3135";
-                        o.StatusName = "On Hold";
-                        break;                
+                    o.StatusCode = "88B5B4BE-CA7B-41a9-9242-D96ED3CA3135";
+                    o.StatusName = "On Hold";
+                    break;
                 case 999: //com.bvsoftware.bvc2004.OrderStatusCode.Void
-                        o.StatusCode = "A7FFDB90-C566-4cf2-93F4-D42367F359D5";
-                        o.StatusName = "Void";
-                        break;
-                }
+                    o.StatusCode = "A7FFDB90-C566-4cf2-93F4-D42367F359D5";
+                    o.StatusName = "Void";
+                    break;
+            }
 
             o.ThirdPartyOrderId = string.Empty;
             o.TimeOfOrderUtc = old.TimeOfOrder ?? DateTime.UtcNow;
             o.TotalHandling = (decimal)old.HandlingFee;
             o.TotalShippingBeforeDiscounts = ((decimal)old.ShippingTotal + (decimal)old.ShippingDiscountsTotal);
-            o.ShippingDiscountDetails.Add(new MigrationServices.DiscountDetailDTO() { Amount = -1 * (decimal)old.ShippingDiscountsTotal, Description = "BVC2004 Shipping Discount", Id = new Guid() });
+            o.ShippingDiscountDetails.Add(new DiscountDetailDTO() { Amount = -1 * (decimal)old.ShippingDiscountsTotal, Description = "BVC2004 Shipping Discount", Id = new Guid() });
             o.TotalTax = (decimal)old.TaxTotal;
             o.TotalTax2 = 0;
             o.UserEmail = string.Empty;
@@ -406,13 +405,13 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             o.Packages = TranslatePackages(old);
 
         }
-        private List<MigrationServices.OrderCouponDTO> TranslateCoupons(data.bvc_Order o)
+        private List<OrderCouponDTO> TranslateCoupons(data.bvc_Order o)
         {
-            List<MigrationServices.OrderCouponDTO> result = new List<MigrationServices.OrderCouponDTO>();            
+            List<OrderCouponDTO> result = new List<OrderCouponDTO>();
 
             foreach (data.bvc_OrderCoupon oldCoupon in o.bvc_OrderCoupon)
             {
-                MigrationServices.OrderCouponDTO c = new MigrationServices.OrderCouponDTO();
+                OrderCouponDTO c = new OrderCouponDTO();
                 c.CouponCode = oldCoupon.CouponCode ?? string.Empty;
                 c.IsUsed = true;
                 c.OrderBvin = o.ID.ToString() ?? string.Empty;
@@ -421,13 +420,13 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
             return result;
         }
-        private List<MigrationServices.OrderNoteDTO> TranslateNotes(data.bvc_Order o)
+        private List<OrderNoteDTO> TranslateNotes(data.bvc_Order o)
         {
-            List<MigrationServices.OrderNoteDTO> result = new List<MigrationServices.OrderNoteDTO>();
-            
+            List<OrderNoteDTO> result = new List<OrderNoteDTO>();
+
             foreach (data.bvc_OrderNote item in o.bvc_OrderNote)
             {
-                MigrationServices.OrderNoteDTO n = new MigrationServices.OrderNoteDTO();
+                OrderNoteDTO n = new OrderNoteDTO();
                 n.AuditDate = item.AuditDate;
                 n.IsPublic = false;
                 n.LastUpdatedUtc = item.AuditDate;
@@ -438,20 +437,20 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
             return result;
         }
-        private List<MigrationServices.OrderPackageDTO> TranslatePackages(data.bvc_Order o)
+        private List<OrderPackageDTO> TranslatePackages(data.bvc_Order o)
         {
-            List<MigrationServices.OrderPackageDTO> result = new List<MigrationServices.OrderPackageDTO>();
-            
+            List<OrderPackageDTO> result = new List<OrderPackageDTO>();
+
             foreach (data.bvc_Package item in o.bvc_Package)
             {
-                MigrationServices.OrderPackageDTO pak = new MigrationServices.OrderPackageDTO();
+                OrderPackageDTO pak = new OrderPackageDTO();
 
-                pak.CustomProperties = new List<MigrationServices.CustomPropertyDTO>();
+                pak.CustomProperties = new List<CustomPropertyDTO>();
                 pak.Description = string.Empty;
                 pak.EstimatedShippingCost = (decimal)item.ShippingCost;
                 pak.HasShipped = true;
                 pak.Height = (decimal)item.Height;
-                pak.Items = new List<MigrationServices.OrderPackageItemDTO>();
+                pak.Items = new List<OrderPackageItemDTO>();
                 pak.LastUpdatedUtc = item.ShipDate ?? DateTime.UtcNow;
                 pak.Length = (decimal)item.Length;
                 pak.OrderId = o.ID.ToString();
@@ -459,27 +458,27 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 pak.ShippingMethodId = string.Empty;
                 pak.ShippingProviderId = string.Empty;
                 pak.ShippingProviderServiceCode = item.ShippingServiceCode;
-                pak.SizeUnits = MigrationServices.LengthTypeDTO.Inches;
+                pak.SizeUnits = LengthTypeDTO.Inches;
                 pak.TrackingNumber = item.TrackingNumber;
                 pak.Weight = (decimal)item.Weight;
-                pak.WeightUnits = MigrationServices.WeightTypeDTO.Pounds;
+                pak.WeightUnits = WeightTypeDTO.Pounds;
                 pak.Width = (decimal)item.Width;
                 result.Add(pak);
             }
 
             return result;
-        }        
-        private List<MigrationServices.LineItemDTO> TranslateItems(data.bvc_Order o)
+        }
+        private List<LineItemDTO> TranslateItems(data.bvc_Order o)
         {
-            List<MigrationServices.LineItemDTO> result = new List<MigrationServices.LineItemDTO>();
-            
+            List<LineItemDTO> result = new List<LineItemDTO>();
+
             foreach (data.bvc_OrderItem item in o.bvc_OrderItem)
             {
-                MigrationServices.LineItemDTO li = new MigrationServices.LineItemDTO();
+                LineItemDTO li = new LineItemDTO();
 
                 li.BasePricePerItem = ((decimal)item.LineTotal / (decimal)item.Qty);
                 li.CustomProperties = TranslateOldProperties(item.ExtraInformation);
-                li.DiscountDetails = new List<MigrationServices.DiscountDetailDTO>();
+                li.DiscountDetails = new List<DiscountDetailDTO>();
                 li.ExtraShipCharge = 0;
                 li.Id = -1;
                 li.LastUpdatedUtc = DateTime.UtcNow;
@@ -493,7 +492,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 if (displaySku != null)
                 {
                     li.ProductSku = displaySku.Value;
-                }                
+                }
                 li.ProductShippingHeight = (decimal)item.Height;
                 li.ProductShippingLength = (decimal)item.Length;
                 li.ProductShippingWeight = (decimal)item.Weight;
@@ -501,9 +500,9 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 li.Quantity = (int)item.Qty;
                 li.QuantityReturned = (int)item.QtyReturned;
                 li.QuantityShipped = (int)item.QtyShipped;
-                li.SelectionData = new List<MigrationServices.OptionSelectionDTO>();
-                li.ShipFromAddress = new MigrationServices.AddressDTO();
-                li.ShipFromMode = MigrationServices.ShippingModeDTO.ShipFromSite;
+                li.SelectionData = new List<OptionSelectionDTO>();
+                li.ShipFromAddress = new AddressDTO();
+                li.ShipFromMode = ShippingModeDTO.ShipFromSite;
                 li.ShipFromNotificationId = string.Empty;
                 li.ShippingPortion = 0;
                 li.ShippingSchedule = 0;
@@ -520,7 +519,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 decimal allDiscounts = prediscountTotal - lineTotal;
                 if (allDiscounts != 0)
                 {
-                    li.DiscountDetails.Add(new MigrationServices.DiscountDetailDTO() { Amount = -1 * allDiscounts, Description = "BVC2004 Discounts", Id = new Guid() });
+                    li.DiscountDetails.Add(new DiscountDetailDTO() { Amount = -1 * allDiscounts, Description = "BVC2004 Discounts", Id = new Guid() });
                 }
 
                 result.Add(li);
@@ -532,50 +531,46 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             wl(" - Transactions for Order " + orderNumber);
 
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
-            
+            Api proxy = GetBV6Proxy();
+
             foreach (data.bvc_OrderPayment item in old.bvc_OrderPayment)
             {
                 wl("Transaction: " + item.ID);
 
-                
-                bool hasAuth = (item.AuthorizationOnly == 1) && (item.PaymentType == 2) && (item.Amount != 0);
+
+                bool hasAuth = (item.AuthorizationOnly == 1) && (item.Amount != 0);
                 bool hasCharge = (item.PaymentType == 2) && (item.Amount != 0);
                 bool hasRefund = (item.PaymentType == 3) && (item.Amount != 0);
-                
+
                 if (hasAuth)
                 {
-                    MigrationServices.OrderTransactionDTO opAuth = new MigrationServices.OrderTransactionDTO();
+                    OrderTransactionDTO opAuth = new OrderTransactionDTO();
                     opAuth.Id = new Guid();
-                                                        
+
                     switch (item.PaymentMethod)
                     {
                         case 1: // Credit Card
-                            opAuth.Action = MigrationServices.OrderTransactionActionDTO.CreditCardHold;
+                            opAuth.Action = OrderTransactionActionDTO.CreditCardHold;
                             break;
                         case 7: // Telephone
                         case 9: // Fax
-                            opAuth.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
-                            break;
                         case 3: // Check
-                            opAuth.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
-                            break;
                         case 4: // Cash
                         case 6: // Other
                         case 8: // Email
-                            opAuth.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
+                            opAuth.Action = OrderTransactionActionDTO.OfflinePaymentRequest;
                             break;
                         case 10: // PO
-                            opAuth.Action = MigrationServices.OrderTransactionActionDTO.PurchaseOrderInfo;
+                            opAuth.Action = OrderTransactionActionDTO.PurchaseOrderInfo;
                             break;
                         case 5: // Gift Card
-                            opAuth.Action = MigrationServices.OrderTransactionActionDTO.GiftCardHold;
+                            opAuth.Action = OrderTransactionActionDTO.GiftCardHold;
                             break;
                         case 2: // PayPal Express
-                            opAuth.Action = MigrationServices.OrderTransactionActionDTO.PayPalHold;
+                            opAuth.Action = OrderTransactionActionDTO.PayPalHold;
                             break;
                         default:
-                            opAuth.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
+                            opAuth.Action = OrderTransactionActionDTO.OfflinePaymentRequest;
                             break;
                     }
                     opAuth.Amount = (decimal)item.Amount;
@@ -584,7 +579,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                         item.Amount = item.Amount * -1;
                     }
                     opAuth.CheckNumber = item.CheckNumber ?? string.Empty;
-                    opAuth.CreditCard = new MigrationServices.OrderTransactionCardDataDTO();
+                    opAuth.CreditCard = new OrderTransactionCardDataDTO();
                     opAuth.CreditCard.CardHolderName = item.CreditCardHolder ?? string.Empty;
                     opAuth.CreditCard.CardIsEncrypted = true;
                     opAuth.CreditCard.CardNumber = string.Empty;
@@ -603,7 +598,9 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     opAuth.TimeStampUtc = item.AuditDate;
                     opAuth.Voided = false;
 
-                    var res = proxy.MigrateOrderTransaction(settings.ApiKey, opAuth);
+                    wl("- Creating Auth | " + opAuth.Amount + " | " + item.ID.ToString() + " | " + opAuth.Action.ToString());
+
+                    var res = proxy.OrderTransactionsCreate(opAuth);
                     if (res != null)
                     {
                         if (res.Errors.Count > 0)
@@ -620,41 +617,37 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
                 if (hasCharge)
                 {
-                    MigrationServices.OrderTransactionDTO opCharge = new MigrationServices.OrderTransactionDTO();
+                    OrderTransactionDTO opCharge = new OrderTransactionDTO();
                     opCharge.Id = new Guid();
                     switch (item.PaymentMethod)
                     {
                         case 1: // Credit Card
-                            opCharge.Action = MigrationServices.OrderTransactionActionDTO.CreditCardHold;
+                            opCharge.Action = OrderTransactionActionDTO.CreditCardCharge;
                             break;
                         case 7: // Telephone
                         case 9: // Fax
-                            opCharge.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
-                            break;
                         case 3: // Check
-                            opCharge.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
-                            break;
                         case 4: // Cash
                         case 6: // Other
                         case 8: // Email
-                            opCharge.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
+                            opCharge.Action = OrderTransactionActionDTO.CashReceived;
                             break;
                         case 10: // PO
-                            opCharge.Action = MigrationServices.OrderTransactionActionDTO.PurchaseOrderInfo;
+                            opCharge.Action = OrderTransactionActionDTO.PurchaseOrderAccepted;
                             break;
                         case 5: // Gift Card
-                            opCharge.Action = MigrationServices.OrderTransactionActionDTO.GiftCardHold;
+                            opCharge.Action = OrderTransactionActionDTO.GiftCardCapture;
                             break;
                         case 2: // PayPal Express
-                            opCharge.Action = MigrationServices.OrderTransactionActionDTO.PayPalHold;
+                            opCharge.Action = OrderTransactionActionDTO.PayPalCharge;
                             break;
                         default:
-                            opCharge.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
+                            opCharge.Action = OrderTransactionActionDTO.CashReceived;
                             break;
                     }
                     opCharge.Amount = (decimal)item.Amount;
                     opCharge.CheckNumber = item.CheckNumber ?? string.Empty;
-                    opCharge.CreditCard = new MigrationServices.OrderTransactionCardDataDTO();
+                    opCharge.CreditCard = new OrderTransactionCardDataDTO();
                     opCharge.CreditCard.CardHolderName = item.CreditCardHolder ?? string.Empty;
                     opCharge.CreditCard.CardIsEncrypted = true;
                     opCharge.CreditCard.CardNumber = string.Empty;
@@ -673,7 +666,9 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     opCharge.TimeStampUtc = item.AuditDate;
                     opCharge.Voided = false;
 
-                    var res = proxy.MigrateOrderTransaction(settings.ApiKey, opCharge);
+                    wl("- Creating Charge | " + opCharge.Amount + " | " + item.ID.ToString() + " | " + opCharge.Action.ToString());
+
+                    var res = proxy.OrderTransactionsCreate(opCharge);
                     if (res != null)
                     {
                         if (res.Errors.Count > 0)
@@ -690,41 +685,37 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
                 if (hasRefund)
                 {
-                    MigrationServices.OrderTransactionDTO opRefund = new MigrationServices.OrderTransactionDTO();
+                    OrderTransactionDTO opRefund = new OrderTransactionDTO();
                     opRefund.Id = new Guid();
                     switch (item.PaymentMethod)
                     {
                         case 1: // Credit Card
-                            opRefund.Action = MigrationServices.OrderTransactionActionDTO.CreditCardHold;
+                            opRefund.Action = OrderTransactionActionDTO.CreditCardRefund;
                             break;
                         case 7: // Telephone
                         case 9: // Fax
-                            opRefund.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
-                            break;
                         case 3: // Check
-                            opRefund.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
-                            break;
                         case 4: // Cash
                         case 6: // Other
                         case 8: // Email
-                            opRefund.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
+                            opRefund.Action = OrderTransactionActionDTO.CashReturned;
                             break;
                         case 10: // PO
-                            opRefund.Action = MigrationServices.OrderTransactionActionDTO.PurchaseOrderInfo;
+                            opRefund.Action = OrderTransactionActionDTO.CashReturned;
                             break;
                         case 5: // Gift Card
-                            opRefund.Action = MigrationServices.OrderTransactionActionDTO.GiftCardHold;
+                            opRefund.Action = OrderTransactionActionDTO.GiftCardIncrease;
                             break;
                         case 2: // PayPal Express
-                            opRefund.Action = MigrationServices.OrderTransactionActionDTO.PayPalHold;
+                            opRefund.Action = OrderTransactionActionDTO.PayPalRefund;
                             break;
                         default:
-                            opRefund.Action = MigrationServices.OrderTransactionActionDTO.OfflinePaymentRequest;
+                            opRefund.Action = OrderTransactionActionDTO.CashReturned;
                             break;
                     }
                     opRefund.Amount = -1 * (decimal)item.Amount;
                     opRefund.CheckNumber = item.CheckNumber ?? string.Empty;
-                    opRefund.CreditCard = new MigrationServices.OrderTransactionCardDataDTO();
+                    opRefund.CreditCard = new OrderTransactionCardDataDTO();
                     opRefund.CreditCard.CardHolderName = item.CreditCardHolder ?? string.Empty;
                     opRefund.CreditCard.CardIsEncrypted = true;
                     opRefund.CreditCard.CardNumber = string.Empty;
@@ -743,7 +734,9 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     opRefund.TimeStampUtc = item.AuditDate;
                     opRefund.Voided = false;
 
-                    var res = proxy.MigrateOrderTransaction(settings.ApiKey, opRefund);
+                    wl("- Creating Refund | " + opRefund.Amount + " | " + item.ID.ToString() + " | " + opRefund.Action.ToString());
+
+                    var res = proxy.OrderTransactionsCreate(opRefund);
                     if (res != null)
                     {
                         if (res.Errors.Count > 0)
@@ -795,35 +788,51 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             }
             //int totalMigrated = 0;
 
-            int pageSize = 100;
+            int pageSize = 10;
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             int totalRecords = oldDatabase.bvc_Product.Count();
             int totalPages = (int)(Math.Ceiling((decimal)totalRecords / (decimal)pageSize));
 
-            for (int i = 0; i < totalPages; i++)
+            int totalMigrated = 0;
+
+            int startPage = settings.ProductStartPage;
+            if (startPage < 1) startPage = 1;
+            if (startPage > totalPages) startPage = totalPages;
+
+            for (int i = (startPage - 1); i < totalPages; i++)
             {
+                wl("------------------------------------------------------------");
                 wl("Getting Products page " + (i + 1) + " of " + totalPages.ToString());
+                wl("------------------------------------------------------------");
                 int startRecord = i * pageSize;
                 var products = (from p in oldDatabase.bvc_Product select p).OrderBy(y => y.ID).Skip(startRecord).Take(pageSize).ToList();
 
-                System.Threading.Tasks.Parallel.ForEach(products, ImportSingleProduct);
+                if (settings.DisableMultiThreading)
+                {
 
-                //foreach (data.bvc_Product p in products)
-                //{
-                //    ImportSingleProduct(p);
+                    foreach (data.bvc_Product p in products)
+                    {
+                        ImportSingleProduct(p);
+                        totalMigrated += 1;
+                        if (limit > 0 && totalMigrated >= limit)
+                        {
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    System.Threading.Tasks.Parallel.ForEach(products, ImportSingleProduct);
+                }
 
-                //    totalMigrated += 1;
-                //    if (limit > 0 && totalMigrated >= limit)
-                //    {
-                //        return;
-                //    }
-                //}
+
             }
         }
-        private List<MigrationServices.CustomPropertyDTO> TranslateOldProperties(string oldXml)
+        private List<CustomPropertyDTO> TranslateOldProperties(string oldXml)
         {
-            List<MigrationServices.CustomPropertyDTO> result = new List<MigrationServices.CustomPropertyDTO>();
+            List<CustomPropertyDTO> result = new List<CustomPropertyDTO>();
 
-            List<CustomProperty> props = CustomProperty.ReadExtraInfo(oldXml);            
+            List<CustomProperty> props = CustomProperty.ReadExtraInfo(oldXml);
             if (props != null)
             {
                 foreach (CustomProperty prop in props)
@@ -838,33 +847,33 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             if (old == null) return;
 
             wl("Product: " + old.ProductName + " [" + old.ID + "]");
-            MigrationServices.ProductDTO p = new MigrationServices.ProductDTO();
+            ProductDTO p = new ProductDTO();
             p.AllowReviews = true;
             p.Bvin = old.ID;
             p.CreationDateUtc = old.CreationDate;
-            p.CustomProperties = new List<MigrationServices.CustomPropertyDTO>();
+            p.CustomProperties = new List<CustomPropertyDTO>();
             p.Featured = false;
             p.GiftWrapAllowed = true;
             p.GiftWrapPrice = 0;
             p.ImageFileSmall = System.IO.Path.GetFileName(old.ImageFileMedium);
             p.ImageFileSmallAlternateText = old.ProductName;
 
-            p.InventoryMode = MigrationServices.ProductInventoryModeDTO.AlwayInStock;
-            switch(old.InventoryNotAvailableStatus)
+            p.InventoryMode = ProductInventoryModeDTO.AlwayInStock;
+            switch (old.InventoryNotAvailableStatus)
             {
                 case 1: // Ignore Inventory
-                    p.InventoryMode = MigrationServices.ProductInventoryModeDTO.AlwayInStock;
+                    p.InventoryMode = ProductInventoryModeDTO.AlwayInStock;
                     break;
                 case 2: // Allow Backorders
-                    p.InventoryMode = MigrationServices.ProductInventoryModeDTO.WhenOutOfStockAllowBackorders;
+                    p.InventoryMode = ProductInventoryModeDTO.WhenOutOfStockAllowBackorders;
                     break;
                 case 3: // Show, no orders
-                    p.InventoryMode = MigrationServices.ProductInventoryModeDTO.WhenOutOfStockShow;
+                    p.InventoryMode = ProductInventoryModeDTO.WhenOutOfStockShow;
                     break;
                 case 0: // Pull from store
-                    p.InventoryMode = MigrationServices.ProductInventoryModeDTO.WhenOutOfStockHide;
+                    p.InventoryMode = ProductInventoryModeDTO.WhenOutOfStockHide;
                     break;
-            }                        
+            }
             p.IsAvailableForSale = true;
             p.Keywords = string.Empty;
             p.ListPrice = (decimal)old.ListPrice;
@@ -879,7 +888,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             p.PreTransformLongDescription = string.Empty;
             p.ProductName = old.ProductName;
             p.ProductTypeId = old.ProductTypeID.ToString();
-            p.ShippingDetails = new MigrationServices.ShippableItemDTO();
+            p.ShippingDetails = new ShippableItemDTO();
             p.ShippingDetails.ExtraShipFee = old.ExtraShipFee;
             p.ShippingDetails.Height = (decimal)old.ShippingHeight;
             p.ShippingDetails.IsNonShipping = old.NonShipping == 1;
@@ -891,16 +900,16 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             switch (old.DropShipMode)
             {
                 case 1:
-                    p.ShippingMode = MigrationServices.ShippingModeDTO.ShipFromSite;
+                    p.ShippingMode = ShippingModeDTO.ShipFromSite;
                     break;
                 case 2:
-                    p.ShippingMode = MigrationServices.ShippingModeDTO.ShipFromVendor;
+                    p.ShippingMode = ShippingModeDTO.ShipFromVendor;
                     break;
                 case 3:
-                    p.ShippingMode = MigrationServices.ShippingModeDTO.ShipFromManufacturer;
+                    p.ShippingMode = ShippingModeDTO.ShipFromManufacturer;
                     break;
                 default:
-                    p.ShippingMode = MigrationServices.ShippingModeDTO.ShipFromSite;
+                    p.ShippingMode = ShippingModeDTO.ShipFromSite;
                     break;
             }
             p.ShortDescription = old.ShortDescription;
@@ -911,13 +920,13 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             switch (old.Status)
             {
                 case 0:
-                    p.Status = MigrationServices.ProductStatusDTO.Disabled;
+                    p.Status = ProductStatusDTO.Disabled;
                     break;
                 default:
-                    p.Status = MigrationServices.ProductStatusDTO.Active;
+                    p.Status = ProductStatusDTO.Active;
                     break;
             }
-            p.Tabs = new List<MigrationServices.ProductDescriptionTabDTO>();
+            p.Tabs = new List<ProductDescriptionTabDTO>();
             p.TaxExempt = old.TaxExempt == 1;
             p.TaxSchedule = 0;
             if (TaxScheduleMapper.ContainsKey(old.TaxClass)) p.TaxSchedule = TaxScheduleMapper[old.TaxClass];
@@ -934,8 +943,8 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 bytes = new byte[0];
             }
 
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
-            var res = proxy.MigrateProduct(settings.ApiKey, p, bytes);
+            Api proxy = GetBV6Proxy();
+            var res = proxy.ProductsCreate(p, bytes);
             if (res != null)
             {
                 if (res.Errors.Count > 0)
@@ -945,30 +954,44 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 }
                 else
                 {
-                    AssignOptionsToProduct(old.ID);
-                    AssignProductPropertyValues(old.ID);
+                    if (settings.ImportProductImagesOnly == false)
+                    {
+                        AssignOptionsToProduct(old.ID);
+                        AssignProductPropertyValues(old.ID);
+                    }
                     wl("SUCCESS");
                 }
             }
 
-            // Inventory                        
-            MigrateProductInventory(old.ID);
+            if (settings.ImportProductImagesOnly == false)
+            {
+                // Inventory                        
+                MigrateProductInventory(old.ID);
+            }
 
             // Additional Images            
             MigrateProductAdditionalImages(old.ID);
 
-            // Volume Prices
-            MigrateProductVolumePrices(old.ID);
+            if (settings.ImportProductImagesOnly == false)
+            {
+                // Volume Prices
+                MigrateProductVolumePrices(old.ID);
 
-            // Reviews
-            MigrateProductReviews(old.ID);
+                // Reviews
+                MigrateProductReviews(old.ID);
 
-            // Link to Categories
-            MigrateProductCategoryLinks(old.ID);
+                // Link to Categories
+                MigrateProductCategoryLinks(old.ID);
+            }
 
             // Assign File Downloads
             AssignFileDownloadsToProduct(old.ID);
 
+            // Index Product
+            wl("- Building Search Index for Product");
+            Api bv6proxy = GetBV6Proxy();
+            bv6proxy.SearchManagerIndexProduct(old.ID);
+            wl("-FINISHED Product: " + old.ProductName + " [" + old.ID + "]");
         }
         private void AssignOptionsToProduct(string bvin)
         {
@@ -979,21 +1002,24 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             var item = db.bvc_Product.Where(y => y.ID == bvin).FirstOrDefault();
             if (item == null) return;
 
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
+            Api proxy = GetBV6Proxy();
 
             var choices = item.bvc_ProductXProductChoices.OrderBy(y => y.SortOrder);
             if (choices == null) return;
             foreach (data.bvc_ProductXProductChoices choice in choices)
             {
-                proxy.AssignOptionToProduct(settings.ApiKey, bvin, choice.ProductChoiceID.ToString());
+                proxy.ProductOptionsAssignToProduct(choice.ProductChoiceID.ToString(), bvin, false);
             }
+
+            // Only generate variants after all options are added. Saves Time
+            proxy.ProductOptionsGenerateAllVariants(bvin);
         }
         private void AssignProductPropertyValues(string bvin)
         {
             wl(" - Migrating Property Values...");
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
+            Api proxy = GetBV6Proxy();
 
             var itemMain = db.bvc_Product.Where(y => y.ID == bvin).FirstOrDefault();
             if (itemMain == null) return;
@@ -1006,7 +1032,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 if (ProductPropertyMapper.ContainsKey(item.PropertyID)) newId = ProductPropertyMapper[item.PropertyID];
                 if (newId > 0)
                 {
-                    proxy.SetProductPropertyValue(settings.ApiKey, bvin, newId, item.PropertyValue, -1);
+                    proxy.ProductPropertiesSetValueForProduct(newId, bvin, item.PropertyValue, -1);
                 }
             }
         }
@@ -1015,7 +1041,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             wl(" - Migrating Inventory...");
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
+            Api proxy = GetBV6Proxy();
 
             var itemMain = db.bvc_Product.Where(y => y.ID == bvin).FirstOrDefault();
             if (itemMain == null) return;
@@ -1023,13 +1049,13 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             var old = itemMain.bvc_ProductInventory.FirstOrDefault();
             if (old == null) return;
 
-            MigrationServices.ProductInventoryDTO inv = new MigrationServices.ProductInventoryDTO();
+            ProductInventoryDTO inv = new ProductInventoryDTO();
             inv.LowStockPoint = 0;
             inv.ProductBvin = bvin;
             inv.QuantityOnHand = old.Qty;
             inv.QuantityReserved = 0;
 
-            var res = proxy.SetInventoryLevelsForProduct(settings.ApiKey, bvin, inv);
+            var res = proxy.ProductInventoryCreate(inv);
             if (res != null)
             {
                 if (res.Errors.Count > 0)
@@ -1048,13 +1074,13 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             wl(" - Migrating AdditionalImages...");
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
+            Api proxy = GetBV6Proxy();
 
             var items = db.bvc_ProductImage.Where(y => y.ProductID == bvin);
             if (items == null) return;
             foreach (data.bvc_ProductImage old in items)
             {
-                MigrationServices.ProductImageDTO img = new MigrationServices.ProductImageDTO();
+                ProductImageDTO img = new ProductImageDTO();
                 img.AlternateText = old.Caption;
                 img.Bvin = old.ImageID.ToString();
                 img.Caption = old.Caption;
@@ -1067,8 +1093,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 if (bytes == null) return;
                 wl("Found Image: " + img.FileName + " [" + bytes.Length + " bytes]");
 
-
-                var res = proxy.MigrateAdditionalImage(settings.ApiKey, img, bytes);
+                var res = proxy.ProductImagesCreate(img, bytes);
                 if (res != null)
                 {
                     if (res.Errors.Count > 0)
@@ -1086,7 +1111,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         private void AssignFileDownloadsToProduct(string bvin)
         {
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
+            Api proxy = GetBV6Proxy();
 
             var itemMain = db.bvc_Product.Where(y => y.ID == bvin).FirstOrDefault();
             if (itemMain == null) return;
@@ -1096,7 +1121,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             foreach (data.bvc_ProductFile x in crosses)
             {
                 wl("Linking Product " + bvin + " to " + x.FileID.ToString());
-                var res2 = proxy.AssociateProductFile(settings.ApiKey, bvin, x.FileID.ToString(), x.AvailableMinutes, x.MaxDownloads);
+                var res2 = proxy.ProductFilesAddToProduct(bvin, x.FileID.ToString(), x.AvailableMinutes, x.MaxDownloads);
                 if (res2 != null)
                 {
                     if (res2.Errors.Count > 0)
@@ -1120,7 +1145,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             Header("Migrating File Downloads");
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
+            Api proxy = GetBV6Proxy();
 
             var items = db.bvc_ProductFile;
             if (items == null) return;
@@ -1155,7 +1180,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     }
                 }
 
-                var res = proxy.MigrateProductFileFirstPart(settings.ApiKey, old.FileID.ToString(), old.FileName, old.Title, partial);
+                var res = proxy.ProductFilesDataUploadFirstPart(old.FileID.ToString(), old.FileName, old.Title, partial);
                 if (res != null)
                 {
                     if (res.Errors.Count > 0)
@@ -1172,7 +1197,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                         {
                             partial = GetAChunkFromFullBytes(bytes, i);
                             wl("+ " + old.FileName + " [" + FriendlyFormatBytes(bytes.Length) + "] part " + (i + 1) + " of " + totalChunks.ToString());
-                            var res2 = proxy.MigrateProductFileAdditionalPart(settings.ApiKey, old.FileID.ToString(), old.FileName, partial);
+                            var res2 = proxy.ProductFilesDataUploadAdditionalPart(old.FileID.ToString(), old.FileName, partial);
                         }
                     }
                     wl("File Done Uploading!");
@@ -1182,8 +1207,6 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     wl("FAILED! EXCEPTION!");
                 }
             }
-
-           
         }
         private byte[] GetAChunkFromFullBytes(byte[] fullBytes, int chunkIndex)
         {
@@ -1233,7 +1256,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             wl(" - Migrating Volume Prices...");
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
+            Api proxy = GetBV6Proxy();
 
             var itemMain = db.bvc_Product.Where(y => y.ID == bvin).FirstOrDefault();
             if (itemMain == null) return;
@@ -1242,19 +1265,19 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             if (items == null) return;
             foreach (data.bvc_ProductVolumeDiscounts item in items)
             {
-                MigrationServices.ProductVolumeDiscountDTO v = new MigrationServices.ProductVolumeDiscountDTO();
-                
+                ProductVolumeDiscountDTO v = new ProductVolumeDiscountDTO();
+
                 v.Bvin = item.ProductID;
 
                 v.Amount = (decimal)item.Price;
-                v.DiscountType = MigrationServices.ProductVolumeDiscountTypeDTO.Amount;
+                v.DiscountType = ProductVolumeDiscountTypeDTO.Amount;
 
                 v.LastUpdated = DateTime.UtcNow;
                 v.ProductId = item.ProductID;
                 v.Qty = item.Qty;
 
                 wl("Discount for qty: " + v.Qty + " [" + v.Bvin + "]");
-                var res = proxy.MigrationProductVolumeDiscount(settings.ApiKey, v);
+                var res = proxy.ProductVolumeDiscountsCreate(v);
                 if (res != null)
                 {
                     if (res.Errors.Count > 0)
@@ -1274,13 +1297,13 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             wl(" - Migrating Reviews...");
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
+            Api proxy = GetBV6Proxy();
 
             var items = db.bvc_ProductReview.Where(y => y.ProductID == bvin);
             if (items == null) return;
             foreach (data.bvc_ProductReview item in items)
             {
-                MigrationServices.ProductReviewDTO r = new MigrationServices.ProductReviewDTO();
+                ProductReviewDTO r = new ProductReviewDTO();
                 r.Approved = item.Approved == 1;
                 r.Bvin = item.ID.ToString();
                 r.Description = item.Description;
@@ -1305,7 +1328,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 r.UserID = item.UserID.ToString();
 
                 wl("Review [" + r.Bvin + "]");
-                var res = proxy.MigrateProductReview(settings.ApiKey, r);
+                var res = proxy.ProductReviewsCreate(r);
                 if (res != null)
                 {
                     if (res.Errors.Count > 0)
@@ -1325,7 +1348,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             wl(" - Migrating Category Links");
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
-            MigrationServices.MigrationToolServiceClient proxy = GetBV6Proxy();
+            Api proxy = GetBV6Proxy();
 
             var itemMain = db.bvc_Product.Where(y => y.ID == bvin).FirstOrDefault();
             if (itemMain == null) return;
@@ -1335,7 +1358,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             foreach (data.bvc_Category item in items)
             {
                 wl("To Category: " + item.ID.ToString());
-                var res = proxy.MigrationProductXCategory(settings.ApiKey, bvin, item.ID.ToString());
+                var res = proxy.CategoryProductAssociationsQuickCreate(bvin, item.ID.ToString());
                 if (res != null)
                 {
                     if (res.Errors.Count > 0)
@@ -1356,39 +1379,40 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             Header("Importing Shared Choices");
 
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_ProductChoices old in oldDatabase.bvc_ProductChoices)
             {
-                
-                MigrationServices.OptionDTO o = new MigrationServices.OptionDTO();
+
+                OptionDTO o = new OptionDTO();
                 string fullName = old.PropertyName;
                 if (old.DisplayName.Trim().Length > 0) fullName = old.DisplayName;
 
-                o.Settings = new List<MigrationServices.OptionSettingDTO>();
-                o.Items = new List<MigrationServices.OptionItemDTO>();
+                o.Settings = new List<OptionSettingDTO>();
+                o.Items = new List<OptionItemDTO>();
                 o.Bvin = old.ID.ToString();
-                o.IsShared = old.Shared == 1;
-                o.IsVariant = true; // Choices are always variants in BV6
+                o.IsShared = (old.Shared == 1);
+                o.IsVariant = false; // Choices are NOT variants in BV6 unless explicitly set
                 o.NameIsHidden = false;
 
                 switch (old.TypeCode)
                 {
                     case 9: //ProductChoiceType.HtmlArea    
-                        o.OptionType = MigrationServices.OptionTypesDTO.Html;
-                        o.Settings.Add(new MigrationServices.OptionSettingDTO() { Key = "html", Value = old.Html });
+                        o.OptionType = OptionTypesDTO.Html;
+                        o.Settings.Add(new OptionSettingDTO() { Key = "html", Value = old.Html });
                         break;
                     case 2: //ProductChoiceType.MultipleChoiceField
-                        o.OptionType = MigrationServices.OptionTypesDTO.DropDownList;
+                        o.OptionType = OptionTypesDTO.DropDownList;
                         break;
                     case 8: // ProductChoiceType.RadioButtonList
-                        o.OptionType = MigrationServices.OptionTypesDTO.RadioButtonList;
+                        o.OptionType = OptionTypesDTO.RadioButtonList;
                         break;
                     case 1: // TextField
-                        o.OptionType = MigrationServices.OptionTypesDTO.TextInput;
-                        o.Settings.Add(new MigrationServices.OptionSettingDTO() { Key = "rows", Value = old.TextRows.ToString() });
-                        o.Settings.Add(new MigrationServices.OptionSettingDTO() { Key = "cols", Value = old.TextColumns.ToString() });
-                        o.Settings.Add(new MigrationServices.OptionSettingDTO() { Key = "required", Value = (old.Html == "REQUIRED" ? "1" : "0") });
-                        o.Settings.Add(new MigrationServices.OptionSettingDTO() { Key = "wraptext", Value = (old.TextWrap == 1 ? "1" : "0") });
-                        o.Settings.Add(new MigrationServices.OptionSettingDTO() { Key = "maxlength", Value = "255" });
+                        o.OptionType = OptionTypesDTO.TextInput;
+                        o.Settings.Add(new OptionSettingDTO() { Key = "rows", Value = old.TextRows.ToString() });
+                        o.Settings.Add(new OptionSettingDTO() { Key = "cols", Value = old.TextColumns.ToString() });
+                        o.Settings.Add(new OptionSettingDTO() { Key = "required", Value = (old.Html == "REQUIRED" ? "1" : "0") });
+                        o.Settings.Add(new OptionSettingDTO() { Key = "wraptext", Value = (old.TextWrap == 1 ? "1" : "0") });
+                        o.Settings.Add(new OptionSettingDTO() { Key = "maxlength", Value = "255" });
                         break;
                     case 21: // AccessoryCheckBox
                         continue;
@@ -1396,14 +1420,15 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                         continue;
                     case 22: // AccessoryRadioButtonList                            
                         continue;
-                }               
+                }
                 o.Name = fullName;
                 wl("Choice: " + fullName);
 
                 // Load Items for Option Here
                 o.Items = LoadOptionItemsChoice(old.ID);
 
-                var res = bv6proxy.MigrateOption(settings.ApiKey, o);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.ProductOptionsCreate(o);
                 if (res != null)
                 {
                     if (res.Errors.Count() > 0)
@@ -1417,10 +1442,10 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     }
                 }
             }
-        }       
-        private List<MigrationServices.OptionItemDTO> LoadOptionItemsChoice(int choiceID)
+        }
+        private List<OptionItemDTO> LoadOptionItemsChoice(int choiceID)
         {
-            List<MigrationServices.OptionItemDTO> result = new List<MigrationServices.OptionItemDTO>();
+            List<OptionItemDTO> result = new List<OptionItemDTO>();
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
             var items = db.bvc_ProductChoices_Item.Where(y => y.ChoiceID == choiceID).OrderBy(y => y.SortOrder);
@@ -1428,14 +1453,14 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
             foreach (data.bvc_ProductChoices_Item item in items)
             {
-                MigrationServices.OptionItemDTO dto = new MigrationServices.OptionItemDTO();
+                OptionItemDTO dto = new OptionItemDTO();
                 dto.Bvin = item.ID.ToString();
                 dto.IsLabel = item.NullItem == 1;
                 dto.Name = item.DisplayText;
                 dto.OptionBvin = choiceID.ToString();
                 dto.PriceAdjustment = (decimal)item.PriceAdjustment;
                 dto.SortOrder = item.SortOrder;
-                dto.WeightAdjustment = (decimal)item.WeightAdjustment;                
+                dto.WeightAdjustment = (decimal)item.WeightAdjustment;
                 result.Add(dto);
             }
 
@@ -1447,39 +1472,40 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             Header("Importing Categories");
 
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_Category old in oldDatabase.bvc_Category)
             {
                 wl("Category: " + old.Name);
 
-                MigrationServices.CategoryDTO cat = new MigrationServices.CategoryDTO();
+                CategoryDTO cat = new CategoryDTO();
                 cat.BannerImageUrl = System.IO.Path.GetFileName(old.BannerImageURL);
                 cat.Bvin = old.ID.ToString();
                 cat.Criteria = string.Empty;
                 cat.CustomerChangeableSortOrder = false;
                 cat.CustomPageId = string.Empty;
-                cat.CustomPageLayout = MigrationServices.CustomPageLayoutTypeDTO.WithSideBar;
+                cat.CustomPageLayout = CustomPageLayoutTypeDTO.WithSideBar;
                 cat.CustomPageOpenInNewWindow = old.CustomPageNewWindow == 1;
                 cat.CustomPageUrl = old.CustomPageURL;
                 cat.Description = old.Description;
                 switch (old.DisplaySortOrder)
                 {
                     case 0:
-                        cat.DisplaySortOrder = MigrationServices.CategorySortOrderDTO.None;
+                        cat.DisplaySortOrder = CategorySortOrderDTO.None;
                         break;
                     case 1:
-                        cat.DisplaySortOrder = MigrationServices.CategorySortOrderDTO.ManualOrder;
+                        cat.DisplaySortOrder = CategorySortOrderDTO.ManualOrder;
                         break;
                     case 2:
-                        cat.DisplaySortOrder = MigrationServices.CategorySortOrderDTO.ProductName;
+                        cat.DisplaySortOrder = CategorySortOrderDTO.ProductName;
                         break;
                     case 3:
-                        cat.DisplaySortOrder = MigrationServices.CategorySortOrderDTO.ProductPriceAscending;
+                        cat.DisplaySortOrder = CategorySortOrderDTO.ProductPriceAscending;
                         break;
                     case 4:
-                        cat.DisplaySortOrder = MigrationServices.CategorySortOrderDTO.ProductPriceDescending;
+                        cat.DisplaySortOrder = CategorySortOrderDTO.ProductPriceDescending;
                         break;
                     case 5:
-                        cat.DisplaySortOrder = MigrationServices.CategorySortOrderDTO.ManufacturerName;
+                        cat.DisplaySortOrder = CategorySortOrderDTO.ManufacturerName;
                         break;
                 }
                 cat.Hidden = old.Hidden == 1;
@@ -1491,7 +1517,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 cat.MetaKeywords = old.MetaKeywords;
                 cat.MetaTitle = old.MetaTitle;
                 cat.Name = old.Name;
-                cat.Operations = new List<MigrationServices.ApiOperation>();
+                cat.Operations = new List<ApiOperation>();
                 cat.ParentId = old.ParentID.ToString();
                 cat.PostContentColumnId = string.Empty;
                 cat.PreContentColumnId = string.Empty;
@@ -1500,17 +1526,17 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 cat.ShowInTopMenu = old.ShowInTopMenu == 1;
                 cat.ShowTitle = old.ShowTitle == 1;
                 cat.SortOrder = old.SortOrder;
-                cat.SourceType = MigrationServices.CategorySourceTypeDTO.Manual;
+                cat.SourceType = CategorySourceTypeDTO.Manual;
                 switch (old.SourceType)
                 {
                     case 0:
-                        cat.SourceType = MigrationServices.CategorySourceTypeDTO.Manual;
+                        cat.SourceType = CategorySourceTypeDTO.Manual;
                         break;
                     case 1:
-                        cat.SourceType = MigrationServices.CategorySourceTypeDTO.ByRules;
+                        cat.SourceType = CategorySourceTypeDTO.ByRules;
                         break;
                     case 2:
-                        cat.SourceType = MigrationServices.CategorySourceTypeDTO.CustomLink;
+                        cat.SourceType = CategorySourceTypeDTO.CustomLink;
                         break;
                 }
                 switch(old.DisplayType)
@@ -1527,9 +1553,10 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     default:
                         cat.TemplateName = "Grid";
                         break;
-                }                 
+                }
 
-                var res = bv6proxy.MigrateCategory(settings.ApiKey, cat);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.CategoriesCreate(cat);
                 if (res != null)
                 {
                     if (res.Errors.Count() > 0)
@@ -1554,7 +1581,8 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             if (bytes == null) return;
             string fileName = Path.GetFileName(imageSource);
             wl("Found Image: " + fileName + " [" + FriendlyFormatBytes(bytes.Length) + "]");
-            bv6proxy.ImagesUploadCategoryImage(settings.ApiKey, catBvin.ToString(), fileName, bytes);
+            Api bv6proxy = GetBV6Proxy();
+            bv6proxy.CategoriesImagesIconUpload(catBvin.ToString(), fileName, bytes);
         }
         private void MigrateCategoryBanner(int catBvin, string imageSource)
         {
@@ -1562,7 +1590,8 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             if (bytes == null) return;
             string fileName = Path.GetFileName(imageSource);
             wl("Found Image: " + fileName + " [" + FriendlyFormatBytes(bytes.Length) + "]");
-            bv6proxy.ImagesUploadCategoryBanner(settings.ApiKey, catBvin.ToString(), fileName, bytes);
+            Api bv6proxy = GetBV6Proxy();
+            bv6proxy.CategoriesImagesBannerUpload(catBvin.ToString(), fileName, bytes);
         }
 
         private byte[] GetBytesForLocalImage(string relativePath)
@@ -1587,18 +1616,20 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             Header("Importing Product Types");
 
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_ProductType old in oldDatabase.bvc_ProductType)
             {
                 wl("Item: " + old.ProductTypeName);
 
-                MigrationServices.ProductTypeDTO pt = new MigrationServices.ProductTypeDTO();
+                ProductTypeDTO pt = new ProductTypeDTO();
 
                 pt.Bvin = old.ID.ToString();
                 pt.IsPermanent = false;
                 pt.LastUpdated = DateTime.UtcNow;
                 pt.ProductTypeName = old.ProductTypeName;
 
-                var res = bv6proxy.MigrateProductType(settings.ApiKey, pt);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.ProductTypesCreate(pt);
                 if (res != null)
                 {
                     if (res.Errors.Count() > 0)
@@ -1619,7 +1650,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             wl("Migrating Properties to Type...");
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
-            var crosses = db.bvc_ProductTypeProperty.Where(y => y.bvc_ProductProperty.ID == typeID).OrderBy(y => y.SortOrder);
+            var crosses = db.bvc_ProductTypeProperty.Where(y => y.ProductTypeID == typeID).OrderBy(y => y.SortOrder);
             if (crosses == null) return;
 
             foreach (data.bvc_ProductTypeProperty cross in crosses)
@@ -1633,7 +1664,8 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 }
                 if (newId <= 0) continue;
                 wl("Mapping " + oldPropertyBvin + " to " + newId.ToString());
-                bv6proxy.AssignProductPropertyToType(settings.ApiKey, typeID.ToString(), newId, sort);
+                Api bv6proxy = GetBV6Proxy();
+                bv6proxy.ProductTypesAddProperty(typeID.ToString(), newId, sort);
             }
         }
         private void ImportProductProperties()
@@ -1642,11 +1674,12 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
             ProductPropertyMapper = new Dictionary<int, long>();
 
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_ProductProperty old in oldDatabase.bvc_ProductProperty)
             {
                 wl("Item: " + old.DisplayName);
 
-                MigrationServices.ProductPropertyDTO pp = new MigrationServices.ProductPropertyDTO();
+                ProductPropertyDTO pp = new ProductPropertyDTO();
 
                 pp.Choices = GetPropertyChoices(old.ID);
                 pp.CultureCode = old.CultureCode;
@@ -1659,26 +1692,27 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 switch (old.TypeCode)
                 {
                     case 0:
-                        pp.TypeCode = MigrationServices.ProductPropertyTypeDTO.None;
+                        pp.TypeCode = ProductPropertyTypeDTO.None;
                         break;
                     case 1:
-                        pp.TypeCode = MigrationServices.ProductPropertyTypeDTO.TextField;
+                        pp.TypeCode = ProductPropertyTypeDTO.TextField;
                         break;
                     case 2:
-                        pp.TypeCode = MigrationServices.ProductPropertyTypeDTO.MultipleChoiceField;
+                        pp.TypeCode = ProductPropertyTypeDTO.MultipleChoiceField;
                         break;
                     case 3:
-                        pp.TypeCode = MigrationServices.ProductPropertyTypeDTO.CurrencyField;
+                        pp.TypeCode = ProductPropertyTypeDTO.CurrencyField;
                         break;
                     case 4:
-                        pp.TypeCode = MigrationServices.ProductPropertyTypeDTO.DateField;
+                        pp.TypeCode = ProductPropertyTypeDTO.DateField;
                         break;
                     case 7:
-                        pp.TypeCode = MigrationServices.ProductPropertyTypeDTO.HyperLink;
+                        pp.TypeCode = ProductPropertyTypeDTO.HyperLink;
                         break;
                 }
 
-                var res = bv6proxy.MigrateProductProperty(settings.ApiKey, pp);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.ProductPropertiesCreate(pp);
                 if (res != null)
                 {
                     if (res.Errors.Count() > 0)
@@ -1688,7 +1722,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     }
                     else
                     {
-                        long newId = res.Content;
+                        long newId = res.Content.Id;
                         ProductPropertyMapper.Add(old.ID, newId);
                         wl("SUCCESS");
                     }
@@ -1696,9 +1730,9 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             }
 
         }
-        private List<MigrationServices.ProductPropertyChoiceDTO> GetPropertyChoices(int propertyId)
+        private List<ProductPropertyChoiceDTO> GetPropertyChoices(int propertyId)
         {
-            List<MigrationServices.ProductPropertyChoiceDTO> result = new List<MigrationServices.ProductPropertyChoiceDTO>();
+            List<ProductPropertyChoiceDTO> result = new List<ProductPropertyChoiceDTO>();
 
             data.bvc2004Entities db = new data.bvc2004Entities(EFConnString(settings.SourceConnectionString()));
             var choices = db.bvc_ProductPropertyChoice.Where(y => y.PropertyID == propertyId)
@@ -1707,7 +1741,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
             foreach (data.bvc_ProductPropertyChoice ppc in choices)
             {
-                MigrationServices.ProductPropertyChoiceDTO dto = new MigrationServices.ProductPropertyChoiceDTO();
+                ProductPropertyChoiceDTO dto = new ProductPropertyChoiceDTO();
                 dto.ChoiceName = ppc.ChoiceName;
                 dto.LastUpdated = DateTime.UtcNow;
                 //dto.PropertyId = ppc.PropertyBvin;
@@ -1723,28 +1757,28 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             Header("Importing Manufacturers");
 
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_Manufacturer old in oldDatabase.bvc_Manufacturer)
             {
                 wl("Item: " + old.DisplayName);
 
-                MigrationServices.VendorManufacturerDTO vm = new MigrationServices.VendorManufacturerDTO();
+                VendorManufacturerDTO vm = new VendorManufacturerDTO();
 
                 BVC2004Address oldAddr = new BVC2004Address();
                 oldAddr.FromXmlString(old.Address);
-                vm.Address = new MigrationServices.AddressDTO();
                 if (oldAddr != null)
                 {
                     oldAddr.CopyTo(vm.Address, EFConnString(settings.SourceConnectionString()));
                 }
                 vm.Bvin = old.ID.ToString();
-                vm.Contacts = new List<MigrationServices.VendorManufacturerContactDTO>();
-                vm.ContactType = MigrationServices.VendorManufacturerTypeDTO.Manufacturer;
+                vm.ContactType = VendorManufacturerTypeDTO.Manufacturer;
                 vm.DisplayName = old.DisplayName;
                 vm.DropShipEmailTemplateId = string.Empty;
                 vm.EmailAddress = old.EmailAddress;
                 vm.LastUpdated = DateTime.UtcNow;
 
-                var res = bv6proxy.MigrateVendorManufacturer(settings.ApiKey, vm);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.ManufacturerCreate(vm);
                 if (res != null)
                 {
                     if (res.Errors.Count() > 0)
@@ -1763,28 +1797,28 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             Header("Importing Vendors");
 
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_Vendor old in oldDatabase.bvc_Vendor)
             {
                 wl("Item: " + old.DisplayName);
 
-                MigrationServices.VendorManufacturerDTO vm = new MigrationServices.VendorManufacturerDTO();
+                VendorManufacturerDTO vm = new VendorManufacturerDTO();
 
                 BVC2004Address oldAddr = new BVC2004Address();
-                oldAddr.FromXmlString(old.Address);
-                vm.Address = new MigrationServices.AddressDTO();
+                oldAddr.FromXmlString(old.Address);                
                 if (oldAddr != null)
                 {
                     oldAddr.CopyTo(vm.Address, EFConnString(settings.SourceConnectionString()));
                 }
-                vm.Bvin = old.ID.ToString();
-                vm.Contacts = new List<MigrationServices.VendorManufacturerContactDTO>();
-                vm.ContactType = MigrationServices.VendorManufacturerTypeDTO.Vendor;
+                vm.Bvin = old.ID.ToString();                
+                vm.ContactType = VendorManufacturerTypeDTO.Vendor;
                 vm.DisplayName = old.DisplayName;
                 vm.DropShipEmailTemplateId = string.Empty;
                 vm.EmailAddress = old.EmailAddress;
                 vm.LastUpdated = DateTime.UtcNow;
 
-                var res = bv6proxy.MigrateVendorManufacturer(settings.ApiKey, vm);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.VendorCreate(vm);
                 if (res != null)
                 {
                     if (res.Errors.Count() > 0)
@@ -1807,14 +1841,17 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
             TaxScheduleMapper = new Dictionary<int, long>();
 
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_TaxClass old in oldDatabase.bvc_TaxClass)
             {
                 wl("Tax Schedule: " + old.DisplayName);
 
-                MigrationServices.TaxScheduleDTO ts = new MigrationServices.TaxScheduleDTO();
+                
+                TaxScheduleDTO ts = new TaxScheduleDTO();
                 ts.Name = old.DisplayName;
 
-                var res = bv6proxy.MigrateTaxSchedule(settings.ApiKey, ts);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.TaxSchedulesCreate(ts);
                 if (res != null)
                 {
                     if (res.Errors.Count() > 0)
@@ -1824,7 +1861,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     }
                     else
                     {
-                        long newId = res.Content;
+                        long newId = res.Content.Id;
                         TaxScheduleMapper.Add(old.ID, newId);
                         wl("SUCCESS");
                     }
@@ -1832,12 +1869,14 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             }
 
             // Migrate Default Tax Schedule
-            MigrationServices.TaxScheduleDTO defaultTaxSchedule = new MigrationServices.TaxScheduleDTO();
+            TaxScheduleDTO defaultTaxSchedule = new TaxScheduleDTO();
             defaultTaxSchedule.Name = "Default";
-            var res2 = bv6proxy.MigrateTaxSchedule(settings.ApiKey, defaultTaxSchedule);
+
+            Api bv6proxy2 = GetBV6Proxy();
+            var res2 = bv6proxy2.TaxSchedulesCreate(defaultTaxSchedule);
             if (res2 != null)
             {
-                long defId = res2.Content;
+                long defId = res2.Content.Id;
                 TaxScheduleMapper.Add(0, defId);
                 TaxScheduleMapper.Add(-1, defId);
             }
@@ -1846,15 +1885,15 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             Header("Importing Taxes");
 
-
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_Tax old in oldDatabase.bvc_Tax)
-            {                
+            {
                 BVSoftware.Web.Geography.Country newCountry = GeographyHelper.TranslateCountry(EFConnString(settings.SourceConnectionString()), old.CountryCode);
                 string RegionAbbreviation = GeographyHelper.TranslateRegionBvinToAbbreviation(EFConnString(settings.SourceConnectionString()), old.RegionCode.ToString());
 
                 wl("Tax: " + newCountry.DisplayName + ", " + RegionAbbreviation + " " + old.PostalCode);
 
-                MigrationServices.TaxDTO tx = new MigrationServices.TaxDTO();
+                TaxDTO tx = new TaxDTO();
                 tx.ApplyToShipping = false;
                 tx.CountryName = newCountry.DisplayName;
                 tx.PostalCode = old.PostalCode;
@@ -1862,14 +1901,15 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 tx.RegionAbbreviation = RegionAbbreviation;
 
                 int matchId = old.TaxClass;
-                if (matchId< 0) matchId = 0;
+                if (matchId < 0) matchId = 0;
 
                 if (TaxScheduleMapper.ContainsKey(matchId))
                 {
                     tx.TaxScheduleId = TaxScheduleMapper[matchId];
                 }
 
-                var res = bv6proxy.MigrateTax(settings.ApiKey, tx);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.TaxesCreate(tx);
                 if (res != null)
                 {
                     if (res.Errors.Count() > 0)
@@ -1891,16 +1931,18 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             Header("Importing Affiliates");
             AffiliateMapper = new Dictionary<int, long>();
-
+            
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_Affiliate aff in oldDatabase.bvc_Affiliate)
             {
                 wl("Affiliate: " + aff.DisplayName + " | " + aff.ID);
 
                 try
                 {
-                    MigrationServices.AffiliateDTO a = OldToNewAffiliate(aff);
+                    AffiliateDTO a = OldToNewAffiliate(aff);
 
-                    var res = bv6proxy.MigrateAffiliate(settings.ApiKey, a);
+                    Api bv6proxy = GetBV6Proxy();
+                    var res = bv6proxy.AffiliatesCreate(a);
                     if (res != null)
                     {
                         if (res.Errors.Count > 0)
@@ -1908,10 +1950,10 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                             DumpErrors(res.Errors);
                             return;
                         }
-                        long newId = res.Content;
-                        AffiliateMapper.Add(aff.ID, newId);
+                        AffiliateDTO newItem = res.Content;
+                        AffiliateMapper.Add(aff.ID, newItem.Id);
                         wl("SUCCESS");
-                        ImportAffiliateReferrals(aff.ID, newId);
+                        ImportAffiliateReferrals(aff.ID, newItem.Id);
                     }
                 }
                 catch (Exception ex)
@@ -1921,14 +1963,14 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
             }
         }
-        private MigrationServices.AffiliateDTO OldToNewAffiliate(data.bvc_Affiliate aff)
+        private AffiliateDTO OldToNewAffiliate(data.bvc_Affiliate aff)
         {
-            MigrationServices.AffiliateDTO affiliate = new MigrationServices.AffiliateDTO();
+            AffiliateDTO affiliate = new AffiliateDTO();
 
             BVC2004Address oldAddress = new BVC2004Address();
             oldAddress.FromXmlString(aff.Address);
 
-            affiliate.Address = new MigrationServices.AddressDTO();
+            affiliate.Address = new AddressDTO();
             if (oldAddress != null)
             {
                 oldAddress.CopyTo(affiliate.Address, EFConnString(settings.SourceConnectionString()));
@@ -1937,16 +1979,16 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             switch (aff.CommissionType)
             {
                 case 0:
-                    affiliate.CommissionType = MigrationServices.AffiliateCommissionTypeDTO.None;
+                    affiliate.CommissionType = AffiliateCommissionTypeDTO.None;
                     break;
                 case 1:
-                    affiliate.CommissionType = MigrationServices.AffiliateCommissionTypeDTO.PercentageCommission;
+                    affiliate.CommissionType = AffiliateCommissionTypeDTO.PercentageCommission;
                     break;
                 case 2:
-                    affiliate.CommissionType = MigrationServices.AffiliateCommissionTypeDTO.FlatRateCommission;
+                    affiliate.CommissionType = AffiliateCommissionTypeDTO.FlatRateCommission;
                     break;
                 default:
-                    affiliate.CommissionType = MigrationServices.AffiliateCommissionTypeDTO.PercentageCommission;
+                    affiliate.CommissionType = AffiliateCommissionTypeDTO.PercentageCommission;
                     break;
             }
             affiliate.CustomThemeName = aff.StyleSheet;
@@ -1960,7 +2002,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             affiliate.ReferralId = aff.ID.ToString();
             affiliate.TaxId = aff.TaxID;
             affiliate.WebSiteUrl = aff.WebSiteURL;
-            affiliate.Contacts = new List<MigrationServices.AffiliateContactDTO>();
+            affiliate.Contacts = new List<AffiliateContactDTO>();
 
             return affiliate;
         }
@@ -1975,12 +2017,13 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
             foreach (data.bvc_Referral r in referrals)
             {
-                MigrationServices.AffiliateReferralDTO rnew = new MigrationServices.AffiliateReferralDTO();
+                AffiliateReferralDTO rnew = new AffiliateReferralDTO();
                 rnew.AffiliateId = newId;
                 rnew.TimeOfReferralUtc = r.TimeOfReferral;
                 rnew.ReferrerUrl = r.ReferrerURL;
 
-                var res = bv6proxy.MigrateAffiliateReferral(settings.ApiKey, rnew);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.AffiliateReferralsCreate(rnew);
             }
 
         }
@@ -1992,6 +2035,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 
 
             int pageSize = 100;
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             int totalRecords = oldDatabase.bvc_User.Count();
             int totalPages = (int)(Math.Ceiling((decimal)totalRecords / (decimal)pageSize));
 
@@ -2017,6 +2061,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             wl("Getting Users page " + (i + 1));
             int startRecord = i * 100;
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             var users = (from u in oldDatabase.bvc_User select u).OrderBy(y => y.Email).Skip(startRecord).Take(100).ToList();
             foreach (data.bvc_User u in users)
             {
@@ -2032,7 +2077,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             }
             wl("Importing Customer: " + u.Email);
 
-            MigrationServices.CustomerAccountDTO customer = new MigrationServices.CustomerAccountDTO();
+            CustomerAccountDTO customer = new CustomerAccountDTO();
             customer.Bvin = u.ID.ToString();
             customer.CreationDateUtc = u.CreationDate;
             customer.Email = u.Email;
@@ -2050,7 +2095,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             }
             customer.Salt = string.Empty;
             customer.TaxExempt = u.TaxExempt == 1 ? true : false;
-            customer.Addresses = new List<MigrationServices.AddressDTO>();
+            customer.Addresses = new List<AddressDTO>();
 
             // Preserve clear text passwords
             string newPassword = u.Password;
@@ -2062,14 +2107,15 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             {
                 foreach (BVC2004Address a in addresses)
                 {
-                    MigrationServices.AddressDTO addr = new MigrationServices.AddressDTO();
-                    addr.AddressType = MigrationServices.AddressTypesDTO.BillingAndShipping;
+                    AddressDTO addr = new AddressDTO();
+                    addr.AddressType = AddressTypesDTO.BillingAndShipping;
                     a.CopyTo(addr, EFConnString(settings.SourceConnectionString())); ;
                     customer.Addresses.Add(addr);
                 }
             }
 
-            var res = bv6proxy.MigrateCustomerAccount(settings.ApiKey, customer, newPassword);
+            Api bv6proxy = GetBV6Proxy();
+            var res = bv6proxy.CustomerAccountsCreateWithPassword(customer, newPassword);
             if (res != null)
             {
                 if (res.Errors.Count > 0)
@@ -2086,11 +2132,12 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             Header("Importing Price Groups");
 
+            data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_PricingLevel oldGroup in oldDatabase.bvc_PricingLevel)
             {
                 wl("Price Group: " + oldGroup.PricingLevel.ToString());
 
-                MigrationServices.PriceGroupDTO pg = new MigrationServices.PriceGroupDTO();
+                PriceGroupDTO pg = new PriceGroupDTO();
                 pg.AdjustmentAmount = (decimal)oldGroup.Amount;
                 pg.Bvin = "BVC2004" + oldGroup.PricingLevel.ToString();
                 pg.Name = "BVC2004" + oldGroup.PricingLevel.ToString();
@@ -2098,26 +2145,27 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 {
 
                     case 3:
-                        pg.PricingType = MigrationServices.PricingTypesDTO.AmountAboveCost;
+                        pg.PricingType = PricingTypesDTO.AmountAboveCost;
                         break;
                     case 1:
-                        pg.PricingType = MigrationServices.PricingTypesDTO.AmountOffListPrice;
+                        pg.PricingType = PricingTypesDTO.AmountOffListPrice;
                         break;
                     case 5:
-                        pg.PricingType = MigrationServices.PricingTypesDTO.AmountOffSitePrice;
+                        pg.PricingType = PricingTypesDTO.AmountOffSitePrice;
                         break;
                     case 2:
-                        pg.PricingType = MigrationServices.PricingTypesDTO.PercentageAboveCost;
+                        pg.PricingType = PricingTypesDTO.PercentageAboveCost;
                         break;
                     case 0:
-                        pg.PricingType = MigrationServices.PricingTypesDTO.PercentageOffListPrice;
+                        pg.PricingType = PricingTypesDTO.PercentageOffListPrice;
                         break;
                     case 4:
-                        pg.PricingType = MigrationServices.PricingTypesDTO.PercentageOffSitePrice;
+                        pg.PricingType = PricingTypesDTO.PercentageOffSitePrice;
                         break;
                 }
 
-                var res = bv6proxy.MigratePriceGroup(settings.ApiKey, pg);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.PriceGroupsCreate(pg);
                 if (res != null)
                 {
                     if (res.Errors.Count() > 0)
@@ -2127,7 +2175,14 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                     }
                     else
                     {
-                        wl(res.Content == string.Empty ? "FAILED" : "SUCCESS");
+                        if (res.Content == null)
+                        {
+                            wl("FAILED");
+                        }
+                        else
+                        {
+                            wl(res.Content.Name == string.Empty ? "FAILED" : "SUCCESS");
+                        }
                     }
                 }
             }
@@ -2142,7 +2197,28 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
         {
             Header("Clearing All Categories");
 
-            var res = bv6proxy.ClearAllCategoriesFirst(settings.ApiKey);
+            Api bv6proxy = GetBV6Proxy();
+            var res = bv6proxy.CategoriesClearAll();
+            if (res != null)
+            {
+                if (res.Errors.Count > 0)
+                {
+                    DumpErrors(res.Errors);
+                    wl("FAILED");
+                }
+                else
+                {
+                    wl("SUCCESS");
+                }
+            }
+        }
+
+        private void ClearUsers()
+        {
+            Header("Clearing All Users");
+
+            Api bv6proxy = GetBV6Proxy();
+            var res = bv6proxy.CustomerAccountsClearAll();
             if (res != null)
             {
                 if (res.Errors.Count > 0)
@@ -2167,7 +2243,8 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             {
                 int pageSize = 100;
 
-                var res = bv6proxy.ClearProducts(settings.ApiKey, pageSize);
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.ProductsClearAll(pageSize);
                 if (res == null)
                 {
                     wl("FAILED TO CLEAR PRODUCTS!");

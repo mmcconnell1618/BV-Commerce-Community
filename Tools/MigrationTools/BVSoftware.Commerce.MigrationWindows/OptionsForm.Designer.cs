@@ -31,6 +31,7 @@
             this.Button1 = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -44,6 +45,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnBrowseForImagesRoot = new System.Windows.Forms.Button();
+            this.SkipProductPreField = new System.Windows.Forms.CheckBox();
+            this.chkDisableMultiThreadingField = new System.Windows.Forms.CheckBox();
             this.ImagesRootFolderField = new System.Windows.Forms.TextBox();
             this.ApiKeyField = new System.Windows.Forms.TextBox();
             this.SQLPasswordField = new System.Windows.Forms.TextBox();
@@ -55,6 +58,9 @@
             this.SingleSkuField = new System.Windows.Forms.TextBox();
             this.chkSingleSku = new System.Windows.Forms.CheckBox();
             this.chkMetric = new System.Windows.Forms.CheckBox();
+            this.chkClearUsers = new System.Windows.Forms.CheckBox();
+            this.ProductImagesOnlyField = new System.Windows.Forms.CheckBox();
+            this.ProductStartPageField = new System.Windows.Forms.TextBox();
             this.UserStartPageField = new System.Windows.Forms.TextBox();
             this.chkClearOrders = new System.Windows.Forms.CheckBox();
             this.chkClearAffiliates = new System.Windows.Forms.CheckBox();
@@ -75,7 +81,7 @@
             // Button1
             // 
             this.Button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button1.Location = new System.Drawing.Point(418, 410);
+            this.Button1.Location = new System.Drawing.Point(418, 451);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(354, 52);
             this.Button1.TabIndex = 10;
@@ -87,7 +93,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(12, 410);
+            this.btnCancel.Location = new System.Drawing.Point(12, 451);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(144, 52);
             this.btnCancel.TabIndex = 11;
@@ -97,6 +103,10 @@
             // 
             // GroupBox1
             // 
+            this.GroupBox1.Controls.Add(this.chkClearUsers);
+            this.GroupBox1.Controls.Add(this.ProductImagesOnlyField);
+            this.GroupBox1.Controls.Add(this.label9);
+            this.GroupBox1.Controls.Add(this.ProductStartPageField);
             this.GroupBox1.Controls.Add(this.label8);
             this.GroupBox1.Controls.Add(this.UserStartPageField);
             this.GroupBox1.Controls.Add(this.chkClearOrders);
@@ -111,14 +121,23 @@
             this.GroupBox1.Controls.Add(this.chkImportCategories);
             this.GroupBox1.Location = new System.Drawing.Point(421, 153);
             this.GroupBox1.Name = "GroupBox1";
-            this.GroupBox1.Size = new System.Drawing.Size(354, 167);
+            this.GroupBox1.Size = new System.Drawing.Size(354, 215);
             this.GroupBox1.TabIndex = 4;
             this.GroupBox1.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(178, 64);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 13);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Start At Page:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(177, 68);
+            this.label8.Location = new System.Drawing.Point(178, 127);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(73, 13);
             this.label8.TabIndex = 11;
@@ -245,6 +264,30 @@
             this.btnBrowseForImagesRoot.UseVisualStyleBackColor = true;
             this.btnBrowseForImagesRoot.Click += new System.EventHandler(this.btnBrowseForImagesRoot_Click);
             // 
+            // SkipProductPreField
+            // 
+            this.SkipProductPreField.AutoSize = true;
+            this.SkipProductPreField.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SkipProductPrerequisites;
+            this.SkipProductPreField.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SkipProductPrerequisites", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SkipProductPreField.Location = new System.Drawing.Point(19, 418);
+            this.SkipProductPreField.Name = "SkipProductPreField";
+            this.SkipProductPreField.Size = new System.Drawing.Size(251, 17);
+            this.SkipProductPreField.TabIndex = 18;
+            this.SkipProductPreField.Text = "Skip Product Prerequisites (Not Recommended)";
+            this.SkipProductPreField.UseVisualStyleBackColor = true;
+            // 
+            // chkDisableMultiThreadingField
+            // 
+            this.chkDisableMultiThreadingField.AutoSize = true;
+            this.chkDisableMultiThreadingField.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.DisableMultiThreading;
+            this.chkDisableMultiThreadingField.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "DisableMultiThreading", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkDisableMultiThreadingField.Location = new System.Drawing.Point(19, 398);
+            this.chkDisableMultiThreadingField.Name = "chkDisableMultiThreadingField";
+            this.chkDisableMultiThreadingField.Size = new System.Drawing.Size(153, 17);
+            this.chkDisableMultiThreadingField.TabIndex = 17;
+            this.chkDisableMultiThreadingField.Text = "Disable Parallel Processing";
+            this.chkDisableMultiThreadingField.UseVisualStyleBackColor = true;
+            // 
             // ImagesRootFolderField
             // 
             this.ImagesRootFolderField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -315,7 +358,7 @@
             // SingleOrderField
             // 
             this.SingleOrderField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleOrderImport", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SingleOrderField.Location = new System.Drawing.Point(601, 352);
+            this.SingleOrderField.Location = new System.Drawing.Point(595, 395);
             this.SingleOrderField.Name = "SingleOrderField";
             this.SingleOrderField.Size = new System.Drawing.Size(157, 20);
             this.SingleOrderField.TabIndex = 7;
@@ -327,7 +370,7 @@
             this.chkSingleOrder.AutoSize = true;
             this.chkSingleOrder.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleOrderOn;
             this.chkSingleOrder.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleOrderOn", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkSingleOrder.Location = new System.Drawing.Point(427, 354);
+            this.chkSingleOrder.Location = new System.Drawing.Point(421, 397);
             this.chkSingleOrder.Name = "chkSingleOrder";
             this.chkSingleOrder.Size = new System.Drawing.Size(172, 17);
             this.chkSingleOrder.TabIndex = 6;
@@ -338,7 +381,7 @@
             // SingleSkuField
             // 
             this.SingleSkuField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleSkuImport", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SingleSkuField.Location = new System.Drawing.Point(601, 375);
+            this.SingleSkuField.Location = new System.Drawing.Point(595, 418);
             this.SingleSkuField.Name = "SingleSkuField";
             this.SingleSkuField.Size = new System.Drawing.Size(157, 20);
             this.SingleSkuField.TabIndex = 9;
@@ -350,7 +393,7 @@
             this.chkSingleSku.AutoSize = true;
             this.chkSingleSku.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SingleSkuOn;
             this.chkSingleSku.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SingleSkuOn", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkSingleSku.Location = new System.Drawing.Point(427, 377);
+            this.chkSingleSku.Location = new System.Drawing.Point(421, 420);
             this.chkSingleSku.Name = "chkSingleSku";
             this.chkSingleSku.Size = new System.Drawing.Size(168, 17);
             this.chkSingleSku.TabIndex = 8;
@@ -363,7 +406,7 @@
             this.chkMetric.AutoSize = true;
             this.chkMetric.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.UseMetricUnits;
             this.chkMetric.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "UseMetricUnits", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkMetric.Location = new System.Drawing.Point(427, 331);
+            this.chkMetric.Location = new System.Drawing.Point(421, 374);
             this.chkMetric.Name = "chkMetric";
             this.chkMetric.Size = new System.Drawing.Size(279, 17);
             this.chkMetric.TabIndex = 5;
@@ -371,10 +414,43 @@
             this.chkMetric.UseVisualStyleBackColor = true;
             this.chkMetric.Visible = false;
             // 
+            // chkClearUsers
+            // 
+            this.chkClearUsers.AutoSize = true;
+            this.chkClearUsers.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ClearUsers;
+            this.chkClearUsers.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ClearUsers", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkClearUsers.Location = new System.Drawing.Point(112, 126);
+            this.chkClearUsers.Name = "chkClearUsers";
+            this.chkClearUsers.Size = new System.Drawing.Size(61, 17);
+            this.chkClearUsers.TabIndex = 15;
+            this.chkClearUsers.Text = "CLEAR";
+            this.chkClearUsers.UseVisualStyleBackColor = true;
+            // 
+            // ProductImagesOnlyField
+            // 
+            this.ProductImagesOnlyField.AutoSize = true;
+            this.ProductImagesOnlyField.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ProductImagesOnly;
+            this.ProductImagesOnlyField.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ProductImagesOnly", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ProductImagesOnlyField.Location = new System.Drawing.Point(180, 87);
+            this.ProductImagesOnlyField.Name = "ProductImagesOnlyField";
+            this.ProductImagesOnlyField.Size = new System.Drawing.Size(122, 17);
+            this.ProductImagesOnlyField.TabIndex = 14;
+            this.ProductImagesOnlyField.Text = "Only Migrate Images";
+            this.ProductImagesOnlyField.UseVisualStyleBackColor = true;
+            // 
+            // ProductStartPageField
+            // 
+            this.ProductStartPageField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ProductStartPage", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ProductStartPageField.Location = new System.Drawing.Point(250, 61);
+            this.ProductStartPageField.Name = "ProductStartPageField";
+            this.ProductStartPageField.Size = new System.Drawing.Size(81, 20);
+            this.ProductStartPageField.TabIndex = 12;
+            this.ProductStartPageField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ProductStartPage;
+            // 
             // UserStartPageField
             // 
             this.UserStartPageField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "UserStartPage", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.UserStartPageField.Location = new System.Drawing.Point(249, 65);
+            this.UserStartPageField.Location = new System.Drawing.Point(250, 124);
             this.UserStartPageField.Name = "UserStartPageField";
             this.UserStartPageField.Size = new System.Drawing.Size(81, 20);
             this.UserStartPageField.TabIndex = 10;
@@ -385,7 +461,7 @@
             this.chkClearOrders.AutoSize = true;
             this.chkClearOrders.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ClearOrders;
             this.chkClearOrders.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ClearOrders", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkClearOrders.Location = new System.Drawing.Point(180, 111);
+            this.chkClearOrders.Location = new System.Drawing.Point(180, 173);
             this.chkClearOrders.Name = "chkClearOrders";
             this.chkClearOrders.Size = new System.Drawing.Size(144, 17);
             this.chkClearOrders.TabIndex = 8;
@@ -398,7 +474,7 @@
             this.chkClearAffiliates.AutoSize = true;
             this.chkClearAffiliates.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ClearAffiliates;
             this.chkClearAffiliates.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ClearAffiliates", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkClearAffiliates.Location = new System.Drawing.Point(180, 88);
+            this.chkClearAffiliates.Location = new System.Drawing.Point(180, 150);
             this.chkClearAffiliates.Name = "chkClearAffiliates";
             this.chkClearAffiliates.Size = new System.Drawing.Size(152, 17);
             this.chkClearAffiliates.TabIndex = 6;
@@ -436,7 +512,7 @@
             this.chkImportOther.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ImportOther;
             this.chkImportOther.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkImportOther.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ImportOther", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkImportOther.Location = new System.Drawing.Point(6, 134);
+            this.chkImportOther.Location = new System.Drawing.Point(6, 196);
             this.chkImportOther.Name = "chkImportOther";
             this.chkImportOther.Size = new System.Drawing.Size(125, 17);
             this.chkImportOther.TabIndex = 9;
@@ -449,7 +525,7 @@
             this.chkImportOrders.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ImportOrders;
             this.chkImportOrders.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkImportOrders.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ImportOrders", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkImportOrders.Location = new System.Drawing.Point(6, 111);
+            this.chkImportOrders.Location = new System.Drawing.Point(6, 173);
             this.chkImportOrders.Name = "chkImportOrders";
             this.chkImportOrders.Size = new System.Drawing.Size(89, 17);
             this.chkImportOrders.TabIndex = 7;
@@ -462,7 +538,7 @@
             this.chkImportAffiliates.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ImportAffiliates;
             this.chkImportAffiliates.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkImportAffiliates.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ImportAffiliates", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkImportAffiliates.Location = new System.Drawing.Point(6, 88);
+            this.chkImportAffiliates.Location = new System.Drawing.Point(6, 150);
             this.chkImportAffiliates.Name = "chkImportAffiliates";
             this.chkImportAffiliates.Size = new System.Drawing.Size(97, 17);
             this.chkImportAffiliates.TabIndex = 5;
@@ -475,7 +551,7 @@
             this.chkImportUsers.Checked = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ImportUsers;
             this.chkImportUsers.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkImportUsers.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ImportUsers", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkImportUsers.Location = new System.Drawing.Point(6, 65);
+            this.chkImportUsers.Location = new System.Drawing.Point(6, 127);
             this.chkImportUsers.Name = "chkImportUsers";
             this.chkImportUsers.Size = new System.Drawing.Size(85, 17);
             this.chkImportUsers.TabIndex = 4;
@@ -523,8 +599,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 474);
+            this.ClientSize = new System.Drawing.Size(784, 515);
             this.ControlBox = false;
+            this.Controls.Add(this.SkipProductPreField);
+            this.Controls.Add(this.chkDisableMultiThreadingField);
             this.Controls.Add(this.btnBrowseForImagesRoot);
             this.Controls.Add(this.ImagesRootFolderField);
             this.Controls.Add(this.label7);
@@ -598,5 +676,11 @@
         private System.Windows.Forms.Button btnBrowseForImagesRoot;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox UserStartPageField;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox ProductStartPageField;
+        private System.Windows.Forms.CheckBox chkDisableMultiThreadingField;
+        private System.Windows.Forms.CheckBox ProductImagesOnlyField;
+        private System.Windows.Forms.CheckBox SkipProductPreField;
+        internal System.Windows.Forms.CheckBox chkClearUsers;
     }
 }

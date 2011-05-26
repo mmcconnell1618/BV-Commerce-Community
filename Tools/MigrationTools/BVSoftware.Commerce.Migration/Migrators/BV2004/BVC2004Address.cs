@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using BVSoftware.CommerceDTO.v1.Contacts;
 
 namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 {
@@ -177,7 +178,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             return results;
         }
 
-        public bool CopyTo(MigrationServices.AddressDTO destinationAddress, string connString)
+        public bool CopyTo(AddressDTO destinationAddress, string connString)
         {
             bool result = true;
 
