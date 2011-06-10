@@ -1,0 +1,747 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/BuiltIn.css" rel="stylesheet" type="text/css">
+    <script src="script/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="script/jquery-ui-1.8.7.custom.min.js" type="text/javascript"></script>
+    <script src="script/jquery.form.js" type="text/javascript"></script>
+    <script type="text/javascript" src="script/searchform.js"></script>        
+    <script src="script/ThemeHelper.js" type="text/javascript"></script>    
+    <style type="text/css" id="themecss"></style>
+    <script src="script/Header.js" type="text/javascript"></script>
+    <title>Checkout</title>
+    <style type="text/css">
+    .cc-visa,.cc-mastercard,.cc-amex,.cc-discover,.cc-diners,.cc-jcb{width:47px;height:30px;display:inline-block;background:url('images/creditcards.png') no-repeat 0 0;border:solid 1px #999;}.cc-visa{background-position:0 0;}.cc-mastercard{background-position:-47px 0;}.cc-amex{background-position:-94px 0;}.cc-discover{background-position:-141px 0;}.cc-diners{background-position:-188px 0;}.cc-jcb{background-position:-235px 0;}
+    </style>
+</head>
+
+<body id="ctl00_pagebody" class="store-checkout-page">
+    <!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx"><img src="http://www.ie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="" /></a></div> <![endif]-->
+    <form method="post" action="Receipt.html">
+    <div id="site-wrapper">       
+        <div id="dynamicheader"></div>
+        <div id="main-content">
+            
+<div class="checkout">
+    
+    <h1>Checkout</h1>
+    <div class="section-sidebar">
+        <div class="decoratedblock"><div class="padded">If you have any questions or concerns please contact us:<br>&nbsp;<br>, VA <br>United States<br><br>&nbsp;<br>Your order is secure!</div></div>
+<div class="sidemenu">
+    <div class="decoratedblock">
+        <h4>Policies</h4>
+        <ul><li><a title="Privacy Policy" class="popover" href="#">Privacy Policy</a></li><li><a title="Terms and Conditions" class="popover" href="#">Return Policy</a></li></ul>
+    </div>
+</div>
+    </div>
+    <div class="sections">
+        <div class="section-email">
+            <h2>Email Address</h2>
+            <input name="ctl00$MainContent$customeremail" type="text" id="customeremail" tabindex="100"><span class="requiredfield">*</span><br>
+            <div id="loginform" style="display: none; ">
+                
+                <div id="ctl00_MainContent_pnlNotLoggedIn">
+	
+                    It looks like you have an account already. Please login:<br>
+                    <div id="ctl00_MainContent_LoginControl1_valLoginSummary" class="errormessage" style="display:none;">
+
+	</div>
+
+<div id="ctl00_MainContent_LoginControl1_pnlMain">
+		
+<table id="CurrentUserTable" cellspacing="0" cellpadding="3">
+    <tbody><tr>
+        <td class="formlabel">
+            Email:</td>
+        <td class="formfield">
+            <input name="ctl00$MainContent$LoginControl1$UsernameField" type="text" id="ctl00_MainContent_LoginControl1_UsernameField" tabindex="1" title="Enter Your Username" class="forminput required logincontrolemailfield"></td>
+    </tr>
+    <tr>
+        <td class="formlabel">
+            <label for="ctl00_MainContent_LoginControl1_PasswordField" id="ctl00_MainContent_LoginControl1_PasswordLabel" class="required">Password:</label></td>
+        <td class="formfield">
+            <input name="ctl00$MainContent$LoginControl1$PasswordField" type="password" id="ctl00_MainContent_LoginControl1_PasswordField" tabindex="2" title="Enter Your Password" class="forminput required"></td>
+    </tr>
+    <tr id="ctl00_MainContent_LoginControl1_trRememberMe">
+			<td class="formlabel">
+        </td>
+			<td class="formfield">
+            <input id="ctl00_MainContent_LoginControl1_RememberMeCheckBox" type="checkbox" name="ctl00$MainContent$LoginControl1$RememberMeCheckBox" checked="checked" tabindex="3"><label for="ctl00_MainContent_LoginControl1_RememberMeCheckBox">Remember Me</label>
+        </td>
+		</tr>
+		
+    <tr>
+        <td class="formlabel">
+        </td>
+        <td class="formfield">
+            <input type="image" name="ctl00$MainContent$LoginControl1$btnLogin" id="ctl00_MainContent_LoginControl1_btnLogin" tabindex="4" title="Login" src="buttons/login.png" alt="Login"></td>
+    </tr>
+    <tr>
+        <td class="formlabel">
+        </td>
+        <td>
+            <a id="ctl00_MainContent_LoginControl1_btnForgotPassword" tabindex="5" class="BVSmallText forgot">Forgot Your Password? Click Here.</a>
+            </td>
+    </tr>
+</tbody></table>
+
+	</div>
+<input type="hidden" name="ctl00$MainContent$LoginControl1$RedirectToField" id="ctl00_MainContent_LoginControl1_RedirectToField"><input type="hidden" name="ctl00$MainContent$LoginControl1$CheckoutModeField" id="ctl00_MainContent_LoginControl1_CheckoutModeField" value="True">
+
+                
+</div>
+            </div>&nbsp;
+        </div>    
+        <div class="section-shipping">
+            <h2>Shipping Address</h2>
+                
+<table border="0" cellspacing="0" cellpadding="3" class="address-table">
+<tbody><tr>
+    <td class="formlabel">&nbsp;</td>
+    <td class="formfield"><select name="ctl00$MainContent$AddressShipping1$shippingcountryname" id="shippingcountryname" tabindex="201">
+	<option value="2c6d4fa9-941d-4d5d-807f-7bccba497680">Albania</option>
+	<option value="255b01ab-4d4f-40eb-b63d-e86ed8f7bd13">Algeria</option>
+	<option value="69135901-5cda-42b3-9bb9-eb0318c08ef5">Argentina</option>
+	<option value="1e4fadd8-5b90-4534-8220-6be963044f39">Armenia</option>
+	<option value="cb87aef1-ae12-4363-a292-8cff1a4e4d02">Australia</option>
+	<option value="6594806a-8e9e-4424-ac4b-4ffa19adb683">Austria</option>
+	<option value="831a08f8-f3bd-486a-8af5-d53bc2db69fb">Azerbaijan</option>
+	<option value="8f6413ef-2edd-4d6c-a9d8-40257bb9dca4">Bahrain</option>
+	<option value="6d37454c-7e9b-4a8c-981c-acc656cbb542">Belarus</option>
+	<option value="d6764c27-b7b3-49bd-88fb-1385570ad5ef">Belgium</option>
+	<option value="6926f9ef-ccf2-43e4-9c3f-2b0477f4998e">Belize</option>
+	<option value="e911f5fb-157d-41ed-84d6-f7c23ac053cf">Bolivia</option>
+	<option value="33ac233a-dc15-4aef-89db-7beda61b0436">Brazil</option>
+	<option value="254a6f90-f4dd-4218-879e-9869c38f9236">Brunei Darussalam</option>
+	<option value="c7cb9d92-9ca1-431e-8e27-e5953b895d92">Bulgaria</option>
+	<option value="94052dcf-1ac8-4b65-813b-b17b12a0491f">Canada</option>
+	<option value="a863ac16-e89c-46cc-bfd4-d518843445b7">Chile</option>
+	<option value="9046b9d5-9bb9-43f5-b605-e7164f99d7d9">China</option>
+	<option value="817edac5-daf0-4722-b02e-03e91309f5fe">Colombia</option>
+	<option value="83cea890-c1de-41be-a213-635d1416d6db">Costa Rica</option>
+	<option value="be57e8d8-6a09-4589-9181-d8558d27f4b5">Croatia</option>
+	<option value="d2b92f8b-8645-433d-9f6d-63a34d895798">Czech Republic</option>
+	<option value="1f54446f-f586-483a-9d7d-7eeb812f248c">Denmark</option>
+	<option value="ed004593-31b7-4c6b-b918-8e7efdb9c8e6">Dominican Republic</option>
+	<option value="424dd0e3-3cf3-4d46-b13b-2ea43da8c8ac">Ecuador</option>
+	<option value="99d0a3c3-4b61-4979-8fde-52584110392e">Egypt</option>
+	<option value="c2a2f20d-821c-4573-ab4d-349a8c858de7">El Salvador</option>
+	<option value="678de6b8-dcbb-4fcf-ac27-6c6f72dd5291">Estonia</option>
+	<option value="b8f7c10f-8274-4642-a828-8b41946ac95d">Faroe Islands</option>
+	<option value="cd884fa0-4d0b-41d9-b45d-0a486fd71009">Finland</option>
+	<option value="1c076e3d-43d5-4b8f-bf8c-6946fb58d231">France</option>
+	<option value="68249d05-62f5-45c9-9735-4057bf0dee7e">Georgia</option>
+	<option value="8d447e0d-6327-4a05-a7e5-f50fc408e13c">Germany</option>
+	<option value="225a471b-8c5c-4b86-9a2d-ea443919eb55">Greece</option>
+	<option value="d11db563-7496-4eb5-88d1-81f20bbfbe8c">Guatemala</option>
+	<option value="6aa3072c-540f-4e07-b203-de21180a94bd">Honduras</option>
+	<option value="67ce5007-5a16-47b0-bd85-173a8a758944">Hong Kong</option>
+	<option value="acf84f60-6b00-4131-a5be-fa202f1eb569">Hungary</option>
+	<option value="4af15981-2ffe-44ff-8c18-7680851ea335">Iceland</option>
+	<option value="fa10d66f-3a6a-4b3b-980a-cc66143a2328">India</option>
+	<option value="b698900d-71ca-43b3-977c-95d04c152141">Indonesia</option>
+	<option value="f01b4b56-e99c-4b5d-b10e-29be58a79e9b">Iran</option>
+	<option value="85a3f763-9543-4a0a-921b-f71a36e3b811">Iraq</option>
+	<option value="a4ac08ae-548a-48bb-af12-d2167c26b673">Ireland</option>
+	<option value="864722db-70ae-4078-b80c-b60b5216b020">Israel</option>
+	<option value="ceb2ea09-1d36-4b44-ac7c-c5d7660ef4f9">Italy</option>
+	<option value="04a2314b-66a2-4157-b17c-0d848b73e9c6">Jamaica</option>
+	<option value="b430b323-926d-4f1a-ac22-eb1b1479fcf6">Japan</option>
+	<option value="6f609d0b-e837-4f43-bd3b-a6f4b631942f">Jordan</option>
+	<option value="f7867666-bb5e-46fe-9f49-39fdc0703382">Kazakhstan</option>
+	<option value="3c3c25d5-0067-49f2-b951-22877d41bbb4">Kenya</option>
+	<option value="be09cdcc-73c5-4829-85a1-ef99a480add8">Kuwait</option>
+	<option value="3335935f-84fa-4dcd-9a0b-fa4d6506d2f3">Latvia</option>
+	<option value="2a330eef-a115-452a-a78d-d94a8d8b7da7">Lebanon</option>
+	<option value="dc3b811a-83f5-4f89-a998-af5abd015109">Libya</option>
+	<option value="d3e3c48a-c2e9-4c91-98d0-bf2f7802d6d6">Liechtenstein</option>
+	<option value="83bfd137-925d-4b64-9559-b6aa9baf9085">Lithuania</option>
+	<option value="0f812320-3aaf-4f3e-96ff-01396751cca6">Luxembourg</option>
+	<option value="815902dd-3392-4dc1-b148-3ddcb1a5828c">Macau</option>
+	<option value="01e68cef-1c77-4c2a-bb7b-5295a71379ad">Macedonia</option>
+	<option value="deddf780-661e-41f7-b5aa-a539cd21e1dd">Malaysia</option>
+	<option value="271f61fc-9f93-4ac2-bcda-d62640e23489">Maldives</option>
+	<option value="cb2f2e2c-459b-4370-a077-7831fdd16733">Mexico</option>
+	<option value="1a109d87-e02c-4ac9-b4c9-a4f74e802ebb">Monaco</option>
+	<option value="3dc123db-aa7b-4223-a37a-793d84b35468">Mongolia</option>
+	<option value="1118faf0-bb14-41d4-9848-cc011f1a344a">Morocco</option>
+	<option value="d6ae4091-0de6-4fb6-b6f9-99e4f7d3a96a">Netherlands</option>
+	<option value="2ebf498d-e6d6-4814-b5f9-f152afcac264">New Zealand</option>
+	<option value="6c866a94-5c9f-414b-b10d-64e8dd330761">Nicaragua</option>
+	<option value="57E083A5-43B6-47f5-90AF-E7153794F0C9">North Korea</option>
+	<option value="39c7e72b-1721-451c-a2f7-476fcc20aa72">Norway</option>
+	<option value="aafcbe32-4e5a-4a8c-b101-699274072571">Oman</option>
+	<option value="e750df18-7cee-42b2-a334-ba82f26f3dd8">Pakistan</option>
+	<option value="52b52f9e-a2c8-4e0d-92eb-678df74f921e">Panama</option>
+	<option value="e606fc92-c7a5-4bd5-abd4-f220db830ee2">Paraguay</option>
+	<option value="acff76b1-cdd4-4c3e-872e-d655fb092a29">Peru</option>
+	<option value="3c707cc5-8a8c-4be9-abd1-3dabdce6dd3f">Philippines</option>
+	<option value="f6eb3a3f-ea89-43e3-90d4-b665d382542b">Poland</option>
+	<option value="cb043623-5166-481b-bd1c-79f4f7a80b16">Portugal</option>
+	<option value="956066df-b065-43f0-9a2e-85eed038717e">Puerto Rico</option>
+	<option value="1b5a4f35-08a6-4259-b375-c4416bec5f11">Qatar</option>
+	<option value="7ab0fab9-7605-45cc-a20a-3e59e0b6151f">Romania</option>
+	<option value="6b6706b6-11ad-4843-bae6-bf8de441749a">Russia</option>
+	<option value="c636ea8b-a773-48df-b5dc-00bf3b8bef87">Saudi Arabia</option>
+	<option value="d5e8ed18-b909-4fcf-b6c6-b7a7e00a28d4">Serbia</option>
+	<option value="226c5e05-3e46-4129-9594-268d156aaffa">Singapore</option>
+	<option value="160dbdd9-9957-4bc2-8385-201c3bf32ea0">Slovakia</option>
+	<option value="727971df-2751-4e7f-9b22-5f4097241aa7">Slovenia</option>
+	<option value="bfff7d8f-0beb-44d5-bd9c-745b7e939e83">South Africa</option>
+	<option value="bd87cd0a-2470-4024-b8f2-bab111899375">South Korea</option>
+	<option value="1cf4480c-5ef8-4a80-a43a-600a69ff2157">Spain</option>
+	<option value="90951a60-ed1a-475d-be9d-e11982593326">Sweden</option>
+	<option value="ebb0cd59-d227-4c38-b31b-c6c93332bdde">Switzerland</option>
+	<option value="d53313a7-cc06-4b09-a56e-9715d32aaf02">Syrian Arab Republic</option>
+	<option value="37ba6822-e99f-430a-a3ec-e665ac1a3c8d">Taiwan</option>
+	<option value="443e409d-0daf-413a-ac06-706375aa0775">Thailand</option>
+	<option value="62b52f42-fe5e-4329-8c40-8483ff1a6996">Trinidad and Tobago</option>
+	<option value="dfd415ae-d8e9-42b4-a143-d1bd6874efe3">Tunisia</option>
+	<option value="62f5a76b-622a-4611-9ad6-17465b56b816">Turkey</option>
+	<option value="f23ea508-4df9-4aba-9b79-a3de288aa0b2">U.A.E.</option>
+	<option value="f3e85660-e4a1-4dc8-afaf-4b4d0a0043f9">Ukraine</option>
+	<option value="9c7a73b1-7ef5-4fc2-beeb-ce4c70cca32f">United Kingdom</option>
+	<option selected="selected" value="bf7389a2-9b21-4d33-b276-23c9c18ea0c0">United States</option>
+	<option value="58b3af90-cdbd-4d36-a56e-5a4a2f6d7dbe">Uruguay</option>
+	<option value="81cd3640-c7ce-483f-b40c-fee3ee6a3a39">Uzbekistan</option>
+	<option value="4787bcae-97ce-46ac-aedf-fc5bbc69e509">Venezuela</option>
+	<option value="d7c507f0-a613-418f-8011-df0d380d8835">Viet Nam</option>
+	<option value="a5ffd15d-731e-4d9d-b9c8-6f68cbffe625">Yemen</option>
+	<option value="0d813c30-067a-4420-b159-84eb8c98b7cb">Zimbabwe</option>
+
+</select></td>
+</tr>
+<tr>
+    <td class="formlabel">First Name:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressShipping1$shippingfirstname" type="text" maxlength="255" size="20" id="shippingfirstname" tabindex="202"><span class="requiredfield">*</span></td>
+</tr>
+<tr>
+    <td class="formlabel">Last Name:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressShipping1$shippinglastname" type="text" maxlength="255" size="20" id="shippinglastname" tabindex="203"><span class="requiredfield">*</span></td>
+</tr>
+<tr>
+    <td class="formlabel">Company:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressShipping1$shippingcompany" type="text" maxlength="255" size="20" id="shippingcompany" tabindex="204"></td>
+</tr>
+<tr>
+    <td class="formlabel">Address:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressShipping1$shippingaddress" type="text" maxlength="255" id="shippingaddress" tabindex="205" size="20"><span class="requiredfield">*</span></td>
+</tr>
+<tr>
+    <td class="formlabel">City:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressShipping1$shippingcity" type="text" maxlength="50" id="shippingcity" tabindex="206" size="20"><span class="requiredfield">*</span></td>
+</tr>
+<tr>
+    <td class="formlabel">State:</td>
+    <td class="formfield"><select name="ctl00$MainContent$AddressShipping1$shippingstate" id="shippingstate" tabindex="207">
+	<option value="">- Make a Selection -</option>
+	<option value="AL">Alabama</option>
+	<option value="AK">Alaska</option>
+	<option value="AZ">Arizona</option>
+	<option value="AR">Arkansas</option>
+	<option value="AE">Armed Forces Africa</option>
+	<option value="AA">Armed Forces Americas</option>
+	<option value="AE">Armed Forces Canada</option>
+	<option value="AE">Armed Forces Europe</option>
+	<option value="AE">Armed Forces Middle</option>
+	<option value="AP">Armed Forces Pacific</option>
+	<option value="CA">California</option>
+	<option value="CO">Colorado</option>
+	<option value="CT">Connecticut</option>
+	<option value="DE">Delaware</option>
+	<option value="DC">District Of Columbia</option>
+	<option value="FL">Florida</option>
+	<option value="GA">Georgia</option>
+	<option value="HI">Hawaii</option>
+	<option value="ID">Idaho</option>
+	<option value="IL">Illinois</option>
+	<option value="IN">Indiana</option>
+	<option value="IA">Iowa</option>
+	<option value="KS">Kansas</option>
+	<option value="KY">Kentucky</option>
+	<option value="LA">Louisiana</option>
+	<option value="ME">Maine</option>
+	<option value="MD">Maryland</option>
+	<option value="MA">Massachusetts</option>
+	<option value="MI">Michigan</option>
+	<option value="MN">Minnesota</option>
+	<option value="MS">Mississippi</option>
+	<option value="MO">Missouri</option>
+	<option value="MT">Montana</option>
+	<option value="NE">Nebraska</option>
+	<option value="NV">Nevada</option>
+	<option value="NH">New Hampshire</option>
+	<option value="NJ">New Jersey</option>
+	<option value="NM">New Mexico</option>
+	<option value="NY">New York</option>
+	<option value="NC">North Carolina</option>
+	<option value="ND">North Dakota</option>
+	<option value="OH">Ohio</option>
+	<option value="OK">Oklahoma</option>
+	<option value="OR">Oregon</option>
+	<option value="PA">Pennsylvania</option>
+	<option value="RI">Rhode Island</option>
+	<option value="SC">South Carolina</option>
+	<option value="SD">South Dakota</option>
+	<option value="TN">Tennessee</option>
+	<option value="TX">Texas</option>
+	<option value="VI">U.S. Virgin Islands</option>
+	<option value="UT">Utah</option>
+	<option value="VT">Vermont</option>
+	<option value="VA">Virginia</option>
+	<option value="WA">Washington</option>
+	<option value="WV">West Virginia</option>
+	<option value="WI">Wisconsin</option>
+	<option value="WY">Wyoming</option>
+</select></td>
+</tr>
+<tr>
+    <td class="formlabel">Postal Code:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressShipping1$shippingzip" type="text" maxlength="20" id="shippingzip" tabindex="208" size="10"><span class="requiredfield">*</span></td>
+</tr>
+<tr>
+    <td class="formlabel">Phone:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressShipping1$shippingphone" type="text" maxlength="20" id="shippingphone" tabindex="209" size="20"></td>
+</tr>
+</tbody></table><input type="hidden" name="ctl00$MainContent$AddressShipping1$shippingaddressbvin" id="shippingaddressbvin">
+    
+        </div>
+        <div class="section-delivery">
+            <h2>Delivery Options</h2>
+            
+<div id="lstShipping"></div>
+<span class="shipping-changing" style="display: none;"><img border="0" src="images/ajax-loader-small.gif" alt="Loading..."></span>
+<div id="shipping-not-valid">Enter a shipping address first</div>
+<div id="shipping-needs-refresh"></div>                                            
+        </div>
+        <div class="section-billing">
+            <h2>Billing Address</h2>
+            <input id="chkBillSame" type="checkbox" name="ctl00$MainContent$chkBillSame" checked="checked" tabindex="400"> My billing address is the same as my shipping address
+            <div id="billingwrapper" style="display: none; ">
+                
+<table border="0" cellspacing="0" cellpadding="3" class="address-table">
+<tbody><tr>
+    <td class="formlabel">&nbsp;</td>
+    <td class="formfield"><select name="ctl00$MainContent$AddressBilling1$billingcountryname" id="billingcountryname" tabindex="401">
+	<option value="2c6d4fa9-941d-4d5d-807f-7bccba497680">Albania</option>
+	<option value="255b01ab-4d4f-40eb-b63d-e86ed8f7bd13">Algeria</option>
+	<option value="69135901-5cda-42b3-9bb9-eb0318c08ef5">Argentina</option>
+	<option value="1e4fadd8-5b90-4534-8220-6be963044f39">Armenia</option>
+	<option value="cb87aef1-ae12-4363-a292-8cff1a4e4d02">Australia</option>
+	<option value="6594806a-8e9e-4424-ac4b-4ffa19adb683">Austria</option>
+	<option value="831a08f8-f3bd-486a-8af5-d53bc2db69fb">Azerbaijan</option>
+	<option value="8f6413ef-2edd-4d6c-a9d8-40257bb9dca4">Bahrain</option>
+	<option value="6d37454c-7e9b-4a8c-981c-acc656cbb542">Belarus</option>
+	<option value="d6764c27-b7b3-49bd-88fb-1385570ad5ef">Belgium</option>
+	<option value="6926f9ef-ccf2-43e4-9c3f-2b0477f4998e">Belize</option>
+	<option value="e911f5fb-157d-41ed-84d6-f7c23ac053cf">Bolivia</option>
+	<option value="33ac233a-dc15-4aef-89db-7beda61b0436">Brazil</option>
+	<option value="254a6f90-f4dd-4218-879e-9869c38f9236">Brunei Darussalam</option>
+	<option value="c7cb9d92-9ca1-431e-8e27-e5953b895d92">Bulgaria</option>
+	<option value="94052dcf-1ac8-4b65-813b-b17b12a0491f">Canada</option>
+	<option value="a863ac16-e89c-46cc-bfd4-d518843445b7">Chile</option>
+	<option value="9046b9d5-9bb9-43f5-b605-e7164f99d7d9">China</option>
+	<option value="817edac5-daf0-4722-b02e-03e91309f5fe">Colombia</option>
+	<option value="83cea890-c1de-41be-a213-635d1416d6db">Costa Rica</option>
+	<option value="be57e8d8-6a09-4589-9181-d8558d27f4b5">Croatia</option>
+	<option value="d2b92f8b-8645-433d-9f6d-63a34d895798">Czech Republic</option>
+	<option value="1f54446f-f586-483a-9d7d-7eeb812f248c">Denmark</option>
+	<option value="ed004593-31b7-4c6b-b918-8e7efdb9c8e6">Dominican Republic</option>
+	<option value="424dd0e3-3cf3-4d46-b13b-2ea43da8c8ac">Ecuador</option>
+	<option value="99d0a3c3-4b61-4979-8fde-52584110392e">Egypt</option>
+	<option value="c2a2f20d-821c-4573-ab4d-349a8c858de7">El Salvador</option>
+	<option value="678de6b8-dcbb-4fcf-ac27-6c6f72dd5291">Estonia</option>
+	<option value="b8f7c10f-8274-4642-a828-8b41946ac95d">Faroe Islands</option>
+	<option value="cd884fa0-4d0b-41d9-b45d-0a486fd71009">Finland</option>
+	<option value="1c076e3d-43d5-4b8f-bf8c-6946fb58d231">France</option>
+	<option value="68249d05-62f5-45c9-9735-4057bf0dee7e">Georgia</option>
+	<option value="8d447e0d-6327-4a05-a7e5-f50fc408e13c">Germany</option>
+	<option value="225a471b-8c5c-4b86-9a2d-ea443919eb55">Greece</option>
+	<option value="d11db563-7496-4eb5-88d1-81f20bbfbe8c">Guatemala</option>
+	<option value="6aa3072c-540f-4e07-b203-de21180a94bd">Honduras</option>
+	<option value="67ce5007-5a16-47b0-bd85-173a8a758944">Hong Kong</option>
+	<option value="acf84f60-6b00-4131-a5be-fa202f1eb569">Hungary</option>
+	<option value="4af15981-2ffe-44ff-8c18-7680851ea335">Iceland</option>
+	<option value="fa10d66f-3a6a-4b3b-980a-cc66143a2328">India</option>
+	<option value="b698900d-71ca-43b3-977c-95d04c152141">Indonesia</option>
+	<option value="f01b4b56-e99c-4b5d-b10e-29be58a79e9b">Iran</option>
+	<option value="85a3f763-9543-4a0a-921b-f71a36e3b811">Iraq</option>
+	<option value="a4ac08ae-548a-48bb-af12-d2167c26b673">Ireland</option>
+	<option value="864722db-70ae-4078-b80c-b60b5216b020">Israel</option>
+	<option value="ceb2ea09-1d36-4b44-ac7c-c5d7660ef4f9">Italy</option>
+	<option value="04a2314b-66a2-4157-b17c-0d848b73e9c6">Jamaica</option>
+	<option value="b430b323-926d-4f1a-ac22-eb1b1479fcf6">Japan</option>
+	<option value="6f609d0b-e837-4f43-bd3b-a6f4b631942f">Jordan</option>
+	<option value="f7867666-bb5e-46fe-9f49-39fdc0703382">Kazakhstan</option>
+	<option value="3c3c25d5-0067-49f2-b951-22877d41bbb4">Kenya</option>
+	<option value="be09cdcc-73c5-4829-85a1-ef99a480add8">Kuwait</option>
+	<option value="3335935f-84fa-4dcd-9a0b-fa4d6506d2f3">Latvia</option>
+	<option value="2a330eef-a115-452a-a78d-d94a8d8b7da7">Lebanon</option>
+	<option value="dc3b811a-83f5-4f89-a998-af5abd015109">Libya</option>
+	<option value="d3e3c48a-c2e9-4c91-98d0-bf2f7802d6d6">Liechtenstein</option>
+	<option value="83bfd137-925d-4b64-9559-b6aa9baf9085">Lithuania</option>
+	<option value="0f812320-3aaf-4f3e-96ff-01396751cca6">Luxembourg</option>
+	<option value="815902dd-3392-4dc1-b148-3ddcb1a5828c">Macau</option>
+	<option value="01e68cef-1c77-4c2a-bb7b-5295a71379ad">Macedonia</option>
+	<option value="deddf780-661e-41f7-b5aa-a539cd21e1dd">Malaysia</option>
+	<option value="271f61fc-9f93-4ac2-bcda-d62640e23489">Maldives</option>
+	<option value="cb2f2e2c-459b-4370-a077-7831fdd16733">Mexico</option>
+	<option value="1a109d87-e02c-4ac9-b4c9-a4f74e802ebb">Monaco</option>
+	<option value="3dc123db-aa7b-4223-a37a-793d84b35468">Mongolia</option>
+	<option value="1118faf0-bb14-41d4-9848-cc011f1a344a">Morocco</option>
+	<option value="d6ae4091-0de6-4fb6-b6f9-99e4f7d3a96a">Netherlands</option>
+	<option value="2ebf498d-e6d6-4814-b5f9-f152afcac264">New Zealand</option>
+	<option value="6c866a94-5c9f-414b-b10d-64e8dd330761">Nicaragua</option>
+	<option value="57E083A5-43B6-47f5-90AF-E7153794F0C9">North Korea</option>
+	<option value="39c7e72b-1721-451c-a2f7-476fcc20aa72">Norway</option>
+	<option value="aafcbe32-4e5a-4a8c-b101-699274072571">Oman</option>
+	<option value="e750df18-7cee-42b2-a334-ba82f26f3dd8">Pakistan</option>
+	<option value="52b52f9e-a2c8-4e0d-92eb-678df74f921e">Panama</option>
+	<option value="e606fc92-c7a5-4bd5-abd4-f220db830ee2">Paraguay</option>
+	<option value="acff76b1-cdd4-4c3e-872e-d655fb092a29">Peru</option>
+	<option value="3c707cc5-8a8c-4be9-abd1-3dabdce6dd3f">Philippines</option>
+	<option value="f6eb3a3f-ea89-43e3-90d4-b665d382542b">Poland</option>
+	<option value="cb043623-5166-481b-bd1c-79f4f7a80b16">Portugal</option>
+	<option value="956066df-b065-43f0-9a2e-85eed038717e">Puerto Rico</option>
+	<option value="1b5a4f35-08a6-4259-b375-c4416bec5f11">Qatar</option>
+	<option value="7ab0fab9-7605-45cc-a20a-3e59e0b6151f">Romania</option>
+	<option value="6b6706b6-11ad-4843-bae6-bf8de441749a">Russia</option>
+	<option value="c636ea8b-a773-48df-b5dc-00bf3b8bef87">Saudi Arabia</option>
+	<option value="d5e8ed18-b909-4fcf-b6c6-b7a7e00a28d4">Serbia</option>
+	<option value="226c5e05-3e46-4129-9594-268d156aaffa">Singapore</option>
+	<option value="160dbdd9-9957-4bc2-8385-201c3bf32ea0">Slovakia</option>
+	<option value="727971df-2751-4e7f-9b22-5f4097241aa7">Slovenia</option>
+	<option value="bfff7d8f-0beb-44d5-bd9c-745b7e939e83">South Africa</option>
+	<option value="bd87cd0a-2470-4024-b8f2-bab111899375">South Korea</option>
+	<option value="1cf4480c-5ef8-4a80-a43a-600a69ff2157">Spain</option>
+	<option value="90951a60-ed1a-475d-be9d-e11982593326">Sweden</option>
+	<option value="ebb0cd59-d227-4c38-b31b-c6c93332bdde">Switzerland</option>
+	<option value="d53313a7-cc06-4b09-a56e-9715d32aaf02">Syrian Arab Republic</option>
+	<option value="37ba6822-e99f-430a-a3ec-e665ac1a3c8d">Taiwan</option>
+	<option value="443e409d-0daf-413a-ac06-706375aa0775">Thailand</option>
+	<option value="62b52f42-fe5e-4329-8c40-8483ff1a6996">Trinidad and Tobago</option>
+	<option value="dfd415ae-d8e9-42b4-a143-d1bd6874efe3">Tunisia</option>
+	<option value="62f5a76b-622a-4611-9ad6-17465b56b816">Turkey</option>
+	<option value="f23ea508-4df9-4aba-9b79-a3de288aa0b2">U.A.E.</option>
+	<option value="f3e85660-e4a1-4dc8-afaf-4b4d0a0043f9">Ukraine</option>
+	<option value="9c7a73b1-7ef5-4fc2-beeb-ce4c70cca32f">United Kingdom</option>
+	<option selected="selected" value="bf7389a2-9b21-4d33-b276-23c9c18ea0c0">United States</option>
+	<option value="58b3af90-cdbd-4d36-a56e-5a4a2f6d7dbe">Uruguay</option>
+	<option value="81cd3640-c7ce-483f-b40c-fee3ee6a3a39">Uzbekistan</option>
+	<option value="4787bcae-97ce-46ac-aedf-fc5bbc69e509">Venezuela</option>
+	<option value="d7c507f0-a613-418f-8011-df0d380d8835">Viet Nam</option>
+	<option value="a5ffd15d-731e-4d9d-b9c8-6f68cbffe625">Yemen</option>
+	<option value="0d813c30-067a-4420-b159-84eb8c98b7cb">Zimbabwe</option>
+
+</select></td>
+</tr>
+<tr>
+    <td class="formlabel">First Name:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressBilling1$billingfirstname" type="text" maxlength="255" size="20" id="billingfirstname" tabindex="402"></td>
+</tr>
+<tr>
+    <td class="formlabel">Last Name:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressBilling1$billinglastname" type="text" maxlength="255" size="20" id="billinglastname" tabindex="403"></td>
+</tr>
+<tr>
+    <td class="formlabel">Company:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressBilling1$billingcompany" type="text" maxlength="255" size="20" id="billingcompany" tabindex="404"></td>
+</tr>
+<tr>
+    <td class="formlabel">Address:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressBilling1$billingaddress" type="text" maxlength="255" id="billingaddress" tabindex="405" size="20"></td>
+</tr>
+<tr>
+    <td class="formlabel">City:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressBilling1$billingcity" type="text" maxlength="50" id="billingcity" tabindex="406" size="20"></td>
+</tr>
+<tr>
+    <td class="formlabel">State:</td>
+    <td class="formfield"><select name="ctl00$MainContent$AddressBilling1$billingstate" id="billingstate" tabindex="407">
+	<option value="">- Make a Selection -</option>
+	<option value="AL">Alabama</option>
+	<option value="AK">Alaska</option>
+	<option value="AZ">Arizona</option>
+	<option value="AR">Arkansas</option>
+	<option value="AE">Armed Forces Africa</option>
+	<option value="AA">Armed Forces Americas</option>
+	<option value="AE">Armed Forces Canada</option>
+	<option value="AE">Armed Forces Europe</option>
+	<option value="AE">Armed Forces Middle</option>
+	<option value="AP">Armed Forces Pacific</option>
+	<option value="CA">California</option>
+	<option value="CO">Colorado</option>
+	<option value="CT">Connecticut</option>
+	<option value="DE">Delaware</option>
+	<option value="DC">District Of Columbia</option>
+	<option value="FL">Florida</option>
+	<option value="GA">Georgia</option>
+	<option value="HI">Hawaii</option>
+	<option value="ID">Idaho</option>
+	<option value="IL">Illinois</option>
+	<option value="IN">Indiana</option>
+	<option value="IA">Iowa</option>
+	<option value="KS">Kansas</option>
+	<option value="KY">Kentucky</option>
+	<option value="LA">Louisiana</option>
+	<option value="ME">Maine</option>
+	<option value="MD">Maryland</option>
+	<option value="MA">Massachusetts</option>
+	<option value="MI">Michigan</option>
+	<option value="MN">Minnesota</option>
+	<option value="MS">Mississippi</option>
+	<option value="MO">Missouri</option>
+	<option value="MT">Montana</option>
+	<option value="NE">Nebraska</option>
+	<option value="NV">Nevada</option>
+	<option value="NH">New Hampshire</option>
+	<option value="NJ">New Jersey</option>
+	<option value="NM">New Mexico</option>
+	<option value="NY">New York</option>
+	<option value="NC">North Carolina</option>
+	<option value="ND">North Dakota</option>
+	<option value="OH">Ohio</option>
+	<option value="OK">Oklahoma</option>
+	<option value="OR">Oregon</option>
+	<option value="PA">Pennsylvania</option>
+	<option value="RI">Rhode Island</option>
+	<option value="SC">South Carolina</option>
+	<option value="SD">South Dakota</option>
+	<option value="TN">Tennessee</option>
+	<option value="TX">Texas</option>
+	<option value="VI">U.S. Virgin Islands</option>
+	<option value="UT">Utah</option>
+	<option value="VT">Vermont</option>
+	<option value="VA">Virginia</option>
+	<option value="WA">Washington</option>
+	<option value="WV">West Virginia</option>
+	<option value="WI">Wisconsin</option>
+	<option value="WY">Wyoming</option>
+</select></td>
+</tr>
+<tr>
+    <td class="formlabel">Postal Code:</td>
+    <td class="formfield"><input name="ctl00$MainContent$AddressBilling1$billingzip" type="text" maxlength="20" id="billingzip" tabindex="408" size="10"></td>
+</tr>
+</tbody></table><input type="hidden" name="ctl00$MainContent$AddressBilling1$billingaddressbvin" id="billingaddressbvin">
+        
+            </div>
+        </div>
+                
+        <div class="section-payment">
+            <h2>Payment Method</h2>
+            
+<table border="0" cellspacing="0" cellpadding="3" width="100%">
+    
+    <tbody><tr id="ctl00_MainContent_Payment_rowCreditCard">
+	<td valign="top" class="radiobuttoncol"><input id="ctl00_MainContent_Payment_rbCreditCard" type="radio" name="ctl00$MainContent$Payment$PaymentGroup" value="rbCreditCard" checked="checked" tabindex="501"></td>
+	<td>Credit Card
+<div class="creditcardinput">
+    <table border="0" cellspacing="0" cellpadding="2">
+        <tbody><tr>
+            <td>&nbsp;</td>
+            <td class="formfield">
+            <span class="cc-amex"></span><span class="cc-discover"></span><span class="cc-mastercard"></span><span class="cc-visa"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="formlabel">
+                Card Number</td>
+            <td class="formfield">
+                <span class="creditcardnumber">
+                    <input name="ctl00$MainContent$Payment$CreditCardInput1$cccardnumber" type="text" maxlength="20" size="20" id="cccardnumber" tabindex="503">                    
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="formlabel">
+                Exp. Date</td>
+            <td class="formfield">
+                <select name="ctl00$MainContent$Payment$CreditCardInput1$ccexpmonth" id="ccexpmonth" tabindex="504">
+		<option value="0">--</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+
+	</select>                
+                &nbsp;/&nbsp;
+                <select name="ctl00$MainContent$Payment$CreditCardInput1$ccexpyear" id="ccexpyear" tabindex="505">
+		<option value="0">----</option>
+		<option value="2011">2011</option>
+		<option value="2012">2012</option>
+		<option value="2013">2013</option>
+		<option value="2014">2014</option>
+		<option value="2015">2015</option>
+		<option value="2016">2016</option>
+		<option value="2017">2017</option>
+		<option value="2018">2018</option>
+		<option value="2019">2019</option>
+		<option value="2020">2020</option>
+
+	</select>                
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="formlabel">
+                Security Code</td>
+            <td class="formfield">
+                <input name="ctl00$MainContent$Payment$CreditCardInput1$ccsecuritycode" type="text" maxlength="4" size="5" id="ccsecuritycode" tabindex="506">                
+                </td>
+        </tr>
+        <tr>
+            <td class="formlabel">
+                Name On Card</td>
+            <td class="formfield">
+                <input name="ctl00$MainContent$Payment$CreditCardInput1$cccardholder" type="text" size="20" id="cccardholder" tabindex="507">                
+            </td>
+        </tr>
+    </tbody></table>
+</div>
+            
+        </td>
+</tr>
+
+    <tr id="ctl00_MainContent_Payment_trPaypal">
+	<td valign="top" class="radiobuttoncol"><input id="ctl00_MainContent_Payment_rbPaypal" type="radio" name="ctl00$MainContent$Payment$PaymentGroup" value="rbPaypal" tabindex="509"></td>
+	<td><img src="images/PayPal_mark_37x23.gif" align="left" style="margin-right:7px;"><span style="font-size:11px; font-family: Arial, Verdana;">Save time.  Checkout securely.<br> Pay without sharing your financial information.</span></td>
+</tr>
+
+    
+    
+    
+    
+    
+</tbody></table>
+        </div>
+        <div class="section-extras">
+            <h2>Special Instructions</h2>
+            <textarea name="ctl00$MainContent$SpecialInstructions" rows="4" cols="80" id="ctl00_MainContent_SpecialInstructions" tabindex="600"></textarea>    
+        </div>
+        <div class="section-actions">
+            <a href="Receipt.html">
+            <input type="image" name="ctl00$MainContent$btnSubmit" id="ctl00_MainContent_btnSubmit" tabindex="3001" src="buttons/PlaceOrder.png" alt="Place Order"></a>
+        </div>
+        <div class="section-totals">
+            <h2>Order Summary</h2>    
+            <div id="totalsastable"> -- </div>
+        </div>
+        <div class="section-cart">    
+            <div>
+	<table cellspacing="0" id="ctl00_MainContent_ViewOrderItems1_ItemsGridView" style="width:100%;border-collapse:collapse;margin: 20px 0px 20px 0px; border-bottom: solid 1px #666;">
+		<tbody><tr class="rowheader">
+			<th scope="col">Item</th><th scope="col">Shipping</th><th align="right" scope="col">Price</th><th align="right" scope="col">Qty</th><th align="right" scope="col">Line Total</th>
+		</tr><tr>
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl02_SKUField">SAMPLE002</span>
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl02_DescriptionField">Cup Cake Sample</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl02_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl02_AdjustedPriceField">$1.99</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl02_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $1.99                            
+                        </td>
+		</tr><tr class="alternaterow">
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl03_SKUField">SAMPLE001</span>
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl03_DescriptionField">Blue Bracelet</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl03_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl03_AdjustedPriceField">$42.95</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl03_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $42.95                            
+                        </td>
+		</tr><tr>
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl04_SKUField">SAMPLE006</span>
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl04_DescriptionField">Butterfly Earrings</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl04_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl04_AdjustedPriceField">$0.00</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl04_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $0.00                            
+                        </td>
+		</tr><tr class="alternaterow">
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl05_SKUField">SAMPLE004</span>
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl05_DescriptionField">Brown Fedora</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl05_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl05_AdjustedPriceField">$59.87</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl05_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $59.87                            
+                        </td>
+		</tr><tr>
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl06_SKUField">SAMPLE003</span>
+                                <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl06_DescriptionField">Purple Top</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl06_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl06_AdjustedPriceField">$29.95</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrderItems1_ItemsGridView_ctl06_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $29.95                            
+                        </td>
+		</tr>
+	</tbody></table>
+</div>
+                
+        </div>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div><input type="hidden" name="ctl00$MainContent$orderbvin" id="orderbvin" value="8de8440b-ad95-4e31-91ae-d139c485a501">
+<div class="modal" style="display: none; ">
+    <div class="popoverframe">
+    <iframe id="popoverpage"></iframe><br>
+    <a id="dialogclose" href="#">Close</a>
+    </div>    
+</div>
+
+
+        </div>
+        <div id="footer">
+            <div class="bottomfooter">
+  <span class="copyright">Copyright ©2011</span>
+</div>
+
+<span class="bvtag"><a href="http://www.bvcommerce.com/" title="Hosted Shopping Cart Software" target="_blank">Shopping Cart Software by BV Commerce</a></span>
+        </div>        
+    </div>    
+    
+        <!--%=Html.RenderAnalyticsTags() %-->
+    
+    
+</form>    
+
+
+
+</body></html>

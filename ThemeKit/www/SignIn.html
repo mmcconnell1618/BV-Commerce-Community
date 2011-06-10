@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/BuiltIn.css" rel="stylesheet" type="text/css">
+    <script src="script/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="script/jquery-ui-1.8.7.custom.min.js" type="text/javascript"></script>
+    <script src="script/jquery.form.js" type="text/javascript"></script>
+    <script src="script/searchform.js" type="text/javascript"></script>
+    <script src="script/ThemeHelper.js" type="text/javascript"></script>    
+    <style type="text/css" id="themecss"></style>
+    <script src="script/Header.js" type="text/javascript"></script>
+    <title>Sign In</title>
+</head>
+<body id="ctl00_pagebody">
+    <!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx"><img src="http://www.ie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="" /></a></div> <![endif]-->
+    <form method="post" action="MyAccount.html" id="aspnetForm">
+    <div id="site-wrapper">       
+        <div id="dynamicheader"></div>
+        <div id="main-content">
+            
+<div class="loginpage">
+    
+<div class="breadcrumbs"><div class="links"><a href="Home.html">Home</a><span class="spacer">&nbsp;::&nbsp;</span>Sign In</div></div>
+    <h1>
+        <span>
+            <span id="ctl00_MainContent_TitleLabel">Sign In</span></span></h1>
+    <div class="sidebysidea"><h2>Current User Login</h2>
+    <div id="ctl00_MainContent_LoginControl1_valLoginSummary" class="errormessage" style="display:none;">
+
+</div>
+
+<div id="ctl00_MainContent_LoginControl1_pnlMain" >
+	
+<table id="CurrentUserTable" cellspacing="0" cellpadding="3">
+    <tbody><tr>
+        <td class="formlabel">
+            Email:</td>
+        <td class="formfield">
+            <input name="ctl00$MainContent$LoginControl1$UsernameField" type="text" id="ctl00_MainContent_LoginControl1_UsernameField" tabindex="1" title="Enter Your Username" class="forminput required logincontrolemailfield"></td>
+    </tr>
+    <tr>
+        <td class="formlabel">
+            <label for="ctl00_MainContent_LoginControl1_PasswordField" id="ctl00_MainContent_LoginControl1_PasswordLabel" class="required">Password:</label></td>
+        <td class="formfield">
+            <input name="ctl00$MainContent$LoginControl1$PasswordField" type="password" id="ctl00_MainContent_LoginControl1_PasswordField" tabindex="2" title="Enter Your Password" class="forminput required"></td>
+    </tr>
+    <tr id="ctl00_MainContent_LoginControl1_trRememberMe">
+		<td class="formlabel">
+        </td>
+		<td class="formfield">
+            <input id="ctl00_MainContent_LoginControl1_RememberMeCheckBox" type="checkbox" name="ctl00$MainContent$LoginControl1$RememberMeCheckBox" checked="checked" tabindex="3"><label for="ctl00_MainContent_LoginControl1_RememberMeCheckBox">Remember Me</label>
+        </td>
+	</tr>
+	
+    <tr>
+        <td class="formlabel">
+        </td>
+        <td class="formfield"><input type="image" name="ctl00$MainContent$LoginControl1$btnLogin" id="ctl00_MainContent_LoginControl1_btnLogin" tabindex="4" title="Login" src="buttons/login.png" alt="Login"></td>
+    </tr>
+    <tr>
+        <td class="formlabel">
+        </td>
+        <td>
+            <a id="ctl00_MainContent_LoginControl1_btnForgotPassword" tabindex="5" class="BVSmallText forgot" href="Home.html">Forgot Your Password? Click Here.</a>
+                        </td>
+    </tr>
+</tbody></table>
+
+</div>
+<input type="hidden" name="ctl00$MainContent$LoginControl1$RedirectToField" id="ctl00_MainContent_LoginControl1_RedirectToField"><input type="hidden" name="ctl00$MainContent$LoginControl1$CheckoutModeField" id="ctl00_MainContent_LoginControl1_CheckoutModeField" value="false">
+
+                        
+                        </div>
+    <div class="sidebysideb"><div id="ctl00_MainContent_pnlNewUser">
+	<h2>New Users Create Account</h2>
+    <div id="ctl00_MainContent_NewUserControl1_valNewUserSummary" class="validationmessage" style="display:none;">
+
+	</div>
+
+<div id="ctl00_MainContent_NewUserControl1_pnlMain" >
+		
+<table id="ctl00_MainContent_NewUserControl1_NewUserTable" border="0" cellspacing="0" cellpadding="3">
+			<tbody><tr>
+				<td class="formlabel">
+            Email:</td>
+				<td class="formfield">
+            <input name="ctl00$MainContent$NewUserControl1$EmailField" type="text" maxlength="100" size="30" id="ctl00_MainContent_NewUserControl1_EmailField" tabindex="2001" class="forminput required">
+            <span id="ctl00_MainContent_NewUserControl1_val2Username" class="errormessage" style="display:none;">*</span>
+            <span id="ctl00_MainContent_NewUserControl1_valUsername" class="errormessage" style="display:none;">Please enter a valid email address</span>
+        </td>
+			</tr>
+			<tr>
+				<td class="formlabel">
+            <label for="ctl00_MainContent_NewUserControl1_FirstNameField" id="ctl00_MainContent_NewUserControl1_FirstNameLabel" class="required">First Name:</label></td>
+				<td class="formfield">
+            <input name="ctl00$MainContent$NewUserControl1$FirstNameField" type="text" maxlength="50" size="30" id="ctl00_MainContent_NewUserControl1_FirstNameField" tabindex="2002" class="forminput required">
+            <span id="ctl00_MainContent_NewUserControl1_valFirstName" class="errormessage" style="display:none;">*</span></td>
+			</tr>
+			<tr>
+				<td class="formlabel">
+            <label for="ctl00_MainContent_NewUserControl1_LastNameField" id="ctl00_MainContent_NewUserControl1_LastNameLabel" class="required">Last Name:</label></td>
+				<td class="formfield">
+            <input name="ctl00$MainContent$NewUserControl1$LastNameField" type="text" maxlength="50" size="30" id="ctl00_MainContent_NewUserControl1_LastNameField" tabindex="2003" class="forminput required">
+            <span id="ctl00_MainContent_NewUserControl1_RequiredFieldValidator1" class="errormessage" style="display:none;">*</span></td>
+			</tr>
+			<tr>
+				<td class="formlabel">            
+            <label for="ctl00_MainContent_NewUserControl1_PasswordField" id="ctl00_MainContent_NewUserControl1_PasswordLabel" class="required">Password:</label></td>
+				<td class="formfield">            
+            <input name="ctl00$MainContent$NewUserControl1$PasswordField" type="password" size="30" id="ctl00_MainContent_NewUserControl1_PasswordField" tabindex="2006" class="forminput required">
+            <span id="ctl00_MainContent_NewUserControl1_valPassword" class="errormessage" style="visibility:hidden;">*</span></td>
+			</tr>
+			<tr>
+				<td class="formlabel">
+            <label for="ctl00_MainContent_NewUserControl1_PasswordConfirmField" id="ctl00_MainContent_NewUserControl1_PasswordConfirmLabel" class="required">Confirm Password:</label></td>
+				<td class="formfield">
+            <input name="ctl00$MainContent$NewUserControl1$PasswordConfirmField" type="password" size="30" id="ctl00_MainContent_NewUserControl1_PasswordConfirmField" tabindex="2007" class="forminput required">
+            <span id="ctl00_MainContent_NewUserControl1_RequiredFieldValidator2" class="errormessage" style="visibility:hidden;">*</span>
+            <span id="ctl00_MainContent_NewUserControl1_CompareValidator1" class="errormessage" style="display:none;">*</span></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td class="formfield">                
+                <input type="image" name="ctl00$MainContent$NewUserControl1$btnSaveChanges" id="ctl00_MainContent_NewUserControl1_btnSaveChanges" tabindex="2050" src="buttons/createaccount.png">
+        </td>
+			</tr>
+		</tbody></table>
+		
+
+	</div>
+<input type="hidden" name="ctl00$MainContent$NewUserControl1$BvinField" id="ctl00_MainContent_NewUserControl1_BvinField">
+
+    
+</div>
+    </div>
+    <div class="clear"></div>        
+</div>
+
+        </div>
+        <div id="footer">
+            <div class="bottomfooter">
+  <span class="copyright">Copyright ©2011</span>
+</div>
+
+<span class="bvtag"><a href="http://www.bvcommerce.com/" title="Hosted Shopping Cart Software" target="_blank">Shopping Cart Software by BV Commerce</a></span>
+        </div>        
+    </div>    
+    
+        <!--%=Html.RenderAnalyticsTags() %-->
+    
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("ctl00_MainContent_LoginControl1_valLoginSummary"), document.getElementById("ctl00_MainContent_NewUserControl1_valNewUserSummary"));
+var Page_Validators =  new Array(document.getElementById("ctl00_MainContent_NewUserControl1_val2Username"), document.getElementById("ctl00_MainContent_NewUserControl1_valUsername"), document.getElementById("ctl00_MainContent_NewUserControl1_valFirstName"), document.getElementById("ctl00_MainContent_NewUserControl1_RequiredFieldValidator1"), document.getElementById("ctl00_MainContent_NewUserControl1_valPassword"), document.getElementById("ctl00_MainContent_NewUserControl1_RequiredFieldValidator2"), document.getElementById("ctl00_MainContent_NewUserControl1_CompareValidator1"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ctl00_MainContent_LoginControl1_valLoginSummary = document.all ? document.all["ctl00_MainContent_LoginControl1_valLoginSummary"] : document.getElementById("ctl00_MainContent_LoginControl1_valLoginSummary");
+ctl00_MainContent_LoginControl1_valLoginSummary.validationGroup = "Login";
+var ctl00_MainContent_NewUserControl1_valNewUserSummary = document.all ? document.all["ctl00_MainContent_NewUserControl1_valNewUserSummary"] : document.getElementById("ctl00_MainContent_NewUserControl1_valNewUserSummary");
+ctl00_MainContent_NewUserControl1_valNewUserSummary.validationGroup = "NewUser";
+var ctl00_MainContent_NewUserControl1_val2Username = document.all ? document.all["ctl00_MainContent_NewUserControl1_val2Username"] : document.getElementById("ctl00_MainContent_NewUserControl1_val2Username");
+ctl00_MainContent_NewUserControl1_val2Username.controltovalidate = "ctl00_MainContent_NewUserControl1_EmailField";
+ctl00_MainContent_NewUserControl1_val2Username.errormessage = "Please enter an email address";
+ctl00_MainContent_NewUserControl1_val2Username.display = "Dynamic";
+ctl00_MainContent_NewUserControl1_val2Username.validationGroup = "NewUser";
+ctl00_MainContent_NewUserControl1_val2Username.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_MainContent_NewUserControl1_val2Username.initialvalue = "";
+var ctl00_MainContent_NewUserControl1_valUsername = document.all ? document.all["ctl00_MainContent_NewUserControl1_valUsername"] : document.getElementById("ctl00_MainContent_NewUserControl1_valUsername");
+ctl00_MainContent_NewUserControl1_valUsername.controltovalidate = "ctl00_MainContent_NewUserControl1_EmailField";
+ctl00_MainContent_NewUserControl1_valUsername.errormessage = "Please enter a valid email address";
+ctl00_MainContent_NewUserControl1_valUsername.display = "Dynamic";
+ctl00_MainContent_NewUserControl1_valUsername.validationGroup = "NewUser";
+ctl00_MainContent_NewUserControl1_valUsername.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+ctl00_MainContent_NewUserControl1_valUsername.validationexpression = "^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\\-+)|([A-Za-z0-9]+\\.+)|([A-Za-z0-9]+\\++))*[A-Za-z0-9]+@((\\w+\\-+)|(\\w+\\.))*\\w{1,63}\\.[a-zA-Z]{2,6}$";
+var ctl00_MainContent_NewUserControl1_valFirstName = document.all ? document.all["ctl00_MainContent_NewUserControl1_valFirstName"] : document.getElementById("ctl00_MainContent_NewUserControl1_valFirstName");
+ctl00_MainContent_NewUserControl1_valFirstName.controltovalidate = "ctl00_MainContent_NewUserControl1_FirstNameField";
+ctl00_MainContent_NewUserControl1_valFirstName.errormessage = "Please enter a first name or nickname";
+ctl00_MainContent_NewUserControl1_valFirstName.display = "Dynamic";
+ctl00_MainContent_NewUserControl1_valFirstName.validationGroup = "NewUser";
+ctl00_MainContent_NewUserControl1_valFirstName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_MainContent_NewUserControl1_valFirstName.initialvalue = "";
+var ctl00_MainContent_NewUserControl1_RequiredFieldValidator1 = document.all ? document.all["ctl00_MainContent_NewUserControl1_RequiredFieldValidator1"] : document.getElementById("ctl00_MainContent_NewUserControl1_RequiredFieldValidator1");
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator1.controltovalidate = "ctl00_MainContent_NewUserControl1_LastNameField";
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator1.errormessage = "Please enter a last name";
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator1.display = "Dynamic";
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator1.validationGroup = "NewUser";
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator1.initialvalue = "";
+var ctl00_MainContent_NewUserControl1_valPassword = document.all ? document.all["ctl00_MainContent_NewUserControl1_valPassword"] : document.getElementById("ctl00_MainContent_NewUserControl1_valPassword");
+ctl00_MainContent_NewUserControl1_valPassword.controltovalidate = "ctl00_MainContent_NewUserControl1_PasswordField";
+ctl00_MainContent_NewUserControl1_valPassword.errormessage = "A password is required";
+ctl00_MainContent_NewUserControl1_valPassword.validationGroup = "NewUser";
+ctl00_MainContent_NewUserControl1_valPassword.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_MainContent_NewUserControl1_valPassword.initialvalue = "";
+var ctl00_MainContent_NewUserControl1_RequiredFieldValidator2 = document.all ? document.all["ctl00_MainContent_NewUserControl1_RequiredFieldValidator2"] : document.getElementById("ctl00_MainContent_NewUserControl1_RequiredFieldValidator2");
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator2.controltovalidate = "ctl00_MainContent_NewUserControl1_PasswordConfirmField";
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator2.errormessage = "A password confirmation is required";
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator2.validationGroup = "NewUser";
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_MainContent_NewUserControl1_RequiredFieldValidator2.initialvalue = "";
+var ctl00_MainContent_NewUserControl1_CompareValidator1 = document.all ? document.all["ctl00_MainContent_NewUserControl1_CompareValidator1"] : document.getElementById("ctl00_MainContent_NewUserControl1_CompareValidator1");
+ctl00_MainContent_NewUserControl1_CompareValidator1.controltovalidate = "ctl00_MainContent_NewUserControl1_PasswordConfirmField";
+ctl00_MainContent_NewUserControl1_CompareValidator1.errormessage = "Password and Confirmation Must Match.";
+ctl00_MainContent_NewUserControl1_CompareValidator1.display = "Dynamic";
+ctl00_MainContent_NewUserControl1_CompareValidator1.validationGroup = "NewUser";
+ctl00_MainContent_NewUserControl1_CompareValidator1.evaluationfunction = "CompareValidatorEvaluateIsValid";
+ctl00_MainContent_NewUserControl1_CompareValidator1.controltocompare = "ctl00_MainContent_NewUserControl1_PasswordField";
+ctl00_MainContent_NewUserControl1_CompareValidator1.controlhookup = "ctl00_MainContent_NewUserControl1_PasswordField";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        WebForm_AutoFocus('ctl00_MainContent_LoginControl1_UsernameField');//]]>
+</script>
+</form>    
+
+
+
+</body></html>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/BuiltIn.css" rel="stylesheet" type="text/css">
+    <script src="script/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="script/jquery-ui-1.8.7.custom.min.js" type="text/javascript"></script>
+    <script src="script/jquery.form.js" type="text/javascript"></script>
+    <script src="script/searchform.js" type="text/javascript"></script>
+    <script src="script/ThemeHelper.js" type="text/javascript"></script>    
+    <style type="text/css" id="themecss"></style>
+    <script src="script/Header.js" type="text/javascript"></script>
+    <title>My Account | Address Book</title>
+</head>
+<body id="ctl00_pagebody" class="myaccountaddressbookpage">
+    <!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx"><img src="http://www.ie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="" /></a></div> <![endif]-->
+    <form method="post" action="./MyAccountAddressBook_files/MyAccountAddressBook.html" id="aspnetForm">
+    <div id="site-wrapper">       
+        <div id="dynamicheader"></div>
+        <div id="main-content">
+            
+<div id="navcolumn">
+    
+<div class="sidemenu">
+    <ul>
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkOrder" href="MyAccount.html">Orders</a></li>
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkAddressBook" href="MyAccountAddressBook.html">Address Book</a></li>
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkChangePassword" href="#">Change Password</a></li>
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkChangeEmail" href="#">Change Email</a></li>
+        
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkSignOut" href="Home.html">Sign Out</a></li>
+    </ul>
+</div>
+&nbsp;<br>
+    
+</div>
+<div id="maincolumn">
+
+<h1>Address Book</h1>
+<input type="image" name="ctl00$MainContent$AddNewButton" id="ctl00_MainContent_AddNewButton" title="Add New Address" class="newaddress" src="buttons/new.png">
+    <h2>
+        <span id="ctl00_MainContent_lblItems">2 addresses found</span></h2>
+    <table id="ctl00_MainContent_AddressList" class="alladdresses" cellspacing="0" style="border-collapse:collapse;">
+	<tbody><tr>
+		<td>
+            <div class="address">
+                <span id="ctl00_MainContent_AddressList_ctl00_AddressDisplay" class="BVSmallText">Marcus McConnell<br>BV Software<br>9702 Gayton Rd<br>Richmond, VA 23233<br>United States<br>United States<br>804-282-4455<br></span>
+                <div class="buttonrow">
+                    <input type="image" name="ctl00$MainContent$AddressList$ctl00$EditButton" id="ctl00_MainContent_AddressList_ctl00_EditButton" src="buttons/edit.png" alt="Edit"> 
+                    <a onclick="return window.confirm(&#39;Delete this address?&#39;);" id="ctl00_MainContent_AddressList_ctl00_DeleteButton" alternatetext="Delete" href="javascript:__doPostBack('ctl00$MainContent$AddressList$ctl00$DeleteButton','')">Delete</a>
+                </div>
+                <div class="buttonrow"><span id="ctl00_MainContent_AddressList_ctl00_lblBillShip">BILLING</span>
+                     
+                    <a onclick="return window.confirm(&#39;Make this your default Shipping Address?&#39;);" id="ctl00_MainContent_AddressList_ctl00_ShipToImageButton" alternatetext="Set As Default Shipping Address" href="javascript:__doPostBack('ctl00$MainContent$AddressList$ctl00$ShipToImageButton','')">Ship To</a>
+                </div>
+            </div>
+        </td><td>
+            <div class="address">
+                <span id="ctl00_MainContent_AddressList_ctl01_AddressDisplay" class="BVSmallText">Marcus McConnell<br>BV Software<br>9702 Gayton Rd<br>Richmond, VA 23233<br>United States<br>United States<br>804-282-4455<br></span>
+                <div class="buttonrow">
+                    <input type="image" name="ctl00$MainContent$AddressList$ctl01$EditButton" id="ctl00_MainContent_AddressList_ctl01_EditButton" src="buttons/edit.png" alt="Edit"> 
+                    <a onclick="return window.confirm(&#39;Delete this address?&#39;);" id="ctl00_MainContent_AddressList_ctl01_DeleteButton" alternatetext="Delete" href="javascript:__doPostBack('ctl00$MainContent$AddressList$ctl01$DeleteButton','')">Delete</a>
+                </div>
+                <div class="buttonrow"><span id="ctl00_MainContent_AddressList_ctl01_lblBillShip"></span>
+                    <a onclick="return window.confirm(&#39;Make this your default Billing Address?&#39;);" id="ctl00_MainContent_AddressList_ctl01_BillToImageButton" alternatetext="Set As Default Billing Address" href="javascript:__doPostBack('ctl00$MainContent$AddressList$ctl01$BillToImageButton','')">Bill To</a> 
+                    <a onclick="return window.confirm(&#39;Make this your default Shipping Address?&#39;);" id="ctl00_MainContent_AddressList_ctl01_ShipToImageButton" alternatetext="Set As Default Shipping Address" href="javascript:__doPostBack('ctl00$MainContent$AddressList$ctl01$ShipToImageButton','')">Ship To</a>
+                </div>
+            </div>
+        </td><td></td>
+	</tr>
+</tbody></table>
+</div>
+<div class="clear"></div>
+
+
+        </div>
+        <div id="footer">
+            <div class="bottomfooter">
+  <span class="copyright">Copyright ©2011</span>
+</div>
+
+<span class="bvtag"><a href="http://www.bvcommerce.com/" title="Hosted Shopping Cart Software" target="_blank">Shopping Cart Software by BV Commerce</a></span>
+        </div>        
+    </div>    
+    
+
+    </form>    
+
+
+
+</body></html>

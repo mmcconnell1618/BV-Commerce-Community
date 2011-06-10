@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <link href="css/BuiltIn.css" rel="stylesheet" type="text/css">        
+        <script src="script/jquery-1.4.4.min.js" type="text/javascript"></script>
+        <script src="script/jquery-ui-1.8.7.custom.min.js" type="text/javascript"></script>
+        <script src="script/jquery.form.js" type="text/javascript"></script>
+        <script src="script/searchform.js" type="text/javascript"></script>
+        <script src="script/ThemeHelper.js" type="text/javascript"></script>    
+        <style type="text/css" id="themecss"></style>
+        <script src="script/Header.js" type="text/javascript"></script>
+    <title>Page Title Here</title>
+</head>
+<body id="ctl00_pagebody" class="store-cart-page">
+    <!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx"><img src="http://www.ie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="" /></a></div> <![endif]-->
+    <form method="post" action="Cart.html" id="aspnetForm">
+
+    <div id="site-wrapper">       
+        <div id="dynamicheader"></div>        
+        <div id="main-content">
+               
+    <div id="ctl00_MainContent_pnlAll" >
+	
+        <div id="carttitle">
+            <h1>
+                <span id="ctl00_MainContent_TitleLabel">Shopping Cart</span>
+            </h1>
+            
+            <div id="ctl00_MainContent_ValidationSummary1" style="display:none;">
+
+	</div>
+            <div id="cartsubtitle">
+                <h3>
+                    <span id="ctl00_MainContent_lblcart">3 Items in Cart</span></h3>
+            </div>
+        </div>
+        <div id="ctl00_MainContent_pnlWholeCart">
+		
+            <div id="cartcontainer">
+                &nbsp;
+                <div>
+			<table class="cartproductgrid" cellspacing="0" id="ctl00_MainContent_ItemGridView" style="width:100%;border-collapse:collapse;">
+				<tbody><tr>
+					<th align="left" scope="col">Product</th><th scope="col">&nbsp;</th><th align="right" scope="col">Price</th><th align="right" scope="col">Quantity</th><th align="right" scope="col">Total</th><th scope="col">&nbsp;</th>
+				</tr><tr>
+					<td class="productimagecolumn" valign="top">
+                                <div class="cartitemimage">
+                                    <img id="ctl00_MainContent_ItemGridView_ctl02_imgProduct" src="images/products/BraceletBlue.png" alt="Blue Bracelet">
+                                </div>                                
+                            </td><td class="productdetailscolumn" valign="top">
+                                <div id="ctl00_MainContent_ItemGridView_ctl02_cartitemdescription" class="cartitemdescription">                                    
+                                    <a id="ctl00_MainContent_ItemGridView_ctl02_DescriptionLink" href="ProductSimple.html"><div class="cartsku">SAMPLE001</div><div class="cartproductname">Blue Bracelet</div></a>
+                                                                        
+                                    
+                                    
+                                </div>
+                            </td><td class="productpricecolumn" valign="top">
+                                <span class="cartproductprice">$42.95</span>
+                            </td><td class="productquantitycolumn" valign="top">
+                                <div>
+                                    <input name="ctl00$MainContent$ItemGridView$ctl02$QtyField" type="text" value="1" id="ctl00_MainContent_ItemGridView_ctl02_QtyField" style="width:50px;">
+                                    <span id="ctl00_MainContent_ItemGridView_ctl02_RequiredFieldValidator1" class="errormessage" style="visibility:hidden;">*</span>                                    
+                                    <span id="ctl00_MainContent_ItemGridView_ctl02_RegularExpressionValidator1" class="errormessage" style="visibility:hidden;">Quantity Must Be Numeric</span>
+                                </div>
+                            </td><td class="producttotalcolumn" valign="top">
+                                <span class="lineitemnodiscounts"></span>
+                                <span class="totallabel">$42.95</span>
+                            </td><td class="productdeletecolumn" valign="top">
+                                <input type="image" name="ctl00$MainContent$ItemGridView$ctl02$btnDelete" id="ctl00_MainContent_ItemGridView_ctl02_btnDelete" src="buttons/x.png" alt="Delete">                                
+                            </td>
+				</tr><tr>
+					<td class="productimagecolumn" valign="top">
+                                <div class="cartitemimage">
+                                    <img id="ctl00_MainContent_ItemGridView_ctl03_imgProduct" src="images/products/CupCake.jpg" alt="Cup Cake Sample">
+                                </div>                                
+                            </td><td class="productdetailscolumn" valign="top">
+                                <div id="ctl00_MainContent_ItemGridView_ctl03_cartitemdescription" class="cartitemdescription">                                    
+                                    <a id="ctl00_MainContent_ItemGridView_ctl03_DescriptionLink" href="ProductSimple.html"><div class="cartsku">SAMPLE002</div><div class="cartproductname">Cup Cake Sample</div></a>
+                                                                        
+                                    
+                                    
+                                </div>
+                            </td><td class="productpricecolumn" valign="top">
+                                <span class="cartproductprice">$1.99</span>
+                            </td><td class="productquantitycolumn" valign="top">
+                                <div>
+                                    <input name="ctl00$MainContent$ItemGridView$ctl03$QtyField" type="text" value="1" id="ctl00_MainContent_ItemGridView_ctl03_QtyField" style="width:50px;">
+                                    <span id="ctl00_MainContent_ItemGridView_ctl03_RequiredFieldValidator1" class="errormessage" style="visibility:hidden;">*</span>                                    
+                                    <span id="ctl00_MainContent_ItemGridView_ctl03_RegularExpressionValidator1" class="errormessage" style="visibility:hidden;">Quantity Must Be Numeric</span>
+                                </div>
+                            </td><td class="producttotalcolumn" valign="top">
+                                <span class="lineitemnodiscounts"></span>
+                                <span class="totallabel">$1.99</span>
+                            </td><td class="productdeletecolumn" valign="top">
+                                <input type="image" name="ctl00$MainContent$ItemGridView$ctl03$btnDelete" id="ctl00_MainContent_ItemGridView_ctl03_btnDelete" src="buttons/x.png" alt="Delete">                                
+                            </td>
+				</tr><tr>
+					<td class="productimagecolumn" valign="top">
+                                <div class="cartitemimage">
+                                    <img id="ctl00_MainContent_ItemGridView_ctl04_imgProduct" src="images/products/PurpleTop.jpg" alt="Purple Top">
+                                </div>                                
+                            </td><td class="productdetailscolumn" valign="top">
+                                <div id="ctl00_MainContent_ItemGridView_ctl04_cartitemdescription" class="cartitemdescription">                                    
+                                    <a id="ctl00_MainContent_ItemGridView_ctl04_DescriptionLink" href="ProductOptions2.html"><div class="cartsku">SAMPLE003</div><div class="cartproductname">Purple Top</div><ul class="lineitemoptions"><li>Size: Small</li><li>Sleeve Length: Short Sleeve</li></ul></a>
+                                                                        
+                                    
+                                    
+                                </div>
+                            </td><td class="productpricecolumn" valign="top">
+                                <span class="cartproductprice">$29.95</span>
+                            </td><td class="productquantitycolumn" valign="top">
+                                <div>
+                                    <input name="ctl00$MainContent$ItemGridView$ctl04$QtyField" type="text" value="1" id="ctl00_MainContent_ItemGridView_ctl04_QtyField" style="width:50px;">
+                                    <span id="ctl00_MainContent_ItemGridView_ctl04_RequiredFieldValidator1" class="errormessage" style="visibility:hidden;">*</span>                                    
+                                    <span id="ctl00_MainContent_ItemGridView_ctl04_RegularExpressionValidator1" class="errormessage" style="visibility:hidden;">Quantity Must Be Numeric</span>
+                                </div>
+                            </td><td class="producttotalcolumn" valign="top">
+                                <span class="lineitemnodiscounts"></span>
+                                <span class="totallabel">$29.95</span>
+                            </td><td class="productdeletecolumn" valign="top">
+                                <input type="image" name="ctl00$MainContent$ItemGridView$ctl04$btnDelete" id="ctl00_MainContent_ItemGridView_ctl04_btnDelete" src="buttons/x.png" alt="Delete">                                
+                            </td>
+				</tr>
+			</tbody></table>
+		</div>
+            </div>
+            <div id="cartfooter">
+                <div id="carttotals">
+                    
+                    <table border="0" cellspacing="0" cellpadding="3">
+                        <tbody><tr>
+                            <td class="formlabel">
+                                Sub Total:</td>
+                            <td class="formfield">
+                                <span id="ctl00_MainContent_lblSubTotal">$74.89</span></td>
+                        </tr>
+                                                
+                    </tbody></table>
+                </div>
+                <div id="cartupdates">
+                    <span>
+                        <span id="ctl00_MainContent_lblMakeChanges">Make any changes above? </span>&nbsp;</span>
+                    <input type="image" name="ctl00$MainContent$btnUpdateQuantities" id="ctl00_MainContent_btnUpdateQuantities" src="buttons/update.png" alt="Update">
+                </div>
+                
+<div id="EstimateShipping">
+    <a id="ctl00_MainContent_EstimateShipping1_GetRatesLink" style="CURSOR:pointer;">
+    <img id="ctl00_MainContent_EstimateShipping1_imgGetRates" src="buttons/estimateshipping.png" style="cursor: hand">
+    </a>
+</div>
+            </div>
+            <div id="cartactions">
+                <div id="cartactioncontinue">
+                    <a href="Category.html"><img name="ctl00$MainContent$btnContinueShopping" id="ctl00_MainContent_btnContinueShopping" src="buttons/keepshopping.png" alt="Continue Shopping" /></a>
+                </div>
+                <div id="ctl00_MainContent_cartactioncheckout">
+                    <a href="Checkout.html"><img name="ctl00$MainContent$btnCheckout" id="ctl00_MainContent_btnCheckout" src="buttons/securecheckout.png" alt="Checkout" /></a>
+                    
+                    <div id="ctl00_MainContent_PaypalExpressCheckoutButton1_PaypalExpress">
+			&nbsp;<br>
+<span style="padding:0 60px 0 0;">- OR - </span><br>&nbsp;<br>
+    <input type="image" name="ctl00$MainContent$PaypalExpressCheckoutButton1$PaypalImageButton" id="ctl00_MainContent_PaypalExpressCheckoutButton1_PaypalImageButton" src="images/btn_xpressCheckout.gif" alt="Checkout with Paypal" style="margin-right: 7px;">    
+
+		</div>
+                </div>
+            </div>
+            <div id="cartcoupons">
+                <div id="ctl00_MainContent_pnlCoupons">
+			
+                    Add a Promotional Code:
+                    <input name="ctl00$MainContent$CouponField" type="text" id="ctl00_MainContent_CouponField">
+                    <input type="image" name="ctl00$MainContent$btnAddCoupon" id="ctl00_MainContent_btnAddCoupon" src="buttons/new.png" alt="Add Coupon to Cart"><br />
+                    <div>
+
+			</div>
+                
+		</div>
+            </div>                        
+        
+	</div>
+    
+</div>
+
+        </div>
+        <div id="footer">
+            <div class="bottomfooter">
+  <span class="copyright">Copyright ©2011</span>
+</div>
+
+<span class="bvtag"><a href="http://www.bvcommerce.com/" title="Hosted Shopping Cart Software" target="_blank">Shopping Cart Software by BV Commerce</a></span>
+        </div>        
+    </div>    
+    
+        <!--%=Html.RenderAnalyticsTags() %-->
+    
+</form>    
+
+</body></html>

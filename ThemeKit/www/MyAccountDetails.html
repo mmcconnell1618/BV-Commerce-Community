@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/BuiltIn.css" rel="stylesheet" type="text/css">
+    <script src="script/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="script/jquery-ui-1.8.7.custom.min.js" type="text/javascript"></script>
+    <script src="script/jquery.form.js" type="text/javascript"></script>
+    <script src="script/searchform.js" type="text/javascript"></script>  
+    <script src="script/ThemeHelper.js" type="text/javascript"></script>    
+    <style type="text/css" id="themecss"></style>
+    <script src="script/Header.js" type="text/javascript"></script>
+    <title>View Order</title>
+</head>
+<body id="ctl00_pagebody" class="myaccountorderdetailspage">
+    <!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx"><img src="http://www.ie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="" /></a></div> <![endif]-->
+    <form method="post" action="MyAccountDetails.html" id="aspnetForm">
+    <div id="site-wrapper">       
+        <div id="dynamicheader"></div>        
+        <div id="main-content">
+            
+    <div id="navcolumn">
+    
+<div class="sidemenu">
+    <ul>
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkOrder" href="MyAccount.html">Orders</a></li>
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkAddressBook" href="MyAccountAddressBook.html">Address Book</a></li>
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkChangePassword" href="#">Change Password</a></li>
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkChangeEmail" href="#">Change Email</a></li>        
+        <li><a id="ctl00_MainContent_MyAccountMenu1_lnkSignOut" href="Home.html">Sign Out</a></li>
+    </ul>
+</div>
+&nbsp;<br>
+    
+</div>
+<div id="maincolumn">
+    
+    
+    
+
+<table cellspacing="0" cellpadding="3" width="100%">
+    <tbody><tr>
+        <td width="67%" colspan="2">
+            <h1 id="ctl00_MainContent_ViewOrder1_OrderNumberHeader">Order
+                <span id="ctl00_MainContent_ViewOrder1_OrderNumberField">1</span></h1>
+            <span id="ctl00_MainContent_ViewOrder1_PONumberLabel"></span>
+        </td>
+        <td width="33%" valign="top" align="right">
+            
+<div id="printthispage">
+    <a onclick="JavaScript:if (window.print) {window.print();} else { alert(&#39;Please choose the print button from your browser.  Usually in the menu dropdowns at File: Print&#39;); } " href="https://themes.bvcommerce.com/account/vieworder/8de8440b-ad95-4e31-91ae-d139c485a501#">
+        <img id="ctl00_MainContent_ViewOrder1_PrintThisPage1_imgPrint" src="buttons/printthispage.png" alt="Print this page." style="cursor: hand">
+    </a>
+</div>
+<br>            
+            <span id="ctl00_MainContent_ViewOrder1_StatusField">Received / Unpaid / Unshipped</span>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top">
+            <span class="lightlabel">Bill To:</span><br>
+            <span id="ctl00_MainContent_ViewOrder1_BillingAddressField">Marcus McConnell<br>BV Software<br>9702 Gayton Rd<br>Richmond, VA 23233<br>United States<br>804-282-4455<br></span>
+        </td>
+        <td valign="top">
+            <div id="ctl00_MainContent_ViewOrder1_pnlShipTo">
+	
+                <span class="lightlabel">Ship To:</span><br>
+                <span id="ctl00_MainContent_ViewOrder1_ShippingAddressField">Marcus McConnell<br>BV Software<br>9702 Gayton Rd<br>Richmond, VA 23233<br>United States<br>804-282-4455<br></span>
+</div>
+            &nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="3"><div>
+	<table cellspacing="0" id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView" style="width:100%;border-collapse:collapse;margin: 20px 0px 20px 0px; border-bottom: solid 1px #666;">
+		<tbody><tr class="rowheader">
+			<th scope="col">Item</th><th scope="col">Shipping</th><th align="right" scope="col">Price</th><th align="right" scope="col">Qty</th><th align="right" scope="col">Line Total</th>
+		</tr><tr>
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl02_SKUField">SAMPLE002</span>
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl02_DescriptionField">Cup Cake Sample</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl02_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl02_AdjustedPriceField">$1.99</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl02_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $1.99                            
+                        </td>
+		</tr><tr class="alternaterow">
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl03_SKUField">SAMPLE001</span>
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl03_DescriptionField">Blue Bracelet</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl03_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl03_AdjustedPriceField">$42.95</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl03_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $42.95                            
+                        </td>
+		</tr><tr>
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl04_SKUField">SAMPLE006</span>
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl04_DescriptionField">Butterfly Earrings</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl04_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl04_AdjustedPriceField">$0.00</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl04_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $0.00                            
+                        </td>
+		</tr><tr class="alternaterow">
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl05_SKUField">SAMPLE004</span>
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl05_DescriptionField">Brown Fedora</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl05_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl05_AdjustedPriceField">$59.87</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl05_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $59.87                            
+                        </td>
+		</tr><tr>
+			<td valign="top">                            
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl06_SKUField">SAMPLE003</span>
+                                <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl06_DescriptionField">Purple Top</span>                                
+                                &nbsp;
+                        </td><td valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl06_ShippingStatusField">Unshipped</span>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl06_AdjustedPriceField">$29.95</span><br>
+                        </td><td align="right" valign="top">
+                            <span id="ctl00_MainContent_ViewOrder1_ViewOrderItems1_ItemsGridView_ctl06_QuantityField">1</span><br>
+                        </td><td align="right" valign="top">
+                            $29.95                            
+                        </td>
+		</tr>
+	</tbody></table>
+</div>
+            </td>
+    </tr>
+    <tr>
+        <td valign="top">
+            <div id="ctl00_MainContent_ViewOrder1_pnlInstructions">
+	
+                <em>Customer's Instructions:</em><br>
+                <span id="ctl00_MainContent_ViewOrder1_InstructionsField">These Are my Instructions</span>
+            
+</div> 
+            <em>Codes Used:</em><br>
+            <span id="ctl00_MainContent_ViewOrder1_CouponField" class="BVSmallText"></span>           
+        </td>
+        <td valign="top" colspan="2" align="right">
+            <table cellspacing="0" cellpadding="2" class="totaltable" border="0"><tbody><tr><td class="totallabel">Sub Total:</td><td class="totalsub">$134.76</td></tr><tr><td class="totallabel">Shipping:<br><span class="tiny">To Be Determined. Contact Store for Details</span></td><td class="totalshipping">$0.00</td></tr><tr><td class="totallabel">Tax:</td><td class="totaltax">$0.00</td></tr><tr><td class="totallabel">&nbsp;</td><td class="totalgrand" style="border-top: solid 1px #666;"><strong>$134.76</strong></td></tr></tbody></table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <div style="height: 20px;">
+            </div>
+        </td>
+    </tr>
+    <tr id="ctl00_MainContent_ViewOrder1_trNotes">
+	<td valign="top" class="controlarea2">
+            
+            <br>
+            <em>Public Notes:</em>
+            <div>
+
+	</div>
+        </td>
+	<td valign="top" class="controlarea2">
+            &nbsp;
+        </td>
+	<td class="controlarea2" align="left" valign="top">
+            <em>Payment Information:</em>
+            <table class="controlarea1" style="margin-top: 8px; color: #666; font-size: 11px;" border="0" cellspacing="0" cellpadding="3" width="100%">
+                <tbody><tr>
+                    <td colspan="2" class="formfield" style="border-bottom: solid 1px #999;">
+                        <span id="ctl00_MainContent_ViewOrder1_lblPaymentSummary">$134.76 | Credit Card 1111</span></td>
+                </tr>                
+                <tr>
+                    <td class="formfield">
+                        Payment Received:</td>
+                    <td class="formlabel">
+                        <span id="ctl00_MainContent_ViewOrder1_PaymentChargedField">$0.00</span></td>
+                </tr>
+                <tr>
+                    <td class="formfield">
+                        Gift Card Total:</td>
+                    <td class="formlabel">
+                        <span id="ctl00_MainContent_ViewOrder1_GiftCardAmountLabel">$0.00</span></td>
+                </tr>
+                <tr>
+                    <td class="formfield">
+                        Total:</td>
+                    <td class="formlabel">
+                        <span id="ctl00_MainContent_ViewOrder1_PaymentTotalField">$0.00</span></td>
+                </tr>
+                <tr>
+                    <td class="formfield" style="border-bottom: solid 1px #999; padding-bottom: 3px;">
+                        Refunded:</td>
+                    <td class="formlabel" style="border-bottom: solid 1px #999; padding-bottom: 3px;">
+                        <span id="ctl00_MainContent_ViewOrder1_PaymentRefundedField">$0.00</span></td>
+                </tr>
+                <tr>
+                    <td class="formfield">
+                        Amount Due:</td>
+                    <td class="formlabel" style="color: #333;">
+                        <strong>
+                            <span id="ctl00_MainContent_ViewOrder1_PaymentDueField">$134.76</span></strong></td>
+                </tr>
+            </tbody></table>
+            &nbsp;<br>
+            
+        </td>
+</tr>
+
+</tbody></table>
+
+    
+    <a id="ctl00_MainContent_lnkBack" href="https://themes.bvcommerce.com/account">« Return to Order History</a>
+</div>
+<div class="clear"></div>
+
+
+        </div>
+        <div id="footer">
+            <div class="bottomfooter">
+  <span class="copyright">Copyright ©2011</span>
+</div>
+
+<span class="bvtag"><a href="http://www.bvcommerce.com/" title="Hosted Shopping Cart Software" target="_blank">Shopping Cart Software by BV Commerce</a></span>
+        </div>        
+    </div>    
+    
+
+    </form>    
+
+
+
+</body></html>
