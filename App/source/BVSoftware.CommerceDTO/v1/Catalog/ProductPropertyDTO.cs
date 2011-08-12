@@ -12,6 +12,8 @@ namespace BVSoftware.CommerceDTO.v1.Catalog
         [DataMember]
         public long Id {get;set;}
         [DataMember]
+        public long StoreId { get; set; }
+        [DataMember]
         public string PropertyName {get;set;}
         [DataMember]
         public string DisplayName {get;set;}
@@ -28,11 +30,12 @@ namespace BVSoftware.CommerceDTO.v1.Catalog
         [DataMember]
         public List<ProductPropertyChoiceDTO> Choices { get; set; }
         [DataMember]
-        public int SortOrder {get;set;}
+        public DateTime LastUpdatedUtc { get; set; }
 
         public ProductPropertyDTO()
         {
             Id = 0;
+            this.StoreId = 0;
             PropertyName = string.Empty;
             DisplayName = string.Empty;
             DisplayOnSite = true;
@@ -41,7 +44,8 @@ namespace BVSoftware.CommerceDTO.v1.Catalog
             DefaultValue = string.Empty;
             CultureCode = "en-US";
             Choices = new List<ProductPropertyChoiceDTO>();
-            SortOrder = 0;
+            //SortOrder = 0;
+            this.LastUpdatedUtc = DateTime.UtcNow;
 
         }
     }

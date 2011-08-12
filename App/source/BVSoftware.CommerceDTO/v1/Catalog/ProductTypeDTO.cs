@@ -12,6 +12,8 @@ namespace BVSoftware.CommerceDTO.v1.Catalog
         [DataMember]
         public string Bvin { get; set; }
         [DataMember]
+        public long StoreId { get; set; }
+        [DataMember]
         public DateTime LastUpdated { get; set; }
         [DataMember]
         public bool IsPermanent { get; set; }
@@ -21,6 +23,7 @@ namespace BVSoftware.CommerceDTO.v1.Catalog
         public ProductTypeDTO()
         {
             Bvin = string.Empty;
+            this.StoreId = 0;
             LastUpdated = DateTime.UtcNow;
             IsPermanent = false;
             ProductTypeName = string.Empty;

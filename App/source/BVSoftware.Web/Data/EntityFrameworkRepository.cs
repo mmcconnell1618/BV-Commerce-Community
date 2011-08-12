@@ -50,8 +50,7 @@ namespace BVSoftware.Web.Data
             _objectContext = context;            
 
             // Call this to force init on _objectset
-            IObjectSet<T> obj = objectSet;
-            
+            IObjectSet<T> obj = objectSet;            
         }
         
         public bool SubmitChanges()

@@ -1,0 +1,79 @@
+BV Commerce 6 Migration Tools Instructions
+===============================================
+
+Requirements
+------------
+ - .NET Framework Version 4.0 or later
+ - BV Commerce 6.0.24 or later
+ - Older BV Commerce Store to Import From
+
+
+Introduction
+------------
+The new BV6 migration tool comes in two flavors, Command Line and Windows. The command line version includes a SampleBatchCommand.cmd file that can make it easier to pass in parameters instead of typing them out each time. The windows version has a graphical interface and will remember your last selections.
+
+The migration tool is designed to allow you to run it multiple times if needed without destroying data. There is an option to clear out products and categories first if you wish but you shouldn't need to in most cases. One warning is that if you don't provide source images for products you will need to clear them out before importing them a second time with images otherwise the images will not get automatically populated and resized.
+
+The tool will also send file downloads to the BV6 store over the API so be aware that if you have very large downloads that can add to migration time. You can always copy the file downloads later after import so take that option if possible with lots of large file downloads.
+
+Preparation
+-------------
+1) As always, make a backup of both your old and new databases and stores before running any batch migration tools. This is a great safety step and something you should do.
+
+2) Make sure your BV Commerce 6 store is running version 6.0.24 or later. If not, download the service pack update from older releases to at least 6.0.24. The migration tool will not run without this.
+
+3) If you're importing from BV5, make sure your store is running at least version 5.3.x. The migration tool may work on earlier releases but it's not guaranteed. Any version 5.3.x or later should work correctly.
+
+4) Make sure you have a working SQL username and password to your old BV database. The migration tool does NOT pull from BV web services. It directly pulls from the old BV database and will need a working connection string.
+
+5) Make sure you have a copy of any images folder from your BV5 store on a local drive accessible to the migration tool. While this is not an absolute requirement it will save you tons of time importing product and category images by hand.
+
+6) Log into your BV6 store's admin panel and go to Options->API. If you don't have one, generate an api access key. This is the unique "password" that the migration tool will need to communicate with the BV6 store.
+
+7) If you would like to clear out any existing categories and products in your BV6 store make sure to click the "Allow Clear for the next..." button. This will tell the store to accept "Clear Products" and "Clear Category" api commands for the next hour. As a safety measure the clear functions will not work unless this button is pressed. No one likes to accidentally erase their entire store!
+
+Migration Process
+------------------
+1) Make sure your BV6 store is running and you've completed all the prepartion steps above
+
+2) Launch the Windows version of the migration tool and click "Start Migration"
+
+3) Enter the URL of your BV6 store into the first box. http://localhost/mystore
+
+4) Copy and paste the API you created in Prep Step #6 into the second box
+
+5) Enter or browse for the full path to the folder that contains the root of your BV5 web site files. For example, if I copied the images folder from BV5 to c:\working\images then I would enter c:\working into the third text field. DO NOT include the "\images" folder or any other sub folder names. The migration tool starts at the folder to specify as the relative root and then matches the \images or other sub folder names from the product and category records in the database.
+
+6) The migration tool only supports BV 5 today. It will soon support BV6 to BV6 and BVC2004 to BV5. For now, the radio button for BV5 is the only selection available.
+
+7) Enter your SQL connection string information to your BV5 database.
+
+8) Select which items you'd like to migrate. If you're moving a whole store BV recommends you do everything at once. One exception would be to NOT import orders or save order imports for a second run.
+
+9) Optionally select the "Delete Categories" and/or "Delete Products" checkboxes to clear these items from your BV6 store before migrating data.
+
+10) Click "Start Migration" and get a cup of coffee
+
+Migration Time
+-------------------
+How long will this take? It depends on how many items, how complex they are, the speed of your computer, the speed of your network connection, etc. In our lab tests we migrated real-world databases from clients in as little at 10 minutes and as long as several hours.
+
+The Product and Order processes support parrallel processing so if you have a multi-core machine available to run the migration, use it. You'll save a lot of time.
+
+What if something goes wrong?
+------------------------------
+This is why we make backups first! One option is to restore a backup. However, if the migration is "almost" right except for a few items you've got some choices:
+
+a) Look for the "Log.txt" file in the folder where the migration tool lives and email it to BV. We'll take a look and if the tool has a bug we'll get it updated.
+
+b) If the data is 99% perfect sometimes it's just easier to tweak the last 1% by hand then try to automate another migration.
+
+c) The source code for the migration tools is available for free as an open source project on GitHub at https://github.com/mmcconnell1618/BV-Commerce-Community and you are free to customize it as needed for your own custom data.
+
+Finally
+--------
+Share your migration process results with BV and other merchants at http://forums.bvcommerce.com I would really like to know how the process went for you and what we could do to improve things for migration tools in the future.
+
+Thanks,
+Marcus
+

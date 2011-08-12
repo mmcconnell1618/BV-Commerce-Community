@@ -84,5 +84,14 @@ namespace BVSoftware.Web.Test
             actual = Text.RemoveHtmlTags(input,"*");
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod()]
+        public void CanSlugifyCorrectlyWithSlashes()
+        {
+            string input =    @"shoes/nikes/awesome stuff/Shared Options.Tester_1";
+            string expected = @"shoes/nikes/awesome-stuff/Shared-Options.Tester_1";
+            string actual = Text.Slugify(input, true, true);
+            Assert.AreEqual(actual, expected);
+        }
     }
 }

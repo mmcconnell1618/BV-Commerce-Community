@@ -4,11 +4,35 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace BVSoftware.Web
 {
     public static class Xml
     {
+        public static T ObjectFromXml<T>(string xml)
+        {
+            T result;
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+            StringReader sr = new StringReader(xml);
+            result = (T)xmlSerializer.Deserialize(sr);
+            return result;
+        }
+        public static T ObjectFromXml<T>(Stream stream)
+        {
+            StreamReader rdr = new StreamReader(stream);
+            return ObjectFromXml<T>(rdr.ReadToEnd());
+        }
+        public static string ObjectToXml(object toSerialize)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(toSerialize.GetType());
+            StringWriter textWriter = new StringWriter();
+            xmlSerializer.Serialize(textWriter, toSerialize);
+            return textWriter.ToString();
+        }
+
+
         public static string Parse(XElement x, string elementName)
         {
             return ParseInnerText(x, elementName);

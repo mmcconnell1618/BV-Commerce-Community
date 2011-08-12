@@ -376,6 +376,8 @@ namespace BVSoftware.Web.Geography
             result.Add(new Country("d6ae4091-0de6-4fb6-b6f9-99e4f7d3a96a", "nl-NL", "Netherlands", "NL", "NLD", "528", "", "Netherlands"));
             result.Add(new Country("2ebf498d-e6d6-4814-b5f9-f152afcac264", "en-NZ", "New Zealand", "NZ", "NZL", "554", "", "New Zealand"));
             result.Add(new Country("6c866a94-5c9f-414b-b10d-64e8dd330761", "es-NI", "Nicaragua", "NI", "NIC", "558", "", "Nicaragua"));
+            result.Add(new Country("42F04944-57C4-4492-9DA0-6ECC375E0A72", "en-US", "Niger", "NE", "NER", "562", "", "Niger"));
+            result.Add(new Country("56191D33-23F0-43E2-8DAB-EB07BFB7215C", "ha-NG", "Nigeria", "NG", "NGA", "566", "", "Nigeria"));
             result.Add(new Country("57E083A5-43B6-47f5-90AF-E7153794F0C9", "ko-KR", "North Korea", "KR", "KOR", "410", "", "North Korea (Korea, Democratic People’s Republic of)"));
             result.Add(new Country("39c7e72b-1721-451c-a2f7-476fcc20aa72", "nb-NO", "Norway", "NO", "NOR", "578", "", "Norway"));
             result.Add(new Country("aafcbe32-4e5a-4a8c-b101-699274072571", "ar-OM", "Oman", "OM", "OMN", "512", "", "Oman"));
@@ -1253,7 +1255,7 @@ namespace BVSoftware.Web.Geography
                     _Regions.Add(new Region("Pernambuco", "PE"));
                     break;
                 default:
-                    _Regions.Add(new Region("- Not Required -", ""));
+                    _Regions.Add(new Region("- Not Required -", "_"));
                     break;
             }
         }

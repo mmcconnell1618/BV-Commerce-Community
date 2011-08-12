@@ -12,6 +12,8 @@ namespace BVSoftware.CommerceDTO.v1.Catalog
         [DataMember]
         public long Id { get; set; }
         [DataMember]
+        public long StoreId { get; set; }
+        [DataMember]
         public long PropertyId {get;set;}
         [DataMember]
         public string ChoiceName {get;set;}
@@ -23,6 +25,7 @@ namespace BVSoftware.CommerceDTO.v1.Catalog
         public ProductPropertyChoiceDTO()
         {
             Id = 0;
+            StoreId = 0;
             PropertyId = 0;
             ChoiceName = string.Empty;
             SortOrder = 0;

@@ -42,10 +42,22 @@ namespace BVSoftware.CommerceDTO.v1.Client
             result = RestHelper.GetRequest<ApiResponse<List<Catalog.CategorySnapshotDTO>>>(this.fullApiUri + "categories/?key=" + Enc(key));
             return result;
         }
+        public ApiResponse<List<Catalog.CategorySnapshotDTO>> CategoriesFindForProduct(string productBvin)
+        {
+            ApiResponse<List<Catalog.CategorySnapshotDTO>> result = new ApiResponse<List<Catalog.CategorySnapshotDTO>>();
+            result = RestHelper.GetRequest<ApiResponse<List<Catalog.CategorySnapshotDTO>>>(this.fullApiUri + "categories/?key=" + Enc(key) + "&byproduct=" + Enc(productBvin));
+            return result;
+        }
         public ApiResponse<Catalog.CategoryDTO> CategoriesFind(string bvin)
         {
             ApiResponse<Catalog.CategoryDTO> result = new ApiResponse<Catalog.CategoryDTO>();
             result = RestHelper.GetRequest<ApiResponse<Catalog.CategoryDTO>>(this.fullApiUri + "categories/" + Enc(bvin) + "?key=" + Enc(key));
+            return result;
+        }
+        public ApiResponse<Catalog.CategoryDTO> CategoriesFindBySlug(string slug)
+        {
+            ApiResponse<Catalog.CategoryDTO> result = new ApiResponse<Catalog.CategoryDTO>();
+            result = RestHelper.GetRequest<ApiResponse<Catalog.CategoryDTO>>(this.fullApiUri + "categories/ANY" + "?key=" + Enc(key) + "&byslug=" + Enc(slug));
             return result;
         }
         public ApiResponse<Catalog.CategoryDTO> CategoriesCreate(Catalog.CategoryDTO item)
@@ -485,10 +497,28 @@ namespace BVSoftware.CommerceDTO.v1.Client
             result = RestHelper.GetRequest<ApiResponse<List<ProductDTO>>>(this.fullApiUri + "products/?key=" + Enc(key));
             return result;
         }
+        public ApiResponse<PageOfProducts> ProductsFindForCategory(string categoryBvin, int pageNumber, int pageSize)
+        {
+            ApiResponse<PageOfProducts> result = new ApiResponse<PageOfProducts>();
+            result = RestHelper.GetRequest<ApiResponse<PageOfProducts>>(this.fullApiUri + "products/?key=" + Enc(key) + "&bycategory=" + Enc(categoryBvin) + "&page=" + pageNumber + "&pagesize=" + pageSize);
+            return result;
+        }
         public ApiResponse<ProductDTO> ProductsFind(string bvin)
         {
             ApiResponse<ProductDTO> result = new ApiResponse<ProductDTO>();
             result = RestHelper.GetRequest<ApiResponse<ProductDTO>>(this.fullApiUri + "products/" + Enc(bvin) + "?key=" + Enc(key));
+            return result;
+        }
+        public ApiResponse<ProductDTO> ProductsFindBySku(string sku)
+        {
+            ApiResponse<ProductDTO> result = new ApiResponse<ProductDTO>();
+            result = RestHelper.GetRequest<ApiResponse<ProductDTO>>(this.fullApiUri + "products/ANY?key=" + Enc(key) + "&bysku=" + Enc(sku));
+            return result;
+        }
+        public ApiResponse<ProductDTO> ProductsBySlug(string slug)
+        {
+            ApiResponse<ProductDTO> result = new ApiResponse<ProductDTO>();
+            result = RestHelper.GetRequest<ApiResponse<ProductDTO>>(this.fullApiUri + "products/ANY?key=" + Enc(key) + "&byslug=" + Enc(slug));
             return result;
         }
         public ApiResponse<ProductDTO> ProductsCreate(ProductDTO item, byte[] imageData)
@@ -894,6 +924,14 @@ namespace BVSoftware.CommerceDTO.v1.Client
         {
             ApiResponse<bool> result = new ApiResponse<bool>();
             result = RestHelper.DeleteRequest<ApiResponse<bool>>(this.fullApiUri + "ordertransactions/" + Enc(id.ToString()) + "?key=" + Enc(key), string.Empty);
+            return result;
+        }
+
+        //Utilities
+        public ApiResponse<string> UtilitiesSlugify(string input)
+        {
+            ApiResponse<string> result = new ApiResponse<string>();
+            result = RestHelper.PostRequest<ApiResponse<string>>(this.fullApiUri + "utilities/slugify?key=" + Enc(key), input);
             return result;
         }
        

@@ -211,6 +211,7 @@
     <Compile Include="PasswordGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomNumbers.cs" />
+    <Compile Include="RemoteIntegrationException.cs" />
     <Compile Include="SiteMapChangeFrequency.cs" />
     <Compile Include="SiteMapNode.cs" />
     <Compile Include="SiteMapPriority.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Urls\Providers\MemoryProvider.cs" />
     <Compile Include="Urls\RedirectService.cs" />
     <Compile Include="Urls\RedirectUrl.cs" />
+    <Compile Include="Validation\EmailValidation.cs" />
     <Compile Include="Validation\IValidatable.cs" />
     <Compile Include="Validation\RuleViolation.cs" />
     <Compile Include="Validation\ValidationHelper.cs" />

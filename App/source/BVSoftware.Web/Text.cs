@@ -143,7 +143,7 @@ namespace BVSoftware.Web
         {
             return Slugify(input, urlEncode, false);
         }
-        public static string Slugify(string input, bool urlEncode, bool allowBackSlashesAndPeriods)
+        public static string Slugify(string input, bool urlEncode, bool allowSlashesAndPeriods)
         {
             string result = input.Replace(' ', '-');
 
@@ -152,7 +152,7 @@ namespace BVSoftware.Web
             result = result.Replace("&", "and");
             result = result.Replace("?", "");
             result = result.Replace("=", "");
-            if (!allowBackSlashesAndPeriods)
+            if (!allowSlashesAndPeriods)
             {
                 result = result.Replace("/", "");
                 result = result.Replace(".", "");
@@ -186,6 +186,13 @@ namespace BVSoftware.Web
             if (urlEncode)
             {
                 result = System.Web.HttpUtility.UrlEncode(result);
+            }
+
+            if (allowSlashesAndPeriods)
+            {
+                result = result.Replace("%2f", "/");
+                result = result.Replace("%252f", "/");
+                //result = result.Replace(".", "");
             }
 
             return result;

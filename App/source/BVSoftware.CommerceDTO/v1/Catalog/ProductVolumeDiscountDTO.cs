@@ -12,6 +12,8 @@ namespace BVSoftware.CommerceDTO.v1.Catalog
         [DataMember]
         public string Bvin { get; set; }
         [DataMember]
+        public long StoreId { get; set; }
+        [DataMember]
         public DateTime LastUpdated { get; set; }
         [DataMember]
         public string ProductId { get; set; }
@@ -25,6 +27,7 @@ namespace BVSoftware.CommerceDTO.v1.Catalog
         public ProductVolumeDiscountDTO()
         {
             Bvin = string.Empty;
+            StoreId = 0;
             LastUpdated = DateTime.UtcNow;
             ProductId = string.Empty;
             Qty = 0;

@@ -61,6 +61,7 @@
     <Compile Include="v1\Catalog\OptionSelectionDTO.cs" />
     <Compile Include="v1\Catalog\OptionSettingDTO.cs" />
     <Compile Include="v1\Catalog\OptionTypesDTO.cs" />
+    <Compile Include="v1\Catalog\PageOfProducts.cs" />
     <Compile Include="v1\Catalog\ProductDescriptionTabDTO.cs" />
     <Compile Include="v1\Catalog\ProductDTO.cs" />
     <Compile Include="v1\Catalog\ProductFileDTO.cs" />
