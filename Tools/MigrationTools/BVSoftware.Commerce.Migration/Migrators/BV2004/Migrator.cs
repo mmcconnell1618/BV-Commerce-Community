@@ -1888,7 +1888,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
             data.bvc2004Entities oldDatabase = GetOldDatabase();
             foreach (data.bvc_Tax old in oldDatabase.bvc_Tax)
             {
-                BVSoftware.Web.Geography.Country newCountry = GeographyHelper.TranslateCountry(EFConnString(settings.SourceConnectionString()), old.CountryCode);
+                MerchantTribe.Web.Geography.Country newCountry = GeographyHelper.TranslateCountry(EFConnString(settings.SourceConnectionString()), old.CountryCode);
                 string RegionAbbreviation = GeographyHelper.TranslateRegionBvinToAbbreviation(EFConnString(settings.SourceConnectionString()), old.RegionCode.ToString());
 
                 wl("Tax: " + newCountry.DisplayName + ", " + RegionAbbreviation + " " + old.PostalCode);

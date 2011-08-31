@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EcmaScript.NET.modified, Version=0.1.1.0, Culture=neutral, PublicKeyToken=7d53ba4f537753a5, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tools\MigrationTools\packages\MerchantTribe.Web.1.0.0.0\lib\EcmaScript.NET.modified.dll</HintPath>
+    </Reference>
+    <Reference Include="MerchantTribe.Web">
+      <HintPath>..\..\..\Tools\MigrationTools\packages\MerchantTribe.Web.1.0.0.0\lib\MerchantTribe.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -41,6 +47,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Yahoo.Yui.Compressor, Version=1.2.2.0, Culture=neutral, PublicKeyToken=a8d7c6e9882175a2, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tools\MigrationTools\packages\MerchantTribe.Web.1.0.0.0\lib\Yahoo.Yui.Compressor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,12 +129,8 @@
     <Compile Include="v1\Taxes\TaxScheduleDTO.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BVSoftware.Web\BVSoftware.Web.csproj">
-      <Project>{7FFBB145-6487-4FFC-93D4-77EC3CD27C98}</Project>
-      <Name>BVSoftware.Web</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

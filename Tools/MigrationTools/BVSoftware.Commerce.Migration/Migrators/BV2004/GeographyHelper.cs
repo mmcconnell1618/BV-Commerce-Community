@@ -7,13 +7,13 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
 {
     public class GeographyHelper
     {
-        public static BVSoftware.Web.Geography.Country TranslateCountry(string connectionString, string countryCode)
+        public static MerchantTribe.Web.Geography.Country TranslateCountry(string connectionString, string countryCode)
         {
-            BVSoftware.Web.Geography.Country result = new Web.Geography.Country();
+            MerchantTribe.Web.Geography.Country result = new MerchantTribe.Web.Geography.Country();
             data.bvc2004Entities db = new data.bvc2004Entities(connectionString);
             var old = db.bvc_Country.Where(y => y.Code == countryCode).FirstOrDefault();
-            if (old == null) return BVSoftware.Web.Geography.Country.FindByISOCode("US");
-            result = BVSoftware.Web.Geography.Country.FindByISOCode(old.UPSCode);
+            if (old == null) return MerchantTribe.Web.Geography.Country.FindByISOCode("US");
+            result = MerchantTribe.Web.Geography.Country.FindByISOCode(old.UPSCode);
             return result;
         }
 

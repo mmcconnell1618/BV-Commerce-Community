@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EcmaScript.NET.modified">
+      <HintPath>..\packages\MerchantTribe.Web.1.0.0.0\lib\EcmaScript.NET.modified.dll</HintPath>
+    </Reference>
+    <Reference Include="MerchantTribe.Web">
+      <HintPath>..\packages\MerchantTribe.Web.1.0.0.0\lib\MerchantTribe.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
@@ -42,6 +48,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Yahoo.Yui.Compressor">
+      <HintPath>..\packages\MerchantTribe.Web.1.0.0.0\lib\Yahoo.Yui.Compressor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMigrator.cs" />
@@ -88,15 +97,12 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OldDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\App\source\BVSoftware.CommerceDTO\BVSoftware.CommerceDTO.csproj">
       <Project>{C47A3A58-D11F-4D67-92FC-3E95B5DD6221}</Project>
       <Name>BVSoftware.CommerceDTO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\App\source\BVSoftware.Web\BVSoftware.Web.csproj">
-      <Project>{7FFBB145-6487-4FFC-93D4-77EC3CD27C98}</Project>
-      <Name>BVSoftware.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

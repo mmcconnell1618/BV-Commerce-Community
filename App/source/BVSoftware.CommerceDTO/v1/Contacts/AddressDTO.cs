@@ -78,7 +78,7 @@ namespace BVSoftware.CommerceDTO.v1.Contacts
             this.RegionBvin = string.Empty;
             this.PostalCode = string.Empty;
             this.CountryName = "US";
-            this.CountryBvin = BVSoftware.Web.Geography.Country.FindByISOCode("US").Bvin;
+            this.CountryBvin = MerchantTribe.Web.Geography.Country.FindByISOCode("US").Bvin;
             this.CountyBvin = string.Empty;
             this.CountyName = string.Empty;
             this.Phone = string.Empty;

@@ -42,7 +42,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
             try
             {
                 string response = SendRequest(uri, "GET", null);
-                T result = BVSoftware.Web.Json.ObjectFromJson<T>(response);
+                T result = MerchantTribe.Web.Json.ObjectFromJson<T>(response);
                 return result;
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
             try
             {
                 string response = SendRequest(uri, method, data);
-                T result = BVSoftware.Web.Json.ObjectFromJson<T>(response);
+                T result = MerchantTribe.Web.Json.ObjectFromJson<T>(response);
                 return result;
             }
             catch (Exception ex)

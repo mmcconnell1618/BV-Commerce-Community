@@ -63,13 +63,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<Catalog.CategoryDTO> CategoriesCreate(Catalog.CategoryDTO item)
         {
             ApiResponse<Catalog.CategoryDTO> result = new ApiResponse<Catalog.CategoryDTO>();
-            result = RestHelper.PostRequest<ApiResponse<Catalog.CategoryDTO>>(this.fullApiUri + "categories/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<Catalog.CategoryDTO>>(this.fullApiUri + "categories/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<Catalog.CategoryDTO> CategoriesUpdate(Catalog.CategoryDTO item)
         {
             ApiResponse<Catalog.CategoryDTO> result = new ApiResponse<Catalog.CategoryDTO>();
-            result = RestHelper.PostRequest<ApiResponse<Catalog.CategoryDTO>>( this.fullApiUri + "categories/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<Catalog.CategoryDTO>>( this.fullApiUri + "categories/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> CategoriesDelete(string bvin)
@@ -101,13 +101,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<PriceGroupDTO> PriceGroupsCreate(PriceGroupDTO item)
         {
             ApiResponse<PriceGroupDTO> result = new ApiResponse<PriceGroupDTO>();
-            result = RestHelper.PostRequest<ApiResponse<PriceGroupDTO>>(this.fullApiUri + "pricegroups/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<PriceGroupDTO>>(this.fullApiUri + "pricegroups/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }        
         public ApiResponse<PriceGroupDTO> PriceGroupsUpdate(PriceGroupDTO item)
         {
             ApiResponse<PriceGroupDTO> result = new ApiResponse<PriceGroupDTO>();
-            result = RestHelper.PostRequest<ApiResponse<PriceGroupDTO>>(this.fullApiUri + "pricegroups/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<PriceGroupDTO>>(this.fullApiUri + "pricegroups/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> PriceGroupsDelete(string bvin)
@@ -151,19 +151,19 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<CustomerAccountDTO> CustomerAccountsCreate(CustomerAccountDTO item)
         {
             ApiResponse<CustomerAccountDTO> result = new ApiResponse<CustomerAccountDTO>();
-            result = RestHelper.PostRequest<ApiResponse<CustomerAccountDTO>>(this.fullApiUri + "customeraccounts/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<CustomerAccountDTO>>(this.fullApiUri + "customeraccounts/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<CustomerAccountDTO> CustomerAccountsUpdate(CustomerAccountDTO item)
         {
             ApiResponse<CustomerAccountDTO> result = new ApiResponse<CustomerAccountDTO>();
-            result = RestHelper.PostRequest<ApiResponse<CustomerAccountDTO>>(this.fullApiUri + "customeraccounts/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<CustomerAccountDTO>>(this.fullApiUri + "customeraccounts/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<CustomerAccountDTO> CustomerAccountsCreateWithPassword(CustomerAccountDTO item, string clearpassword)
         {
             ApiResponse<CustomerAccountDTO> result = new ApiResponse<CustomerAccountDTO>();
-            result = RestHelper.PostRequest<ApiResponse<CustomerAccountDTO>>(this.fullApiUri + "customeraccounts/?key=" + Enc(key) + "&pwd=" + Enc(clearpassword), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<CustomerAccountDTO>>(this.fullApiUri + "customeraccounts/?key=" + Enc(key) + "&pwd=" + Enc(clearpassword), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> CustomerAccountsDelete(string bvin)
@@ -195,13 +195,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<AffiliateDTO> AffiliatesCreate(AffiliateDTO item)
         {
             ApiResponse<AffiliateDTO> result = new ApiResponse<AffiliateDTO>();
-            result = RestHelper.PostRequest<ApiResponse<AffiliateDTO>>(this.fullApiUri + "affiliates/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<AffiliateDTO>>(this.fullApiUri + "affiliates/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<AffiliateDTO> AffiliatesUpdate(AffiliateDTO item)
         {
             ApiResponse<AffiliateDTO> result = new ApiResponse<AffiliateDTO>();
-            result = RestHelper.PostRequest<ApiResponse<AffiliateDTO>>(this.fullApiUri + "affiliates/" + item.Id + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<AffiliateDTO>>(this.fullApiUri + "affiliates/" + item.Id + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> AffiliatesDelete(long id)
@@ -221,7 +221,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<AffiliateReferralDTO> AffiliateReferralsCreate(AffiliateReferralDTO item)
         {
             ApiResponse<AffiliateReferralDTO> result = new ApiResponse<AffiliateReferralDTO>();
-            result = RestHelper.PostRequest<ApiResponse<AffiliateReferralDTO>>(this.fullApiUri + "affiliates/" + item.AffiliateId + "/referrals?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<AffiliateReferralDTO>>(this.fullApiUri + "affiliates/" + item.AffiliateId + "/referrals?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
  
@@ -241,13 +241,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<TaxScheduleDTO> TaxSchedulesCreate(TaxScheduleDTO item)
         {
             ApiResponse<TaxScheduleDTO> result = new ApiResponse<TaxScheduleDTO>();
-            result = RestHelper.PostRequest<ApiResponse<TaxScheduleDTO>>(this.fullApiUri + "taxschedules/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<TaxScheduleDTO>>(this.fullApiUri + "taxschedules/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<TaxScheduleDTO> TaxSchedulesUpdate(TaxScheduleDTO item)
         {
             ApiResponse<TaxScheduleDTO> result = new ApiResponse<TaxScheduleDTO>();
-            result = RestHelper.PostRequest<ApiResponse<TaxScheduleDTO>>(this.fullApiUri + "taxschedules/" + item.Id + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<TaxScheduleDTO>>(this.fullApiUri + "taxschedules/" + item.Id + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> TaxSchedulesDelete(long id)
@@ -273,13 +273,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<TaxDTO> TaxesCreate(TaxDTO item)
         {
             ApiResponse<TaxDTO> result = new ApiResponse<TaxDTO>();
-            result = RestHelper.PostRequest<ApiResponse<TaxDTO>>(this.fullApiUri + "taxes/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<TaxDTO>>(this.fullApiUri + "taxes/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<TaxDTO> TaxesUpdate(TaxDTO item)
         {
             ApiResponse<TaxDTO> result = new ApiResponse<TaxDTO>();
-            result = RestHelper.PostRequest<ApiResponse<TaxDTO>>(this.fullApiUri + "taxes/" + item.Id + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<TaxDTO>>(this.fullApiUri + "taxes/" + item.Id + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> TaxesDelete(long id)
@@ -305,13 +305,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<VendorManufacturerDTO> VendorCreate(VendorManufacturerDTO item)
         {
             ApiResponse<VendorManufacturerDTO> result = new ApiResponse<VendorManufacturerDTO>();
-            result = RestHelper.PostRequest<ApiResponse<VendorManufacturerDTO>>(this.fullApiUri + "vendors/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<VendorManufacturerDTO>>(this.fullApiUri + "vendors/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<VendorManufacturerDTO> VendorUpdate(VendorManufacturerDTO item)
         {
             ApiResponse<VendorManufacturerDTO> result = new ApiResponse<VendorManufacturerDTO>();
-            result = RestHelper.PostRequest<ApiResponse<VendorManufacturerDTO>>(this.fullApiUri + "vendors/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<VendorManufacturerDTO>>(this.fullApiUri + "vendors/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> VendorDelete(string bvin)
@@ -337,13 +337,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<VendorManufacturerDTO> ManufacturerCreate(VendorManufacturerDTO item)
         {
             ApiResponse<VendorManufacturerDTO> result = new ApiResponse<VendorManufacturerDTO>();
-            result = RestHelper.PostRequest<ApiResponse<VendorManufacturerDTO>>(this.fullApiUri + "manufacturers/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<VendorManufacturerDTO>>(this.fullApiUri + "manufacturers/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<VendorManufacturerDTO> ManufacturerUpdate(VendorManufacturerDTO item)
         {
             ApiResponse<VendorManufacturerDTO> result = new ApiResponse<VendorManufacturerDTO>();
-            result = RestHelper.PostRequest<ApiResponse<VendorManufacturerDTO>>(this.fullApiUri + "manufacturers/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<VendorManufacturerDTO>>(this.fullApiUri + "manufacturers/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ManufacturerDelete(string bvin)
@@ -369,13 +369,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductTypeDTO> ProductTypesCreate(ProductTypeDTO item)
         {
             ApiResponse<ProductTypeDTO> result = new ApiResponse<ProductTypeDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductTypeDTO>>(this.fullApiUri + "producttypes/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductTypeDTO>>(this.fullApiUri + "producttypes/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<ProductTypeDTO> ProductTypesUpdate(ProductTypeDTO item)
         {
             ApiResponse<ProductTypeDTO> result = new ApiResponse<ProductTypeDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductTypeDTO>>(this.fullApiUri + "producttypes/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductTypeDTO>>(this.fullApiUri + "producttypes/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductTypesDelete(string bvin)
@@ -413,13 +413,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductPropertyDTO> ProductPropertiesCreate(ProductPropertyDTO item)
         {
             ApiResponse<ProductPropertyDTO> result = new ApiResponse<ProductPropertyDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductPropertyDTO>>(this.fullApiUri + "productproperties/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductPropertyDTO>>(this.fullApiUri + "productproperties/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<ProductPropertyDTO> ProductPropertiesUpdate(ProductPropertyDTO item)
         {
             ApiResponse<ProductPropertyDTO> result = new ApiResponse<ProductPropertyDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductPropertyDTO>>(this.fullApiUri + "productproperties/" + item.Id + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductPropertyDTO>>(this.fullApiUri + "productproperties/" + item.Id + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductPropertiesDelete(long id)
@@ -457,13 +457,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<OptionDTO> ProductOptionsCreate(OptionDTO item)
         {
             ApiResponse<OptionDTO> result = new ApiResponse<OptionDTO>();
-            result = RestHelper.PostRequest<ApiResponse<OptionDTO>>(this.fullApiUri + "productoptions/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<OptionDTO>>(this.fullApiUri + "productoptions/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<OptionDTO> ProductOptionsUpdate(OptionDTO item)
         {
             ApiResponse<OptionDTO> result = new ApiResponse<OptionDTO>();
-            result = RestHelper.PostRequest<ApiResponse<OptionDTO>>(this.fullApiUri + "productoptions/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<OptionDTO>>(this.fullApiUri + "productoptions/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductOptionsDelete(string bvin)
@@ -524,7 +524,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductDTO> ProductsCreate(ProductDTO item, byte[] imageData)
         {
             ApiResponse<ProductDTO> result = new ApiResponse<ProductDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductDTO>>(this.fullApiUri + "products/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductDTO>>(this.fullApiUri + "products/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
 
             if (result.Content != null)
             {
@@ -535,7 +535,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductDTO> ProductsUpdate(ProductDTO item)
         {
             ApiResponse<ProductDTO> result = new ApiResponse<ProductDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductDTO>>(this.fullApiUri + "products/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductDTO>>(this.fullApiUri + "products/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductsDelete(string bvin)
@@ -561,7 +561,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductRelationshipDTO> ProductRelationshipsCreate(ProductRelationshipDTO item)
         {
             ApiResponse<ProductRelationshipDTO> result = new ApiResponse<ProductRelationshipDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductRelationshipDTO>>(this.fullApiUri + "productrelationships/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductRelationshipDTO>>(this.fullApiUri + "productrelationships/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductRelationshipsQuickCreate(string productBvin, string otherProductBvin, bool isSubstitute)
@@ -587,7 +587,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductRelationshipDTO> ProductRelationshipsUpdate(ProductRelationshipDTO item)
         {
             ApiResponse<ProductRelationshipDTO> result = new ApiResponse<ProductRelationshipDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductRelationshipDTO>>(this.fullApiUri + "productrelationships/" + item.Id + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductRelationshipDTO>>(this.fullApiUri + "productrelationships/" + item.Id + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductRelationshipsUnrelate(string productBvin, string otherProductBvin)
@@ -602,21 +602,21 @@ namespace BVSoftware.CommerceDTO.v1.Client
         {
             ApiResponse<bool> response = new ApiResponse<bool>();
             response = RestHelper.PostRequest<ApiResponse<bool>>(this.fullApiUri + "productmainimage/" + Enc(productBvin) + "?key=" + Enc(key) + "&filename=" + Enc(fileName),
-                                                        BVSoftware.Web.Json.ObjectToJson(imageData));
+                                                        MerchantTribe.Web.Json.ObjectToJson(imageData));
             return response;
         }        
         public ApiResponse<bool> CategoriesImagesIconUpload(string categoryBvin, string fileName, byte[] imageData)
         {
             ApiResponse<bool> response = new ApiResponse<bool>();
             response = RestHelper.PostRequest<ApiResponse<bool>>(this.fullApiUri + "categoriesimagesicon/" + Enc(categoryBvin) + "?key=" + Enc(key) + "&filename=" + Enc(fileName),
-                                                        BVSoftware.Web.Json.ObjectToJson(imageData));
+                                                        MerchantTribe.Web.Json.ObjectToJson(imageData));
             return response;
         }
         public ApiResponse<bool> CategoriesImagesBannerUpload(string categoryBvin, string fileName, byte[] imageData)
         {
             ApiResponse<bool> response = new ApiResponse<bool>();
             response = RestHelper.PostRequest<ApiResponse<bool>>(this.fullApiUri + "categoriesimagesbanner/" + Enc(categoryBvin) + "?key=" + Enc(key) + "&filename=" + Enc(fileName),
-                                                        BVSoftware.Web.Json.ObjectToJson(imageData));
+                                                        MerchantTribe.Web.Json.ObjectToJson(imageData));
             return response;
         }
 
@@ -636,13 +636,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductFileDTO> ProductFilesCreate(ProductFileDTO item)
         {
             ApiResponse<ProductFileDTO> result = new ApiResponse<ProductFileDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductFileDTO>>(this.fullApiUri + "productfiles/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductFileDTO>>(this.fullApiUri + "productfiles/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }                
         public ApiResponse<ProductFileDTO> ProductFilesUpdate(ProductFileDTO item)
         {
             ApiResponse<ProductFileDTO> result = new ApiResponse<ProductFileDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductFileDTO>>(this.fullApiUri + "productfiles/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductFileDTO>>(this.fullApiUri + "productfiles/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductFilesDelete(string bvin)
@@ -667,14 +667,14 @@ namespace BVSoftware.CommerceDTO.v1.Client
         {
             ApiResponse<bool> response = new ApiResponse<bool>();
             response = RestHelper.PostRequest<ApiResponse<bool>>(this.fullApiUri + "productfilesdata/" + Enc(fileBvin) + "?key=" + Enc(key) + "&first=1" + "&filename=" + Enc(fileName) + "&description=" + Enc(description),
-                                                        BVSoftware.Web.Json.ObjectToJson(data));
+                                                        MerchantTribe.Web.Json.ObjectToJson(data));
             return response;
         }
         public ApiResponse<bool> ProductFilesDataUploadAdditionalPart(string fileBvin, string fileName, byte[] moreData)
         {
             ApiResponse<bool> response = new ApiResponse<bool>();
             response = RestHelper.PostRequest<ApiResponse<bool>>(this.fullApiUri + "productfilesdata/" + Enc(fileBvin) + "?key=" + Enc(key) + "&first=0" + "&filename=" + Enc(fileName),
-                                                        BVSoftware.Web.Json.ObjectToJson(moreData));
+                                                        MerchantTribe.Web.Json.ObjectToJson(moreData));
             return response;
         }
 
@@ -694,13 +694,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductInventoryDTO> ProductInventoryCreate(ProductInventoryDTO item)
         {
             ApiResponse<ProductInventoryDTO> result = new ApiResponse<ProductInventoryDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductInventoryDTO>>(this.fullApiUri + "productinventory/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductInventoryDTO>>(this.fullApiUri + "productinventory/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<ProductInventoryDTO> ProductInventoryUpdate(ProductInventoryDTO item)
         {
             ApiResponse<ProductInventoryDTO> result = new ApiResponse<ProductInventoryDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductInventoryDTO>>(this.fullApiUri + "productinventory/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductInventoryDTO>>(this.fullApiUri + "productinventory/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductInventoryDelete(string bvin)
@@ -726,7 +726,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductImageDTO> ProductImagesCreate(ProductImageDTO item, byte[] data)
         {
             ApiResponse<ProductImageDTO> result = new ApiResponse<ProductImageDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductImageDTO>>(this.fullApiUri + "productimages/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductImageDTO>>(this.fullApiUri + "productimages/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             if (data != null)
             {
                 if (result.Content != null && result.Errors.Count < 1)
@@ -739,7 +739,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductImageDTO> ProductImagesUpdate(ProductImageDTO item)
         {
             ApiResponse<ProductImageDTO> result = new ApiResponse<ProductImageDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductImageDTO>>(this.fullApiUri + "productimages/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductImageDTO>>(this.fullApiUri + "productimages/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductImagesDelete(string bvin)
@@ -752,8 +752,8 @@ namespace BVSoftware.CommerceDTO.v1.Client
         {
             ApiResponse<bool> response = new ApiResponse<bool>();
             response = RestHelper.PostRequest<ApiResponse<bool>>(this.fullApiUri + "productimagesupload/" + Enc(productBvin) + "/" + Enc(imageBvin) + "?key=" + Enc(key) 
-                                                        + "&filename=" + Enc(fileName)                                                        
-                                                        , BVSoftware.Web.Json.ObjectToJson(imageData));
+                                                        + "&filename=" + Enc(fileName)
+                                                        , MerchantTribe.Web.Json.ObjectToJson(imageData));
             return response;
         }
 
@@ -767,13 +767,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductVolumeDiscountDTO> ProductVolumeDiscountsCreate(ProductVolumeDiscountDTO item)
         {
             ApiResponse<ProductVolumeDiscountDTO> result = new ApiResponse<ProductVolumeDiscountDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductVolumeDiscountDTO>>(this.fullApiUri + "productvolumediscounts/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductVolumeDiscountDTO>>(this.fullApiUri + "productvolumediscounts/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<ProductVolumeDiscountDTO> ProductVolumeDiscountsUpdate(ProductVolumeDiscountDTO item)
         {
             ApiResponse<ProductVolumeDiscountDTO> result = new ApiResponse<ProductVolumeDiscountDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductVolumeDiscountDTO>>(this.fullApiUri + "productvolumediscounts/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductVolumeDiscountDTO>>(this.fullApiUri + "productvolumediscounts/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductVolumeDiscountsDelete(string bvin)
@@ -793,13 +793,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<ProductReviewDTO> ProductReviewsCreate(ProductReviewDTO item)
         {
             ApiResponse<ProductReviewDTO> result = new ApiResponse<ProductReviewDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductReviewDTO>>(this.fullApiUri + "productreviews/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductReviewDTO>>(this.fullApiUri + "productreviews/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<ProductReviewDTO> ProductReviewsUpdate(ProductReviewDTO item)
         {
             ApiResponse<ProductReviewDTO> result = new ApiResponse<ProductReviewDTO>();
-            result = RestHelper.PostRequest<ApiResponse<ProductReviewDTO>>(this.fullApiUri + "productreviews/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<ProductReviewDTO>>(this.fullApiUri + "productreviews/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> ProductReviewsDelete(string bvin)
@@ -820,7 +820,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<CategoryProductAssociationDTO> CategoryProductAssociationsCreate(CategoryProductAssociationDTO item)
         {
             ApiResponse<CategoryProductAssociationDTO> result = new ApiResponse<CategoryProductAssociationDTO>();
-            result = RestHelper.PostRequest<ApiResponse<CategoryProductAssociationDTO>>(this.fullApiUri + "categoryproductassociations/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<CategoryProductAssociationDTO>>(this.fullApiUri + "categoryproductassociations/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> CategoryProductAssociationsQuickCreate(string productBvin, string categoryBvin)
@@ -845,7 +845,7 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<CategoryProductAssociationDTO> CategoryProductAssociationsUpdate(CategoryProductAssociationDTO item)
         {
             ApiResponse<CategoryProductAssociationDTO> result = new ApiResponse<CategoryProductAssociationDTO>();
-            result = RestHelper.PostRequest<ApiResponse<CategoryProductAssociationDTO>>(this.fullApiUri + "categoryproductassociations/" + item.Id + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<CategoryProductAssociationDTO>>(this.fullApiUri + "categoryproductassociations/" + item.Id + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> CategoryProductAssociationsUnrelate(string productBvin, string categoryBvin)
@@ -879,13 +879,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<Orders.OrderDTO> OrdersCreate(Orders.OrderDTO item)
         {
             ApiResponse<Orders.OrderDTO> result = new ApiResponse<Orders.OrderDTO>();
-            result = RestHelper.PostRequest<ApiResponse<Orders.OrderDTO>>(this.fullApiUri + "orders/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<Orders.OrderDTO>>(this.fullApiUri + "orders/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<Orders.OrderDTO> OrdersUpdate(Orders.OrderDTO item)
         {
             ApiResponse<Orders.OrderDTO> result = new ApiResponse<Orders.OrderDTO>();
-            result = RestHelper.PostRequest<ApiResponse<Orders.OrderDTO>>(this.fullApiUri + "orders/" + Enc(item.Bvin) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<Orders.OrderDTO>>(this.fullApiUri + "orders/" + Enc(item.Bvin) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> OrdersDelete(string bvin)
@@ -911,13 +911,13 @@ namespace BVSoftware.CommerceDTO.v1.Client
         public ApiResponse<OrderTransactionDTO> OrderTransactionsCreate(OrderTransactionDTO item)
         {
             ApiResponse<OrderTransactionDTO> result = new ApiResponse<OrderTransactionDTO>();
-            result = RestHelper.PostRequest<ApiResponse<OrderTransactionDTO>>(this.fullApiUri + "ordertransactions/?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<OrderTransactionDTO>>(this.fullApiUri + "ordertransactions/?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<OrderTransactionDTO> OrderTransactionsUpdate(OrderTransactionDTO item)
         {
             ApiResponse<OrderTransactionDTO> result = new ApiResponse<OrderTransactionDTO>();
-            result = RestHelper.PostRequest<ApiResponse<OrderTransactionDTO>>(this.fullApiUri + "ordertransactions/" + Enc(item.Id.ToString()) + "?key=" + Enc(key), BVSoftware.Web.Json.ObjectToJson(item));
+            result = RestHelper.PostRequest<ApiResponse<OrderTransactionDTO>>(this.fullApiUri + "ordertransactions/" + Enc(item.Id.ToString()) + "?key=" + Enc(key), MerchantTribe.Web.Json.ObjectToJson(item));
             return result;
         }
         public ApiResponse<bool> OrderTransactionsDelete(Guid id)

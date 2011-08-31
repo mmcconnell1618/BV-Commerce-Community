@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using BVSoftware.Web;
+using MerchantTribe.Web;
 using System.Runtime.Serialization;
 
 namespace BVSoftware.CommerceDTO.v1.Catalog

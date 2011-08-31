@@ -253,8 +253,8 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
                     destinationAddress.Line3 = this.Line3;
                     destinationAddress.City = this.City;
                     destinationAddress.PostalCode = this.PostalCode;
-                                        
-                    BVSoftware.Web.Geography.Country newCountry = GeographyHelper.TranslateCountry(connString, this.CountryBvin);
+
+                    MerchantTribe.Web.Geography.Country newCountry = GeographyHelper.TranslateCountry(connString, this.CountryBvin);
                     destinationAddress.CountryBvin = newCountry.Bvin;
                     destinationAddress.CountryName = newCountry.DisplayName;
 

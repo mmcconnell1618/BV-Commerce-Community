@@ -2049,7 +2049,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
 
             foreach (data.bvc_Tax old in oldDatabase.bvc_Tax)
             {
-                BVSoftware.Web.Geography.Country newCountry = GeographyHelper.TranslateCountry(EFConnString(settings.SourceConnectionString()), old.CountryBvin);
+                MerchantTribe.Web.Geography.Country newCountry = GeographyHelper.TranslateCountry(EFConnString(settings.SourceConnectionString()), old.CountryBvin);
                 string RegionAbbreviation = GeographyHelper.TranslateRegionBvinToAbbreviation(EFConnString(settings.SourceConnectionString()), old.RegionBvin);
 
                 wl("Tax: " + newCountry.DisplayName + ", " + RegionAbbreviation + " " + old.PostalCode);

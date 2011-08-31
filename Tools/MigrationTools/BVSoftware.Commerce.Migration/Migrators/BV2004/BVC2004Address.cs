@@ -195,7 +195,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV2004
                 destinationAddress.City = this.City;
                 destinationAddress.PostalCode = this.PostalCode;
 
-                BVSoftware.Web.Geography.Country newCountry = GeographyHelper.TranslateCountry(connString, this.CountryCode);
+                MerchantTribe.Web.Geography.Country newCountry = GeographyHelper.TranslateCountry(connString, this.CountryCode);
                 destinationAddress.CountryBvin = newCountry.Bvin;
                 destinationAddress.CountryName = newCountry.DisplayName;
 
