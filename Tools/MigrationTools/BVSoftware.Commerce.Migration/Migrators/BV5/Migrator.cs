@@ -2423,8 +2423,16 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
                     }
                     else
                     {
-                        remaining = res.Content.ProductsRemaining;
-                        wl("Clearing products: " + res.Content.ProductsRemaining + " remaining at " + DateTime.UtcNow.ToString());
+                        if (res.Content != null)
+                        {
+                            remaining = res.Content.ProductsRemaining;
+                            wl("Clearing products: " + res.Content.ProductsRemaining + " remaining at " + DateTime.UtcNow.ToString());
+                        }
+                        else
+                        {
+                            wl("Invalid Response. Skipping Clear..");
+                            remaining = 0;
+                        }
                     }
                 }
             }
