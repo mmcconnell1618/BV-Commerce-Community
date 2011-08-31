@@ -11,4 +11,5 @@ obj/
 /App/TestResults
 /builds
 /Builds
+/Tools/MigrationTools/migrate.cmd
 
