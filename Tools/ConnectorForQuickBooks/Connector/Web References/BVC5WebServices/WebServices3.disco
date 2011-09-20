@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://localhost/CommerceMain/WebServices3.asmx?wsdl" docRef="http://localhost/CommerceMain/WebServices3.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://localhost/CommerceMain/WebServices3.asmx" xmlns:q1="http://www.bvsoftware.com/Schemas/Bvc5/2006/01/WebServices3" binding="q1:WebServices3Soap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://localhost/CommerceMain/WebServices3.asmx" xmlns:q2="http://www.bvsoftware.com/Schemas/Bvc5/2006/01/WebServices3" binding="q2:WebServices3Soap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

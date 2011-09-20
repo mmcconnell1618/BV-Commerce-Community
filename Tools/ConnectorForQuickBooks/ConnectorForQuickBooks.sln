@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConnectorForQuickBooks", "Connector\ConnectorForQuickBooks.vbproj", "{BF972C0F-5F9E-430B-9F38-A7A23490E1CE}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ConnectorForQuickBooksSetup", "ConnectorSetup\ConnectorSetup.vdproj", "{AC4F7478-CEEB-4F79-BE80-1D899138A0E9}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2008.bvsoftware.com:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Connector\\ConnectorForQuickBooks.vbproj
+		SccProjectName1 = Connector
+		SccLocalPath1 = Connector
+		SccProjectUniqueName2 = ConnectorSetup\\ConnectorSetup.vdproj
+		SccProjectName2 = ConnectorSetup
+		SccLocalPath2 = ConnectorSetup
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF972C0F-5F9E-430B-9F38-A7A23490E1CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF972C0F-5F9E-430B-9F38-A7A23490E1CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF972C0F-5F9E-430B-9F38-A7A23490E1CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF972C0F-5F9E-430B-9F38-A7A23490E1CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC4F7478-CEEB-4F79-BE80-1D899138A0E9}.Debug|Any CPU.ActiveCfg = Debug
+		{AC4F7478-CEEB-4F79-BE80-1D899138A0E9}.Release|Any CPU.ActiveCfg = Release
+		{AC4F7478-CEEB-4F79-BE80-1D899138A0E9}.Release|Any CPU.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

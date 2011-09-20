@@ -1,0 +1,213 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="WebStoreUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost/bvc5</Value>
+    </Setting>
+    <Setting Name="WebUsename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">admin@bvcommerce.com</Value>
+    </Setting>
+    <Setting Name="WebPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">password</Value>
+    </Setting>
+    <Setting Name="LastOrderNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SingleOrderNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="StartOrderNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="EndOrderNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CompanyFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UseCompanyFile" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseOrderPrefix" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OrderPrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BVC</Value>
+    </Setting>
+    <Setting Name="UseUsernamePrefix" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UsernamePrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BVC</Value>
+    </Setting>
+    <Setting Name="SendCreditCardInfo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseExportDateInsteadOfOrderDate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MarkOrdersToBePrinted" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MarkUnpaidOrdersAsPending" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ExportProductsAsSKU" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UseQuickBooksItemDescription" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseInlineTax" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShippingItemName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BVC Shipping</Value>
+    </Setting>
+    <Setting Name="HandlingItemName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BVC Handling</Value>
+    </Setting>
+    <Setting Name="InlineTaxItemName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BV Tax</Value>
+    </Setting>
+    <Setting Name="InvoiceAccountsReceivableAccount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Accounts Receivable</Value>
+    </Setting>
+    <Setting Name="InvoiceDepostAccount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Undeposited Funds</Value>
+    </Setting>
+    <Setting Name="DepositInvoices" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DepositSalesReceipts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SalesReceiptDepositAccount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Undeposited Funds</Value>
+    </Setting>
+    <Setting Name="PaymentAmex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Amex</Value>
+    </Setting>
+    <Setting Name="PaymentDiners" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Diner's Club</Value>
+    </Setting>
+    <Setting Name="PaymentDiscover" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Discover</Value>
+    </Setting>
+    <Setting Name="PaymentJCB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">JCB</Value>
+    </Setting>
+    <Setting Name="PaymentMasterCard" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Master Card</Value>
+    </Setting>
+    <Setting Name="PaymentVisa" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Visa</Value>
+    </Setting>
+    <Setting Name="PaymentPayPal" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PayPal</Value>
+    </Setting>
+    <Setting Name="PaymentTelephone" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Telephone</Value>
+    </Setting>
+    <Setting Name="UseProductPrefix" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProductPrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BVC</Value>
+    </Setting>
+    <Setting Name="NewProductIncomeAccount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Other Income</Value>
+    </Setting>
+    <Setting Name="UseShipMethodPrefix" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ShipMethodPrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BVC</Value>
+    </Setting>
+    <Setting Name="ShippingItemIncomeAccount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Shipping Charge Income</Value>
+    </Setting>
+    <Setting Name="InlineTaxVendorName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BVC Tax Vendor</Value>
+    </Setting>
+    <Setting Name="HandlineIncomeAccount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Shipping Charge Income</Value>
+    </Setting>
+    <Setting Name="OrderDiscount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BVC Discount</Value>
+    </Setting>
+    <Setting Name="ExportUsersAsName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ExportReverseUserName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PaymentCheck" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Check</Value>
+    </Setting>
+    <Setting Name="PaymentEmail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Email</Value>
+    </Setting>
+    <Setting Name="PaymentPO" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PO</Value>
+    </Setting>
+    <Setting Name="PaymentCash" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Cash</Value>
+    </Setting>
+    <Setting Name="PaymentFax" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fax</Value>
+    </Setting>
+    <Setting Name="PaymentOther" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Other</Value>
+    </Setting>
+    <Setting Name="QBApplicationName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BV Connector for QuickBooks</Value>
+    </Setting>
+    <Setting Name="UseSubProductNameMatching" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FirstRun" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MarkPaidOrdersToBePrinted" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CreateCustomersAsCompany" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UseExportDateForShipping" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OrderExport3_BVC5WebServices_WebServices3" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/CommerceMain/WebServices3.asmx</Value>
+    </Setting>
+    <Setting Name="ImportOrderMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SendInventoryToWeb" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SendPricesToWeb" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CreateInventoryItems" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="COGAccount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Cost of Goods Sold</Value>
+    </Setting>
+    <Setting Name="InventoryAssetAccount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Inventory Asset</Value>
+    </Setting>
+    <Setting Name="ImportToMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ProductUseTitleOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DisableTaxes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
