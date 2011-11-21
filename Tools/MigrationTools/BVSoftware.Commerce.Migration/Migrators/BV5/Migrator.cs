@@ -24,8 +24,8 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
         private data.BV53Entities oldDatabase = null;
         private Dictionary<string, long> AffiliateMapper = new Dictionary<string, long>();
         private Dictionary<string, long> TaxScheduleMapper = new Dictionary<string, long>();
-        private Dictionary<string, long> ProductPropertyMapper = new Dictionary<string, long>();
-
+        private List<PropertyMapperInfo> ProductPropertyMapper = new List<PropertyMapperInfo>();
+        
         public event MigrationService.ProgressReportDelegate ProgressReport;
         private void wl(string message)
         {
@@ -856,6 +856,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
                 {
                     foreach (data.bvc_Product p in products)
                     {
+                       
                         ImportSingleProduct(p);
 
                         totalMigrated += 1;
@@ -890,6 +891,12 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
         {
             if (old == null) return;
 
+            if (old.ParentID.Trim() != string.Empty)
+            {
+                wl("Skipping product [" + old.SKU + "] because it is a variant");
+                return;
+            }
+
             wl("Product: " + old.ProductName + " [" + old.SKU + "]");
             ProductDTO p = new ProductDTO();
             p.AllowReviews = true;
@@ -916,7 +923,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
             p.PreContentColumnId = string.Empty;
             p.PreTransformLongDescription = old.PreTransformLongDescription;
             p.ProductName = old.ProductName;
-            p.ProductTypeId = old.ProductTypeId;
+            p.ProductTypeId = old.ProductTypeId;            
             p.ShippingDetails = new ShippableItemDTO();
             p.ShippingDetails.ExtraShipFee = old.ExtraShipFee;
             p.ShippingDetails.Height = old.ShippingHeight;
@@ -925,7 +932,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
             p.ShippingDetails.ShippingScheduleId = 0;
             p.ShippingDetails.ShipSeparately = old.ShipSeparately == 1;
             p.ShippingDetails.Weight = old.ShippingWeight;
-            p.ShippingDetails.Width = old.ShippingWeight;
+            p.ShippingDetails.Width = old.ShippingWidth;
             switch (old.ShippingMode)
             {
                 case 1:
@@ -960,6 +967,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
             p.TaxSchedule = 0;
             if (TaxScheduleMapper.ContainsKey(old.TaxClass)) p.TaxSchedule = TaxScheduleMapper[old.TaxClass];
             p.VendorId = old.VendorID;
+            p.UrlSlug = GetCustomUrlSlug(old.bvin);
 
             byte[] bytes = GetBytesForLocalImage(old.ImageFileMedium);
             if (bytes != null)
@@ -1015,6 +1023,19 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
                 MigrateProductCategoryLinks(old.bvin);
             }
         }
+        private string GetCustomUrlSlug(string oldBvin)
+        {
+            wl(" - Getting Custom Url - ");
+            data.BV53Entities db = new data.BV53Entities(EFConnString(settings.SourceConnectionString()));
+            var customUrl = db.bvc_CustomUrl.Where(y => y.SystemUrl == 1).Where(y => y.SystemData == oldBvin).FirstOrDefault();
+            if (customUrl != null)
+            {
+                wl("using URL: " + customUrl.RequestedUrl + " for " + oldBvin);
+                return customUrl.RequestedUrl.TrimStart('/');
+            }
+            wl("No custom URL Found for " + oldBvin);
+            return string.Empty;
+        }
         private void AssignOptionsToProduct(string bvin)
         {
             wl(" - Migrating Options...");
@@ -1059,14 +1080,43 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
             if (items == null) return;
             foreach (data.bvc_ProductPropertyValue item in items)
             {
-                long newId = 0;
-                if (ProductPropertyMapper.ContainsKey(item.PropertyBvin)) newId = ProductPropertyMapper[item.PropertyBvin];
+                var map = ProductPropertyMapper.Where(y => y.OldBvin == item.PropertyBvin).FirstOrDefault();
+                if (map == null)
+                {
+                    wl("!!Missing Map for old property bvin of " + item.PropertyBvin);
+                    continue;
+                }
+
+                string newPropertyValue = item.PropertyValue;
+                long newChoiceId = -1;
+
+                switch (map.PropertyType)
+                {
+                    case ProductPropertyTypeDTO.MultipleChoiceField:
+                        newChoiceId = FindNewChoiceId(map, item.PropertyValue);
+                        newPropertyValue = newChoiceId.ToString();                        
+                        break;
+                    default:
+                        newPropertyValue = item.PropertyValue;
+                        break;
+                }
+                
+                long newId = map.NewBvin;                
                 if (newId > 0)
                 {
-                    proxy.ProductPropertiesSetValueForProduct(newId, bvin, item.PropertyValue, -1);
+                    proxy.ProductPropertiesSetValueForProduct(newId, bvin, newPropertyValue, newChoiceId);
                 }
             }
         }
+        private long FindNewChoiceId(PropertyMapperInfo map, string oldPropertyValue)
+        {
+            if (map == null) return -1;
+            if (map.Choices == null) return -1;
+            var matchingChoice = map.Choices.Where(y => y.OldBvin == oldPropertyValue).FirstOrDefault();
+            if (matchingChoice == null) return -1;
+            return matchingChoice.NewBvin;
+        }
+
         private void MigrateProductInventory(string bvin)
         {
             wl(" - Migrating Inventory...");
@@ -1335,16 +1385,22 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
                 switch (item.Rating)
                 {
                     case 0:
+                        r.Rating = ProductReviewRatingDTO.ZeroStars;
                         break;
                     case 1:
+                        r.Rating = ProductReviewRatingDTO.OneStar;
                         break;
                     case 2:
+                        r.Rating = ProductReviewRatingDTO.TwoStars;
                         break;
                     case 3:
+                        r.Rating = ProductReviewRatingDTO.ThreeStars;
                         break;
                     case 4:
+                        r.Rating = ProductReviewRatingDTO.FourStars;
                         break;
                     case 5:
+                        r.Rating = ProductReviewRatingDTO.FiveStars;
                         break;
                 }
                 r.ReviewDateUtc = item.ReviewDate;
@@ -1827,9 +1883,10 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
                 int sort = cross.SortOrder;
                 string oldPropertyBvin = cross.ProductPropertyBvin;
                 long newId = 0;
-                if (ProductPropertyMapper.ContainsKey(oldPropertyBvin))
-                {
-                    newId = ProductPropertyMapper[oldPropertyBvin];
+                var map = ProductPropertyMapper.Where(y => y.OldBvin == oldPropertyBvin).FirstOrDefault();
+                if (map != null)
+                {                
+                    newId = map.NewBvin;
                 }
                 if (newId <= 0) continue;
                 wl("Mapping " + oldPropertyBvin + " to " + newId.ToString());
@@ -1841,15 +1898,19 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
         {
             Header("Importing Product Properties");
 
-            ProductPropertyMapper = new Dictionary<string, long>();
-
+            ProductPropertyMapper = new List<PropertyMapperInfo>();
             foreach (data.bvc_ProductProperty old in oldDatabase.bvc_ProductProperty)
             {
                 wl("Item: " + old.DisplayName);
 
-                ProductPropertyDTO pp = new ProductPropertyDTO();
+                // Skip creation if we've already mapped this one before
+                if (ProductPropertyMapper.Where(y => y.OldBvin == old.bvin).Count() > 0) continue;
 
-                pp.Choices = GetPropertyChoices(old.bvin);
+                PropertyMapperInfo mapInfo = new PropertyMapperInfo();
+                mapInfo.OldBvin = old.bvin;                
+
+                ProductPropertyDTO pp = new ProductPropertyDTO();
+                pp.Choices = GetPropertyChoices(old.bvin, mapInfo);
                 pp.CultureCode = old.CultureCode;
                 pp.DefaultValue = old.DefaultValue;
                 pp.DisplayName = old.DisplayName;
@@ -1877,6 +1938,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
                         pp.TypeCode = ProductPropertyTypeDTO.HyperLink;
                         break;
                 }
+                mapInfo.PropertyType = pp.TypeCode;
 
                 Api bv6proxy = GetBV6Proxy();
                 var res = bv6proxy.ProductPropertiesCreate(pp);
@@ -1890,13 +1952,16 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
                     else
                     {
                         long newId = res.Content.Id;
-                        ProductPropertyMapper.Add(old.bvin, newId);
+                        mapInfo.NewBvin = newId;
+                        SynchronizeChoices(res.Content, mapInfo);
+                        ProductPropertyMapper.Add(mapInfo);
+
                         wl("SUCCESS");
                     }
                 }
             }
         }
-        private List<ProductPropertyChoiceDTO> GetPropertyChoices(string propertyBvin)
+        private List<ProductPropertyChoiceDTO> GetPropertyChoices(string propertyBvin, PropertyMapperInfo mapInfo)
         {
             List<ProductPropertyChoiceDTO> result = new List<ProductPropertyChoiceDTO>();
 
@@ -1913,9 +1978,31 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV5
                 //dto.PropertyId = ppc.PropertyBvin;
                 dto.SortOrder = ppc.SortOrder;
                 result.Add(dto);
+
+                PropertyChoiceMapperInfo choiceMapInfo = new PropertyChoiceMapperInfo();
+                choiceMapInfo.OldBvin = ppc.bvin;
+                choiceMapInfo.SortOrder = ppc.SortOrder;
+                choiceMapInfo.TextValue = ppc.ChoiceName;                
+                mapInfo.Choices.Add(choiceMapInfo);
             }
 
             return result;
+        }        
+        // Maps the new choice (long)id value to the old (string)bvin value for a choice
+        private void SynchronizeChoices(ProductPropertyDTO dto, PropertyMapperInfo mapInfo)
+        {
+            if (dto == null) return;
+            if (dto.Choices == null) return;
+            if (mapInfo == null) return;
+
+            foreach(PropertyChoiceMapperInfo mapChoice in mapInfo.Choices)
+            {
+                var dtoChoice = dto.Choices.Where(y => y.ChoiceName == mapChoice.TextValue).FirstOrDefault();
+                if (dtoChoice != null)
+                {
+                    mapChoice.NewBvin = dtoChoice.Id;
+                }
+            }
         }
 
         // Manufacturer Vendor

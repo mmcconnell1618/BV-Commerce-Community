@@ -98,6 +98,7 @@ namespace BVSoftware.Commerce.MigrationWindows
             s.SourceApiKey = Properties.Settings.Default.SourceApiKey;
 
             s.PrepArgs();
-        }       
+        }
+         
     }
 }

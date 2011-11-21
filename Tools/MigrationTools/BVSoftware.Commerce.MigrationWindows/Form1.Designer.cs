@@ -62,9 +62,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(357, 29);
+            this.label1.Size = new System.Drawing.Size(360, 29);
             this.label1.TabIndex = 2;
-            this.label1.Text = "BV Commerce Migration Tool";
+            this.label1.Text = "MerchantTribe Migration Tool";
             // 
             // lblVersion
             // 
@@ -90,7 +90,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "BV Migration Tool";
+            this.Text = "MerchantTribe Migration Tool";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

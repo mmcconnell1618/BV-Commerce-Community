@@ -81,6 +81,8 @@
     </Compile>
     <Compile Include="Migrators\BV5\Migrator.cs" />
     <Compile Include="Migrators\BV5\PackageItem.cs" />
+    <Compile Include="Migrators\BV5\PropertyChoiceMapperInfo.cs" />
+    <Compile Include="Migrators\BV5\PropertyMapperInfo.cs" />
     <Compile Include="Migrators\BV6\Migrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaxSplitter.cs" />
