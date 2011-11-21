@@ -8,6 +8,7 @@ namespace BVSoftware.Commerce.Migration
     public enum MigrationSourceType
     {
         BVC2004 = 1,
-        BV5 = 0
+        BV5 = 0,
+        BV6 = 2
     }
 }

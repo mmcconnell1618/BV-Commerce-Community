@@ -32,6 +32,9 @@ namespace BVSoftware.Commerce.Migration
             IMigrator migrator = null;
             switch (_Settings.SourceType)
             {
+                case MigrationSourceType.BV6:
+                    migrator = new Migrators.BV6.Migrator();
+                    break;
                 case MigrationSourceType.BV5:
                     migrator = new Migrators.BV5.Migrator();
                     break;

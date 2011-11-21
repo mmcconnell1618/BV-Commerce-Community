@@ -9,6 +9,11 @@ namespace BVSoftware.Commerce.Migration
     {
         public string DestinationServiceRootUrl {get;set;}
         public string ApiKey { get; set; }
+
+        // For BV6 to BV6
+        public string SourceServiceRootUrl { get; set; }
+        public string SourceApiKey { get; set; }
+
         public MigrationSourceType SourceType { get; set; }
 
         public string ImagesRootFolder { get; set; }
@@ -62,6 +67,10 @@ namespace BVSoftware.Commerce.Migration
             DestinationServiceRootUrl = "http://localhost/bv6/api/v1";
             ImagesRootFolder = string.Empty;
             ApiKey = string.Empty;
+
+            SourceServiceRootUrl = "http://localhost/bv6/api/v1";
+            SourceApiKey = string.Empty;
+
             SourceType = MigrationSourceType.BV5;
             SQLServer = string.Empty;
             SQLDatabase = string.Empty;
@@ -93,6 +102,7 @@ namespace BVSoftware.Commerce.Migration
         public void PrepArgs()
         {
             this.DestinationServiceRootUrl = this.DestinationServiceRootUrl.Trim();
+            this.SourceServiceRootUrl = this.SourceServiceRootUrl.Trim();
 
             if (!this.DestinationServiceRootUrl.StartsWith("http://") &&
                 !this.DestinationServiceRootUrl.StartsWith("https://"))
@@ -100,6 +110,14 @@ namespace BVSoftware.Commerce.Migration
                 this.DestinationServiceRootUrl = "http://" + this.DestinationServiceRootUrl;
             }
             this.DestinationServiceRootUrl = this.DestinationServiceRootUrl.TrimEnd('/');
+
+
+            if (!this.SourceServiceRootUrl.StartsWith("http://") &&
+                !this.SourceServiceRootUrl.StartsWith("https://"))
+            {
+                this.SourceServiceRootUrl = "http://" + this.SourceServiceRootUrl;
+            }
+            this.SourceServiceRootUrl = this.SourceServiceRootUrl.TrimEnd('/');
 
             // Prep Image Root Folder
             this.ImagesRootFolder.TrimEnd('\\');

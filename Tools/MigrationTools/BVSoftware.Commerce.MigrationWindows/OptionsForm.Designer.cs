@@ -34,7 +34,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.sqlGroupBox = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,14 +45,20 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnBrowseForImagesRoot = new System.Windows.Forms.Button();
+            this.rb6 = new System.Windows.Forms.RadioButton();
+            this.fromBV6Data = new System.Windows.Forms.GroupBox();
+            this.SourceRootField = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.SourceApiKeyField = new System.Windows.Forms.TextBox();
             this.SkipProductPreField = new System.Windows.Forms.CheckBox();
             this.chkDisableMultiThreadingField = new System.Windows.Forms.CheckBox();
-            this.ImagesRootFolderField = new System.Windows.Forms.TextBox();
-            this.ApiKeyField = new System.Windows.Forms.TextBox();
             this.SQLPasswordField = new System.Windows.Forms.TextBox();
             this.SQLUsernameField = new System.Windows.Forms.TextBox();
             this.SQLDatabaseField = new System.Windows.Forms.TextBox();
             this.SQLServerField = new System.Windows.Forms.TextBox();
+            this.ImagesRootFolderField = new System.Windows.Forms.TextBox();
+            this.ApiKeyField = new System.Windows.Forms.TextBox();
             this.SingleOrderField = new System.Windows.Forms.TextBox();
             this.chkSingleOrder = new System.Windows.Forms.CheckBox();
             this.SingleSkuField = new System.Windows.Forms.TextBox();
@@ -74,14 +80,15 @@
             this.chkImportCategories = new System.Windows.Forms.CheckBox();
             this.DestinationRootUrlField = new System.Windows.Forms.TextBox();
             this.GroupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.sqlGroupBox.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.fromBV6Data.SuspendLayout();
             this.SuspendLayout();
             // 
             // Button1
             // 
             this.Button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button1.Location = new System.Drawing.Point(418, 451);
+            this.Button1.Location = new System.Drawing.Point(418, 461);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(354, 52);
             this.Button1.TabIndex = 10;
@@ -93,7 +100,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(12, 451);
+            this.btnCancel.Location = new System.Drawing.Point(12, 461);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(144, 52);
             this.btnCancel.TabIndex = 11;
@@ -152,21 +159,21 @@
             this.Label1.TabIndex = 12;
             this.Label1.Text = "Web Site Address (URL) of your BV 6 Store";
             // 
-            // groupBox2
+            // sqlGroupBox
             // 
-            this.groupBox2.Controls.Add(this.SQLPasswordField);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.SQLUsernameField);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.SQLDatabaseField);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.SQLServerField);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(15, 214);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(322, 134);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
+            this.sqlGroupBox.Controls.Add(this.SQLPasswordField);
+            this.sqlGroupBox.Controls.Add(this.label5);
+            this.sqlGroupBox.Controls.Add(this.SQLUsernameField);
+            this.sqlGroupBox.Controls.Add(this.label4);
+            this.sqlGroupBox.Controls.Add(this.SQLDatabaseField);
+            this.sqlGroupBox.Controls.Add(this.label3);
+            this.sqlGroupBox.Controls.Add(this.SQLServerField);
+            this.sqlGroupBox.Controls.Add(this.label2);
+            this.sqlGroupBox.Location = new System.Drawing.Point(15, 236);
+            this.sqlGroupBox.Name = "sqlGroupBox";
+            this.sqlGroupBox.Size = new System.Drawing.Size(322, 134);
+            this.sqlGroupBox.TabIndex = 3;
+            this.sqlGroupBox.TabStop = false;
             // 
             // label5
             // 
@@ -206,33 +213,36 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.rb6);
             this.groupBox3.Controls.Add(this.rb2004);
             this.groupBox3.Controls.Add(this.rb5);
             this.groupBox3.Location = new System.Drawing.Point(15, 134);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(322, 74);
+            this.groupBox3.Size = new System.Drawing.Size(322, 96);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
             // rb2004
             // 
             this.rb2004.AutoSize = true;
-            this.rb2004.Location = new System.Drawing.Point(9, 42);
+            this.rb2004.Location = new System.Drawing.Point(9, 65);
             this.rb2004.Name = "rb2004";
             this.rb2004.Size = new System.Drawing.Size(183, 17);
             this.rb2004.TabIndex = 1;
             this.rb2004.Text = "Migrate From BV Commerce 2004";
             this.rb2004.UseVisualStyleBackColor = true;
+            this.rb2004.CheckedChanged += new System.EventHandler(this.rb2004_CheckedChanged);
             // 
             // rb5
             // 
             this.rb5.AutoSize = true;
-            this.rb5.Location = new System.Drawing.Point(9, 19);
+            this.rb5.Location = new System.Drawing.Point(9, 42);
             this.rb5.Name = "rb5";
             this.rb5.Size = new System.Drawing.Size(165, 17);
             this.rb5.TabIndex = 0;
             this.rb5.Text = "Migrate From BV Commerce 5";
             this.rb5.UseVisualStyleBackColor = true;
+            this.rb5.CheckedChanged += new System.EventHandler(this.rb5_CheckedChanged);
             // 
             // label6
             // 
@@ -264,6 +274,66 @@
             this.btnBrowseForImagesRoot.UseVisualStyleBackColor = true;
             this.btnBrowseForImagesRoot.Click += new System.EventHandler(this.btnBrowseForImagesRoot_Click);
             // 
+            // rb6
+            // 
+            this.rb6.AutoSize = true;
+            this.rb6.Location = new System.Drawing.Point(9, 19);
+            this.rb6.Name = "rb6";
+            this.rb6.Size = new System.Drawing.Size(165, 17);
+            this.rb6.TabIndex = 2;
+            this.rb6.Text = "Migrate From BV Commerce 6";
+            this.rb6.UseVisualStyleBackColor = true;
+            this.rb6.CheckedChanged += new System.EventHandler(this.rb6_CheckedChanged);
+            // 
+            // fromBV6Data
+            // 
+            this.fromBV6Data.Controls.Add(this.label11);
+            this.fromBV6Data.Controls.Add(this.SourceApiKeyField);
+            this.fromBV6Data.Controls.Add(this.label10);
+            this.fromBV6Data.Controls.Add(this.SourceRootField);
+            this.fromBV6Data.Location = new System.Drawing.Point(15, 243);
+            this.fromBV6Data.Name = "fromBV6Data";
+            this.fromBV6Data.Size = new System.Drawing.Size(322, 109);
+            this.fromBV6Data.TabIndex = 19;
+            this.fromBV6Data.TabStop = false;
+            this.fromBV6Data.Text = "From BV6 Info";
+            // 
+            // SourceRootField
+            // 
+            this.SourceRootField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SourceRootUrl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SourceRootField.Location = new System.Drawing.Point(6, 32);
+            this.SourceRootField.Name = "SourceRootField";
+            this.SourceRootField.Size = new System.Drawing.Size(310, 20);
+            this.SourceRootField.TabIndex = 0;
+            this.SourceRootField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SourceRootUrl;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(126, 13);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "URL of FROM BV6 Store";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 55);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(145, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "API Key for FROM BV6 Store";
+            // 
+            // SourceApiKeyField
+            // 
+            this.SourceApiKeyField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "SourceApiKey", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.SourceApiKeyField.Location = new System.Drawing.Point(6, 71);
+            this.SourceApiKeyField.Name = "SourceApiKeyField";
+            this.SourceApiKeyField.Size = new System.Drawing.Size(310, 20);
+            this.SourceApiKeyField.TabIndex = 2;
+            this.SourceApiKeyField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SourceApiKey;
+            // 
             // SkipProductPreField
             // 
             this.SkipProductPreField.AutoSize = true;
@@ -287,28 +357,6 @@
             this.chkDisableMultiThreadingField.TabIndex = 17;
             this.chkDisableMultiThreadingField.Text = "Disable Parallel Processing";
             this.chkDisableMultiThreadingField.UseVisualStyleBackColor = true;
-            // 
-            // ImagesRootFolderField
-            // 
-            this.ImagesRootFolderField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagesRootFolderField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ImagesRootFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ImagesRootFolderField.Location = new System.Drawing.Point(12, 103);
-            this.ImagesRootFolderField.Name = "ImagesRootFolderField";
-            this.ImagesRootFolderField.Size = new System.Drawing.Size(679, 20);
-            this.ImagesRootFolderField.TabIndex = 15;
-            this.ImagesRootFolderField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ImagesRootFolder;
-            // 
-            // ApiKeyField
-            // 
-            this.ApiKeyField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ApiKeyField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ApiKey", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ApiKeyField.Location = new System.Drawing.Point(12, 64);
-            this.ApiKeyField.Name = "ApiKeyField";
-            this.ApiKeyField.Size = new System.Drawing.Size(760, 20);
-            this.ApiKeyField.TabIndex = 1;
-            this.ApiKeyField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ApiKey;
             // 
             // SQLPasswordField
             // 
@@ -354,6 +402,28 @@
             this.SQLServerField.Size = new System.Drawing.Size(213, 20);
             this.SQLServerField.TabIndex = 0;
             this.SQLServerField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.SQLServer;
+            // 
+            // ImagesRootFolderField
+            // 
+            this.ImagesRootFolderField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagesRootFolderField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ImagesRootFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ImagesRootFolderField.Location = new System.Drawing.Point(12, 103);
+            this.ImagesRootFolderField.Name = "ImagesRootFolderField";
+            this.ImagesRootFolderField.Size = new System.Drawing.Size(679, 20);
+            this.ImagesRootFolderField.TabIndex = 15;
+            this.ImagesRootFolderField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ImagesRootFolder;
+            // 
+            // ApiKeyField
+            // 
+            this.ApiKeyField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ApiKeyField.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default, "ApiKey", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ApiKeyField.Location = new System.Drawing.Point(12, 64);
+            this.ApiKeyField.Name = "ApiKeyField";
+            this.ApiKeyField.Size = new System.Drawing.Size(760, 20);
+            this.ApiKeyField.TabIndex = 1;
+            this.ApiKeyField.Text = global::BVSoftware.Commerce.MigrationWindows.Properties.Settings.Default.ApiKey;
             // 
             // SingleOrderField
             // 
@@ -599,8 +669,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 515);
+            this.ClientSize = new System.Drawing.Size(784, 525);
             this.ControlBox = false;
+            this.Controls.Add(this.sqlGroupBox);
+            this.Controls.Add(this.fromBV6Data);
             this.Controls.Add(this.SkipProductPreField);
             this.Controls.Add(this.chkDisableMultiThreadingField);
             this.Controls.Add(this.btnBrowseForImagesRoot);
@@ -609,7 +681,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.ApiKeyField);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.SingleOrderField);
             this.Controls.Add(this.chkSingleOrder);
             this.Controls.Add(this.Button1);
@@ -626,10 +697,12 @@
             this.Text = "OptionsForm";
             this.GroupBox1.ResumeLayout(false);
             this.GroupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.sqlGroupBox.ResumeLayout(false);
+            this.sqlGroupBox.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.fromBV6Data.ResumeLayout(false);
+            this.fromBV6Data.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -657,7 +730,7 @@
         internal System.Windows.Forms.TextBox DestinationRootUrlField;
         internal System.Windows.Forms.TextBox SingleOrderField;
         internal System.Windows.Forms.CheckBox chkSingleOrder;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox sqlGroupBox;
         private System.Windows.Forms.TextBox SQLPasswordField;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox SQLUsernameField;
@@ -682,5 +755,11 @@
         private System.Windows.Forms.CheckBox ProductImagesOnlyField;
         private System.Windows.Forms.CheckBox SkipProductPreField;
         internal System.Windows.Forms.CheckBox chkClearUsers;
+        private System.Windows.Forms.RadioButton rb6;
+        private System.Windows.Forms.GroupBox fromBV6Data;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox SourceApiKeyField;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox SourceRootField;
     }
 }

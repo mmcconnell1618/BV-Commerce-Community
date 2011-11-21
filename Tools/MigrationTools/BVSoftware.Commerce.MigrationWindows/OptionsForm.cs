@@ -23,6 +23,10 @@ namespace BVSoftware.Commerce.MigrationWindows
             {
                 this.rb2004.Checked = true;
             }
+            else if (Properties.Settings.Default.SourceType == Migration.MigrationSourceType.BV6)
+            {
+                this.rb6.Checked = true;
+            }
             else
             {
                 this.rb5.Checked = true;
@@ -45,6 +49,10 @@ namespace BVSoftware.Commerce.MigrationWindows
             {
                 Properties.Settings.Default.SourceType = Migration.MigrationSourceType.BVC2004;
             }
+            else if (this.rb6.Checked)
+            {
+                Properties.Settings.Default.SourceType = Migration.MigrationSourceType.BV6;
+            }
             else
             {
                 Properties.Settings.Default.SourceType = Migration.MigrationSourceType.BV5;
@@ -60,6 +68,35 @@ namespace BVSoftware.Commerce.MigrationWindows
             if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.ImagesRootFolderField.Text = fd.SelectedPath;
+            }
+        }
+
+        private void rb6_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioChange();
+        }
+
+        private void rb5_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioChange();
+        }
+
+        private void rb2004_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioChange();
+        }
+
+        private void RadioChange()
+        {
+            if (this.rb6.Checked)
+            {
+                this.sqlGroupBox.Visible = false;
+                this.fromBV6Data.Visible = true;
+            }
+            else
+            {
+                this.sqlGroupBox.Visible = true;
+                this.fromBV6Data.Visible = false;
             }
         }
     }

@@ -94,6 +94,9 @@ namespace BVSoftware.Commerce.MigrationWindows
 
             s.SkipProductPrerequisites = Properties.Settings.Default.SkipProductPrerequisites;
 
+            s.SourceServiceRootUrl = Properties.Settings.Default.SourceRootUrl;
+            s.SourceApiKey = Properties.Settings.Default.SourceApiKey;
+
             s.PrepArgs();
         }       
     }
