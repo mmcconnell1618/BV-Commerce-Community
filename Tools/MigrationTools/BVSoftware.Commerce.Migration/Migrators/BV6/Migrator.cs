@@ -21,7 +21,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
 
         private const int CHUNKSIZE = 131072;
         private MigrationSettings settings = null;
-        private Dictionary<string, long> AffiliateMapper = new Dictionary<string, long>();
+        private Dictionary<long, long> AffiliateMapper = new Dictionary<long, long>();
         private Dictionary<long, long> TaxScheduleMapper = new Dictionary<long, long>();
         private Dictionary<string, long> ProductPropertyMapper = new Dictionary<string, long>();
 
@@ -122,13 +122,13 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
                 {
                     //ImportRoles();
                     ImportPriceGroups();
-                    //ImportUsers();
+                    ImportUsers();
                 }
 
                 // Affiliates
                 if (s.ImportAffiliates)
                 {
-                    //ImportAffiliates();
+                    ImportAffiliates();
                 }
 
                 // Taxes and Shipping Classes are prerequisite for product import
@@ -303,8 +303,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
             Api proxy = GetBV6Proxy();
 
             //TODO: Need to get relationships pulled
-
-            //ApiResponse<List<ProductRelationshipDTO>> all = oldProxy.pro
+         
             //var crosses = db.bvc_ProductCrossSell;
             //if (crosses == null) return;
             //foreach (data.bvc_ProductCrossSell x in crosses)
@@ -416,7 +415,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
             {
                 // Volume Prices
                 MigrateProductVolumePrices(p.Bvin);
-
+                
                 // Reviews
                 MigrateProductReviews(p.Bvin);
 
@@ -446,7 +445,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
 
             Api oldProxy = GetOldStoreBV6Proxy();                        
             Api proxy = GetBV6Proxy();
-
+            
             // TODO: Need to migration property data
         }
         private void MigrateProductInventory(string bvin)
@@ -490,9 +489,11 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
         {
             wl(" - Migrating Volume Prices...");
 
-            Api oldProxy = GetOldStoreBV6Proxy();
-                        
-            //Api proxy = GetBV6Proxy();
+            Api oldProxy = GetOldStoreBV6Proxy();            
+            Api proxy = GetBV6Proxy();
+
+            // TODO - Need to pull list of discounts
+            ApiResponse<ProductVolumeDiscountDTO> oldDiscounts = oldProxy.ProductVolumeDiscountsFind(bvin);
 
             //var items = db.bvc_ProductVolumeDiscounts.Where(y => y.ProductID == bvin);
             //if (items == null) return;
@@ -536,53 +537,29 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
             wl(" - Migrating Reviews...");
 
             Api oldProxy = GetOldStoreBV6Proxy();
-            
-            //data.BV53Entities db = new data.BV53Entities(EFConnString(settings.SourceConnectionString()));
-            //Api proxy = GetBV6Proxy();
+            var resAll = oldProxy.ProductReviewsByProduct(bvin);
+            if (resAll == null) return;
+            if (resAll.Content == null) return;
 
-            //var items = db.bvc_ProductReview.Where(y => y.ProductBvin == bvin);
-            //if (items == null) return;
-            //foreach (data.bvc_ProductReview item in items)
-            //{
-            //    ProductReviewDTO r = new ProductReviewDTO();
-            //    r.Approved = item.Approved == 1;
-            //    r.Bvin = item.bvin;
-            //    r.Description = item.Description;
-            //    r.Karma = item.Karma;
-            //    r.ProductBvin = item.ProductBvin;
-            //    switch (item.Rating)
-            //    {
-            //        case 0:
-            //            break;
-            //        case 1:
-            //            break;
-            //        case 2:
-            //            break;
-            //        case 3:
-            //            break;
-            //        case 4:
-            //            break;
-            //        case 5:
-            //            break;
-            //    }
-            //    r.ReviewDateUtc = item.ReviewDate;
-            //    r.UserID = item.UserID;
+            Api proxy = GetBV6Proxy();
 
-            //    wl("Review [" + r.Bvin + "]");
-            //    var res = proxy.ProductReviewsCreate(r);
-            //    if (res != null)
-            //    {
-            //        if (res.Errors.Count > 0)
-            //        {
-            //            DumpErrors(res.Errors);
-            //            wl("FAILED");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        wl("FAILED! EXCEPTION!");
-            //    }
-            //}
+            foreach (ProductReviewDTO r in resAll.Content)
+            {                
+                wl("Review [" + r.Bvin + "]");
+                var res = proxy.ProductReviewsCreate(r);
+                if (res != null)
+                {
+                    if (res.Errors.Count > 0)
+                    {
+                        DumpErrors(res.Errors);
+                        wl("FAILED");
+                    }
+                }
+                else
+                {
+                    wl("FAILED! EXCEPTION!");
+                }
+            }
         }
         private void MigrateProductCategoryLinks(string bvin)
         {
@@ -668,7 +645,7 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
             {
                 wl("Item: " + old.ProductTypeName);
 
-                ProductTypeDTO pt = old;
+                ProductTypeDTO pt = old;                
                 Api bv6proxy = GetBV6Proxy();
                 var res = bv6proxy.ProductTypesCreate(pt);
                 if (res != null)
@@ -922,134 +899,103 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
         }
 
         // Affiliates
+        private void ImportAffiliates()
+        {
+            Api oldProxy = GetOldStoreBV6Proxy();
+            
+            Header("Importing Affiliates");
+            AffiliateMapper = new Dictionary<long, long>();
 
-        //private void ImportAffiliates()
-        //{
-        //    Header("Importing Affiliates");
-        //    AffiliateMapper = new Dictionary<string, long>();
+            ApiResponse<List<AffiliateDTO>> oldAffiliates = oldProxy.AffiliatesFindAll();
 
-        //    foreach (data.bvc_Affiliate aff in oldDatabase.bvc_Affiliate)
-        //    {
-        //        wl("Affiliate: " + aff.DisplayName + " | " + aff.bvin);
+            if (oldAffiliates == null) return;
 
-        //        try
-        //        {
-        //            AffiliateDTO a = OldToNewAffiliate(aff);
+            foreach (AffiliateDTO aff in oldAffiliates.Content)
+            {
+                wl("Affiliate: " + aff.DisplayName + " | " + aff.Id);
 
-        //            Api bv6proxy = GetBV6Proxy();
-        //            var res = bv6proxy.AffiliatesCreate(a);
-        //            if (res != null)
-        //            {
-        //                if (res.Errors.Count > 0)
-        //                {
-        //                    DumpErrors(res.Errors);
-        //                    return;
-        //                }
-        //                if (res.Content == null) throw new ArgumentNullException("Result object was null");
-        //                long newId = res.Content.Id;
-        //                AffiliateMapper.Add(aff.bvin, newId);
-        //                wl("SUCCESS");
-        //                ImportAffiliateReferrals(aff.bvin, newId);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            wl("FAILED: " + ex.Message + " | " + ex.StackTrace);
-        //        }
+                try
+                {
+                    long oldId = aff.Id;
 
-        //    }
-        //}
-        //private AffiliateDTO OldToNewAffiliate(data.bvc_Affiliate aff)
-        //{
-        //    AffiliateDTO affiliate = new AffiliateDTO();
+                    Api proxy = GetBV6Proxy();
+                    aff.Id = 0;
+                    var res = proxy.AffiliatesCreate(aff);
+                    if (res != null)
+                    {
+                        if (res.Errors.Count > 0)
+                        {
+                            DumpErrors(res.Errors);
+                            return;
+                        }
+                        if (res.Content == null) throw new ArgumentNullException("Result object was null");
+                        long newId = res.Content.Id;
+                        AffiliateMapper.Add(oldId, newId);
+                        wl("SUCCESS");
+                        ImportAffiliateReferrals(oldId, newId);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    wl("FAILED: " + ex.Message + " | " + ex.StackTrace);
+                }
 
-        //    BV5Address oldAddress = new BV5Address();
-        //    oldAddress.FromXmlString(aff.Address);
+            }
+        }
+        private void ImportAffiliateReferrals(long oldId, long newId)
+        {
+            wl(" - Migrating Referrals...");
+            Api oldProxy = GetOldStoreBV6Proxy();
 
-        //    affiliate.Address = new AddressDTO();
-        //    if (oldAddress != null)
-        //    {
-        //        oldAddress.CopyTo(affiliate.Address, EFConnString(settings.SourceConnectionString()));
-        //    }
-        //    affiliate.CommissionAmount = aff.CommissionAmount;
-        //    switch (aff.CommissionType)
-        //    {
-        //        case 0:
-        //            affiliate.CommissionType = AffiliateCommissionTypeDTO.None;
-        //            break;
-        //        case 1:
-        //            affiliate.CommissionType = AffiliateCommissionTypeDTO.PercentageCommission;
-        //            break;
-        //        case 2:
-        //            affiliate.CommissionType = AffiliateCommissionTypeDTO.FlatRateCommission;
-        //            break;
-        //    }
-        //    affiliate.CustomThemeName = aff.StyleSheet;
-        //    affiliate.DisplayName = aff.DisplayName;
-        //    affiliate.DriversLicenseNumber = aff.DriversLicenseNumber;
-        //    affiliate.Enabled = aff.Enabled;
-        //    affiliate.Id = -1;
-        //    affiliate.LastUpdatedUtc = aff.LastUpdated;
-        //    affiliate.Notes = aff.Notes;
-        //    affiliate.ReferralDays = aff.ReferralDays;
-        //    affiliate.ReferralId = aff.ReferralID;
-        //    if (affiliate.ReferralId == string.Empty) affiliate.ReferralId = aff.bvin;
-        //    affiliate.TaxId = aff.TaxID;
-        //    affiliate.WebSiteUrl = aff.WebSiteURL;
-        //    affiliate.Contacts = new List<AffiliateContactDTO>();
+            ApiResponse<List<AffiliateReferralDTO>> refs = oldProxy.AffiliateReferralsFindForAffiliate(oldId);                        
 
-        //    return affiliate;
-        //}
-        //private void ImportAffiliateReferrals(string bvin, long newId)
-        //{
-        //    wl(" - Migrating Referrals...");
+            if (refs == null) return;
+            if (refs.Content == null) return;
 
-        //    data.BV53Entities db = new data.BV53Entities(EFConnString(settings.SourceConnectionString()));
+            foreach (AffiliateReferralDTO r in refs.Content)
+            {
+                AffiliateReferralDTO rnew = new AffiliateReferralDTO();
+                rnew.AffiliateId = newId;
+                rnew.TimeOfReferralUtc = r.TimeOfReferralUtc;
+                rnew.ReferrerUrl = r.ReferrerUrl;
+                Api bv6proxy = GetBV6Proxy();
+                var res = bv6proxy.AffiliateReferralsCreate(rnew);
+            }
 
-        //    var referrals = db.bvc_AffiliateReferral.Where(y => y.affid == bvin);
-        //    if (referrals == null) return;
+        }
 
-        //    foreach (data.bvc_AffiliateReferral r in referrals)
-        //    {
-        //        AffiliateReferralDTO rnew = new AffiliateReferralDTO();
-        //        rnew.AffiliateId = newId;
-        //        rnew.TimeOfReferralUtc = r.TimeOfReferral;
-        //        rnew.ReferrerUrl = r.referrerurl;
+        // Users
+        private void ImportUsers()
+        {
+            Header("Importing Users");
 
-        //        Api bv6proxy = GetBV6Proxy();
-        //        var res = bv6proxy.AffiliateReferralsCreate(rnew);
-        //    }
+            Api oldProxy = GetOldStoreBV6Proxy();            
+            int pageSize = 100;
+            var CountResponse = oldProxy.CustomerAccountsCountOfAll();
+            long totalRecords = CountResponse.Content;
+            int totalPages = (int)(Math.Ceiling((decimal)totalRecords / (decimal)pageSize));
 
-        //}
+            //System.Threading.Tasks.Parallel.For(0, totalPages, ProcessPage);
+            int startIndex = 0;
+            if (settings.UserStartPage > 1)
+            {
+                startIndex = settings.UserStartPage - 1;
+            }
+            for (int i = startIndex; i < totalPages; i++)
+            {
+                wl("Getting Users page " + (i + 1) + " of " + totalPages.ToString());
+                int startRecord = i * pageSize;
+                var users = oldProxy.CustomerAccountsFindAllByPage(i + 1, pageSize);
+                if (users == null) continue;
+                if (users.Content == null) continue;
 
-        //// Users
-        //private void ImportUsers()
-        //{
-        //    Header("Importing Users");
+                foreach (CustomerAccountDTO u in users.Content)
+                {
+                    ImportSingleUser(u);
+                }
+            }
 
-
-        //    int pageSize = 100;
-        //    int totalRecords = oldDatabase.bvc_User.Count();
-        //    int totalPages = (int)(Math.Ceiling((decimal)totalRecords / (decimal)pageSize));
-
-        //    //System.Threading.Tasks.Parallel.For(0, totalPages, ProcessPage);
-        //    int startIndex = 0;
-        //    if (settings.UserStartPage > 1)
-        //    {
-        //        startIndex = settings.UserStartPage - 1;
-        //    }
-        //    for (int i = startIndex; i < totalPages; i++)
-        //    {
-        //        wl("Getting Users page " + (i + 1) + " of " + totalPages.ToString());
-        //        int startRecord = i * pageSize;
-        //        var users = (from u in oldDatabase.bvc_User select u).OrderBy(y => y.Email).Skip(startRecord).Take(pageSize).ToList();
-        //        foreach (data.bvc_User u in users)
-        //        {
-        //            ImportSingleUser(u);
-        //        }
-        //    }
-
-        //}
+        }
         //private void ProcessPage(int i)
         //{
         //    wl("Getting Users page " + (i + 1));
@@ -1060,73 +1006,26 @@ namespace BVSoftware.Commerce.Migration.Migrators.BV6
         //        ImportSingleUser(u);
         //    }
         //}
-        //private void ImportSingleUser(data.bvc_User u)
-        //{
-        //    if (u == null)
-        //    {
-        //        wl("Customer was null!");
-        //        return;
-        //    }
-        //    wl("Importing Customer: " + u.Email);
-
-        //    CustomerAccountDTO customer = new CustomerAccountDTO();
-        //    customer.Bvin = u.bvin;
-        //    customer.CreationDateUtc = u.CreationDate;
-        //    customer.Email = u.Email;
-        //    customer.FailedLoginCount = u.FailedLoginCount;
-        //    customer.FirstName = u.FirstName;
-        //    customer.LastLoginDateUtc = u.LastLoginDate;
-        //    customer.LastName = u.LastName;
-        //    customer.LastUpdatedUtc = u.LastUpdated;
-        //    customer.Notes = u.Comment;
-        //    customer.Password = string.Empty;
-        //    customer.PricingGroupId = u.PricingGroup;
-        //    customer.Salt = string.Empty;
-        //    customer.TaxExempt = u.TaxExempt == 1 ? true : false;
-        //    customer.Addresses = new List<AddressDTO>();
-
-        //    // Preserve clear text passwords
-        //    string newPassword = string.Empty;
-        //    if (u.PasswordFormat == 0)
-        //    {
-        //        newPassword = u.Password;
-        //    }
-
-        //    BV5Address shipping = new BV5Address();
-        //    shipping.FromXmlString(u.ShippingAddress);
-        //    AddressDTO ship = new AddressDTO();
-        //    ship.AddressType = AddressTypesDTO.Shipping;
-        //    shipping.CopyTo(ship, EFConnString(settings.SourceConnectionString()));
-        //    customer.Addresses.Add(ship);
-
-        //    BV5Address billing = new BV5Address();
-        //    billing.FromXmlString(u.BillingAddress);
-        //    AddressDTO bill = new AddressDTO();
-        //    bill.AddressType = AddressTypesDTO.Billing;
-        //    billing.CopyTo(bill, EFConnString(settings.SourceConnectionString()));
-        //    customer.Addresses.Add(bill);
-
-        //    List<BV5Address> addresses = BV5Address.ReadAddressesFromXml(u.AddressBook);
-        //    foreach (BV5Address addr in addresses)
-        //    {
-        //        AddressDTO a = new AddressDTO();
-        //        a.AddressType = AddressTypesDTO.General;
-        //        addr.CopyTo(a, EFConnString(settings.SourceConnectionString()));
-        //        customer.Addresses.Add(a);
-        //    }
-
-        //    Api bv6proxy = GetBV6Proxy();
-        //    var res = bv6proxy.CustomerAccountsCreateWithPassword(customer, newPassword);
-        //    if (res != null)
-        //    {
-        //        if (res.Errors.Count > 0)
-        //        {
-        //            DumpErrors(res.Errors);
-        //            return;
-        //        }
-        //        wl("SUCCESS");
-        //    }
-        //}
+        private void ImportSingleUser(CustomerAccountDTO u)
+        {
+            if (u == null)
+            {
+                wl("Customer was null!");
+                return;
+            }
+            wl("Importing Customer: " + u.Email);            
+            Api bv6proxy = GetBV6Proxy();
+            var res = bv6proxy.CustomerAccountsCreate(u);            
+            if (res != null)
+            {
+                if (res.Errors.Count > 0)
+                {
+                    DumpErrors(res.Errors);
+                    return;
+                }
+                wl("SUCCESS");
+            }
+        }
 
         // Price Groups and Roles
         private void ImportPriceGroups()
